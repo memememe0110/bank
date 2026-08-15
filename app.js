@@ -243,104 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* v38: Saving detail + editable transactions */
-(function () {
-  const savingButton = document.getElementById("savingCardButton");
-  const backButton = document.getElementById("savingDetailBack");
-  const screens = [...document.querySelectorAll(".screen")];
-  const historyEl = document.getElementById("savingHistory");
-
-  if (!savingButton || !backButton || !historyEl) return;
-
-  const defaultTransactions = [
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 12000, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 8000,  date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 27740, date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 1205,  date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（ハーバーブリッジ支店）", amount: 28945, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" }
-  ];
-
-  let transactions = JSON.parse(localStorage.getItem("walletMockSavingTx") || "null") || defaultTransactions;
-
-  function save() {
-    localStorage.setItem("walletMockSavingTx", JSON.stringify(transactions));
-  }
-
-  function money(n) {
-    return "¥" + Number(n || 0).toLocaleString("ja-JP");
-  }
-
-  function render() {
-    historyEl.innerHTML = "";
-    transactions.forEach((tx, index) => {
-      const row = document.createElement("div");
-      row.className = "saving-tx " + tx.type;
-
-      const icon = document.createElement("div");
-      icon.className = "saving-tx-icon";
-      icon.textContent = tx.type === "credit" ? "↓" : "↑";
-
-      const main = document.createElement("div");
-      main.className = "saving-tx-main";
-      main.innerHTML = `
-        <div class="saving-tx-desc">${tx.desc}</div>
-        <div class="saving-tx-date">${tx.date}</div>
-      `;
-
-      const amount = document.createElement("div");
-      amount.className = "saving-tx-amount";
-      amount.textContent = (tx.type === "credit" ? "+ " : "") + money(tx.amount);
-
-      const edit = document.createElement("div");
-      edit.className = "saving-tx-edit";
-      edit.innerHTML = `
-        <input data-field="desc" data-index="${index}" value="${tx.desc.replace(/"/g, '&quot;')}">
-        <input data-field="date" data-index="${index}" value="${tx.date}">
-        <input data-field="amount" data-index="${index}" inputmode="numeric" value="${tx.amount}">
-        <select data-field="type" data-index="${index}">
-          <option value="debit" ${tx.type === "debit" ? "selected" : ""}>出金</option>
-          <option value="credit" ${tx.type === "credit" ? "selected" : ""}>入金</option>
-        </select>
-      `;
-
-      row.append(icon, main, amount, edit);
-      historyEl.appendChild(row);
-    });
-
-    historyEl.querySelectorAll("input, select").forEach(el => {
-      el.addEventListener("change", e => {
-        const i = Number(e.target.dataset.index);
-        const field = e.target.dataset.field;
-        transactions[i][field] = field === "amount" ? Number(e.target.value.replace(/,/g, "")) : e.target.value;
-        save();
-        render();
-      });
-    });
-  }
-
-  function showSavingDetail() {
-    screens.forEach(s => s.classList.remove("active"));
-    const detail = document.getElementById("saving-detail");
-    if (detail) detail.classList.add("active");
-    window.scrollTo(0, 0);
-  }
-
-  function showBanking() {
-    screens.forEach(s => s.classList.remove("active"));
-    const banking = document.getElementById("banking");
-    if (banking) banking.classList.add("active");
-    window.scrollTo(0, 0);
-  }
-
-  savingButton.addEventListener("click", showSavingDetail);
-  backButton.addEventListener("click", showBanking);
-
-  render();
-})();
-
-
 /* v40: reliable Banking savings/loan tabs */
 (function () {
   const savingsTab = document.getElementById("bankSavingsTab");
@@ -385,4 +287,82 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   showSavings();
+})();
+
+
+/* v42: Saving detail - data is edited only in app.js, never on screen */
+(function () {
+  const savingButton = document.getElementById("savingCardButton");
+  const backButton = document.getElementById("savingDetailBack");
+  const historyEl = document.getElementById("savingHistory");
+  const screens = [...document.querySelectorAll(".screen")];
+
+  if (!savingButton || !backButton || !historyEl) return;
+
+  // =========================================================
+  // Saving transaction mock data
+  // ここを書き換えると、画面の明細が変わります。
+  // type: "credit" = 入金 / "debit" = 出金
+  // =========================================================
+  const savingTransactions = [
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 12000, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 8000,  date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 27740, date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 1205,  date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（ハーバーブリッジ支店）", amount: 28945, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" }
+  ];
+
+  const money = n => "¥" + Number(n || 0).toLocaleString("ja-JP");
+
+  function render() {
+    historyEl.innerHTML = "";
+
+    savingTransactions.forEach(tx => {
+      const row = document.createElement("div");
+      row.className = "saving-tx " + tx.type;
+
+      const icon = document.createElement("div");
+      icon.className = "saving-tx-icon";
+      icon.textContent = tx.type === "credit" ? "↓" : "↑";
+
+      const main = document.createElement("div");
+      main.className = "saving-tx-main";
+
+      const desc = document.createElement("div");
+      desc.className = "saving-tx-desc";
+      desc.textContent = tx.desc;
+
+      const date = document.createElement("div");
+      date.className = "saving-tx-date";
+      date.textContent = tx.date;
+
+      main.append(desc, date);
+
+      const amount = document.createElement("div");
+      amount.className = "saving-tx-amount";
+      amount.textContent = (tx.type === "credit" ? "+ " : "") + money(tx.amount);
+
+      row.append(icon, main, amount);
+      historyEl.appendChild(row);
+    });
+  }
+
+  function showSavingDetail() {
+    screens.forEach(s => s.classList.remove("active"));
+    document.getElementById("saving-detail")?.classList.add("active");
+    window.scrollTo(0, 0);
+  }
+
+  function showBanking() {
+    screens.forEach(s => s.classList.remove("active"));
+    document.getElementById("banking")?.classList.add("active");
+    window.scrollTo(0, 0);
+  }
+
+  savingButton.addEventListener("click", showSavingDetail);
+  backButton.addEventListener("click", showBanking);
+
+  render();
 })();

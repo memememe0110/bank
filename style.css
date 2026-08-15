@@ -2071,3 +2071,155 @@ body {
     font-size: 40px !important;
   }
 }
+
+
+/* =========================
+   v41: Circle borders always visible
+   ========================= */
+
+/* 画像側の罫線は使わず、カード外枠をCSSで統一 */
+.circle-card {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  border: 2px solid #111 !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  object-fit: cover !important;
+}
+
+/* Safariで1辺だけ消えて見えるのを防ぐ */
+.circle-card {
+  outline: 1px solid transparent !important;
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+}
+
+/* 各カードを完全に独立させて線が欠けないようにする */
+.circle-grid {
+  gap: 18px !important;
+  align-items: start !important;
+}
+.circle-maruzen,
+.circle-invest,
+.circle-travel,
+.circle-lifestyle,
+.circle-learning {
+  overflow: hidden !important;
+}
+
+/* Learning下側は固定ナビに隠れないよう十分な余白 */
+.circle-page {
+  padding-bottom: calc(170px + env(safe-area-inset-bottom)) !important;
+}
+.circle-grid {
+  padding-bottom: 36px !important;
+}
+
+@media (max-width: 390px) {
+  .circle-grid {
+    gap: 16px !important;
+  }
+  .circle-card {
+    border-width: 2px !important;
+  }
+}
+
+
+/* v42: Saving明細は画面上で編集させない */
+.saving-tx-edit {
+  display: none !important;
+}
+
+
+/* =========================
+   v43: Saving明細は完全に表示専用
+   ========================= */
+
+#saving-detail input,
+#saving-detail select,
+#saving-detail textarea,
+#saving-detail [contenteditable="true"],
+#saving-detail .saving-tx-edit {
+  display: none !important;
+}
+
+#saving-detail .saving-tx {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#saving-detail .saving-tx-desc,
+#saving-detail .saving-tx-date,
+#saving-detail .saving-tx-amount {
+  pointer-events: none;
+}
+
+
+/* =========================
+   v45: Saving detail screen only
+   Banking overview and every other screen are unchanged.
+   ========================= */
+#saving-detail .saving-detail-page {
+  padding-left: 26px !important;
+  padding-right: 26px !important;
+}
+
+#saving-detail .saving-detail-back {
+  margin-top: 20px !important;
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 42px !important;
+}
+
+/* Keep the complete pig fully inside the detail screen. */
+#saving-detail .saving-detail-hero {
+  height: 300px !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+#saving-detail .saving-detail-pig {
+  display: block !important;
+  width: 205px !important;
+  max-width: none !important;
+  max-height: 220px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin-left: 8px !important;
+  transform: none !important;
+}
+
+#saving-detail .saving-detail-name {
+  font-size: 19px !important;
+}
+
+#saving-detail .saving-detail-balance {
+  margin-top: 14px !important;
+  font-size: 46px !important;
+  line-height: 1 !important;
+}
+
+#saving-detail .saving-transfer-btn {
+  margin-top: 38px !important;
+  width: 150px !important;
+  height: 74px !important;
+  font-size: 18px !important;
+}
+
+#saving-detail .saving-detail-divider {
+  margin: 44px 0 32px !important;
+}
+
+#saving-detail .saving-history-label {
+  margin-top: 50px !important;
+}
+
+@media (max-width: 390px) {
+  #saving-detail .saving-detail-hero { height: 270px !important; }
+  #saving-detail .saving-detail-pig { width: 190px !important; max-height: 205px !important; }
+  #saving-detail .saving-detail-balance { font-size: 43px !important; }
+}
