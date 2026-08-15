@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=29">
+<link rel="stylesheet" href="style.css?v=33">
 </head>
 <body>
 <div class="app">
@@ -22,8 +22,8 @@
             <p>よく使う銀行機能</p>
           </div>
           <div class="wallet-header-icons" aria-hidden="true">
-            <img class="wallet-header-icon" src="assets/header-notice.jpeg" alt="">
-            <img class="wallet-header-icon" src="assets/header-person.jpeg" alt="">
+            <img class="wallet-header-icon" src="assets/header-notice-v30.png" alt="">
+            <img class="wallet-header-icon" src="assets/header-person-v30.png" alt="">
           </div>
         </header>
 
@@ -34,8 +34,8 @@
         <section class="wallet-account">
           <div class="wallet-account-line">普通預金 <span id="walletBranch">丸善ジュンク堂支店</span></div>
           <div class="wallet-account-actions">
-            <strong id="walletBalance" class="is-hidden">¥ ********</strong>
-            <button class="deposit-btn">♧ 入金方法を見る</button>
+            <strong id="walletBalance" class="is-hidden">¥ *******</strong>
+            
           </div>
           <button class="hide-balance" id="balanceToggle"><span class="eye-mark">◉</span><span id="balanceToggleText">残高を表示</span></button>
         </section>
@@ -166,8 +166,52 @@
         </div>
       </div>
     </section>
-    <section id="links" class="screen"><div class="simple"><h1>Links</h1><p>リンクス</p></div></section>
-    <section id="circle" class="screen"><div class="simple"><h1>Circle</h1><p>サークル</p></div></section>
+    <section id="links" class="screen">
+      <div class="links-page">
+        <header class="links-header">
+          <div>
+            <h1>Links</h1>
+            <p>登録したお金の送り先</p>
+          </div>
+          <div class="links-header-icons" aria-hidden="true">
+            <span class="search-glyph"></span>
+            <span class="help-glyph">?</span>
+          </div>
+        </header>
+
+        <section class="links-account">
+          <div class="links-account-title">支払口座：丸善ジュンク堂支店</div>
+          <div class="links-account-sub">普通預金 ¥0</div>
+        </section>
+
+        <div class="links-divider"></div>
+
+        <section class="links-empty">
+          <div class="links-empty-icon">○</div>
+          <div class="links-empty-title">登録されている送り先はありません</div>
+          <div class="links-empty-sub">送金先を登録すると、ここに表示されます</div>
+        </section>
+      </div>
+    </section>
+    <section id="circle" class="screen">
+      <div class="circle-page">
+        <header class="circle-header">
+          <div>
+            <h1>Circle</h1>
+            <p>便利な提携サービス</p>
+          </div>
+          <div class="circle-help" aria-hidden="true">?</div>
+        </header>
+
+        <div class="circle-grid">
+          <img src="assets/circle-maruzen.jpg" class="circle-card circle-maruzen" alt="">
+          <img src="assets/circle-invest.jpg" class="circle-card circle-invest" alt="">
+          <img src="assets/circle-travel.jpg" class="circle-card circle-travel" alt="">
+          <img src="assets/circle-lifestyle.jpg" class="circle-card circle-lifestyle" alt="">
+          <img src="assets/circle-learning.jpg" class="circle-card circle-learning" alt="">
+        </div>
+      </div>
+    </section>
   </main>
 
   <nav class="bottom-nav">
@@ -188,6 +232,6 @@
     </button>
   </nav>
 </div>
-<script src="app.js?v=29"></script>
+<script src="app.js?v=33"></script>
 </body>
 </html>

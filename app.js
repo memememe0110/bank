@@ -180,7 +180,7 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
   button.addEventListener("click", function(){
     hidden = !hidden;
     if (hidden) {
-      balance.textContent = "¥ ********";
+      balance.textContent = "¥ *******";
       balance.classList.add("is-hidden");
       text.textContent = "残高を表示";
     } else {

@@ -1371,3 +1371,270 @@ body {
 #walletBalance.is-hidden{
   letter-spacing: 2px;
 }
+
+
+/* =========================
+   v30 Wallet polish
+   ========================= */
+
+/* header icons: slightly smaller, crisp, no colored residue */
+.wallet-header-icons {
+  gap: 20px !important;
+  padding-top: 12px !important;
+}
+.wallet-header-icon {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain !important;
+  mix-blend-mode: normal !important;
+}
+
+/* hidden balance should stay on one line like the reference */
+#walletBalance.is-hidden {
+  white-space: nowrap !important;
+  font-size: 46px !important;
+  line-height: 1 !important;
+  letter-spacing: 1px !important;
+  flex: 0 0 auto !important;
+}
+
+/* give the masked value enough room before the deposit button */
+.wallet-account-actions {
+  align-items: center !important;
+  gap: 10px !important;
+}
+.wallet-account-actions .deposit-btn {
+  min-width: 170px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+/* proper eye icon instead of a filled circle */
+.hide-balance .eye-mark {
+  position: relative !important;
+  width: 24px !important;
+  height: 16px !important;
+  display: inline-block !important;
+  font-size: 0 !important;
+  border: 2px solid #000 !important;
+  border-radius: 50% / 60% !important;
+}
+.hide-balance .eye-mark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #000;
+}
+
+/* belt-and-suspenders: ensure no legacy notification dot can appear */
+.bell-icon,
+.bell-icon i,
+.notif-dot {
+  display: none !important;
+}
+
+
+/* v31: Walletをすっきり。入金方法/Money Talkを非表示 */
+.wallet-account-actions {
+  display: block !important;
+}
+.wallet-account-actions .deposit-btn,
+.wallet-news,
+.money-talk,
+.wallet-topic {
+  display: none !important;
+}
+
+
+/* v32: Walletのお金のアクションメニューを削除 */
+.action-menu,
+.wallet-action-menu,
+.money-action-menu {
+  display: none !important;
+}
+
+
+/* =========================
+   v33 Links / Circle
+   ========================= */
+
+/* Links */
+.links-page {
+  min-height: 100dvh;
+  padding: max(28px, env(safe-area-inset-top)) 26px calc(126px + env(safe-area-inset-bottom));
+  background: #fff;
+}
+.links-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.links-header h1,
+.circle-header h1 {
+  margin: 0;
+  font-size: 54px;
+  line-height: .95;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+.links-header p,
+.circle-header p {
+  margin: 9px 0 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+.links-header-icons {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding-top: 14px;
+}
+.search-glyph {
+  width: 31px;
+  height: 31px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  position: relative;
+  display: block;
+}
+.search-glyph::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 3px;
+  background: #111;
+  transform: rotate(45deg);
+  right: -11px;
+  bottom: -5px;
+  border-radius: 2px;
+}
+.help-glyph,
+.circle-help {
+  width: 31px;
+  height: 31px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+.links-account {
+  margin-top: 48px;
+}
+.links-account-title {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  background: #effb00;
+  padding: 1px 2px;
+}
+.links-account-sub {
+  margin-top: 9px;
+  font-size: 16px;
+}
+.links-divider {
+  height: 2px;
+  background: #111;
+  margin-top: 18px;
+}
+.links-empty {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.links-empty-icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  margin-bottom: 22px;
+}
+.links-empty-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+.links-empty-sub {
+  margin-top: 9px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Circle */
+.circle-page {
+  min-height: 100dvh;
+  padding: max(28px, env(safe-area-inset-top)) 26px calc(126px + env(safe-area-inset-bottom));
+  background: #fff;
+}
+.circle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.circle-help {
+  margin-top: 14px;
+}
+.circle-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 18px;
+  align-items: start;
+}
+.circle-card {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0;
+}
+.circle-maruzen {
+  grid-column: 1;
+  grid-row: 1;
+}
+.circle-invest {
+  grid-column: 2;
+  grid-row: 1;
+}
+.circle-travel {
+  grid-column: 1;
+  grid-row: 2 / span 2;
+}
+.circle-lifestyle {
+  grid-column: 2;
+  grid-row: 2;
+}
+.circle-learning {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+@media (max-width: 390px) {
+  .links-page,
+  .circle-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .links-header h1,
+  .circle-header h1 {
+    font-size: 50px;
+  }
+  .circle-grid {
+    gap: 16px;
+    margin-top: 44px;
+  }
+}
