@@ -12,7 +12,7 @@
   <meta name="theme-color" content="#ececec">
   <title>Wallet Mock</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <div class="app-shell">
@@ -120,16 +120,7 @@
                 <div id="banking-balance" class="card-balance">¥0</div>
               </div>
 
-              <svg viewBox="0 0 180 120" class="bank-card-illustration" aria-hidden="true">
-                <ellipse cx="63" cy="24" rx="20" ry="11" class="line"/>
-                <ellipse cx="44" cy="37" rx="22" ry="12" class="line"/>
-                <rect x="58" y="52" width="80" height="11" class="line-fill"/>
-                <path d="M66 50h64l-9-18H75Z" class="line-fill"/>
-                <circle cx="98" cy="40" r="2.4" class="fill"/>
-                <path d="M69 63v41M86 63v41M104 63v41M122 63v41" class="line"/>
-                <path d="M64 104h63l4 11H61Z" class="line-fill"/>
-                <ellipse cx="147" cy="99" rx="18" ry="10" class="line"/>
-              </svg>
+              <img src="assets/bank-illustration.png" class="bank-card-illustration-img" alt="">
             </button>
 
             <div class="show-all-wrap">
@@ -155,25 +146,12 @@
               <button class="savings-card">
                 <div class="small-card-title">Saving</div>
                 <div id="saving-balance" class="savings-balance">¥24,000</div>
-                <svg viewBox="0 0 170 120" class="pig-svg" aria-hidden="true">
-                  <path d="M38 78c-8-4-14-12-14-21 0-17 15-31 48-31 24 0 43 8 53 22 9 1 16 8 16 17 0 8-6 14-14 16-2 8-10 13-23 14-2 12-8 19-18 19-3 0-5-1-7-2l3-16c-7 0-17-2-25-5l-7 14c-3 1-6 2-9 2-9 0-15-5-17-14-10-1-16-6-16-15 0-7 4-12 10-15Z" class="line"/>
-                  <path d="M43 58c1-4 5-7 10-7 4 0 7 2 8 5" class="line-thin"/>
-                  <path d="M90 39c10-1 20 0 29 3" class="line-thin"/>
-                  <ellipse cx="30" cy="77" rx="9" ry="8" class="line"/>
-                  <circle cx="27" cy="77" r="1.5" class="fill"/>
-                  <circle cx="33" cy="77" r="1.5" class="fill"/>
-                  <path d="M53 96l-7 10M96 97l3 14M127 84l7 10" class="line"/>
-                </svg>
+                <img src="assets/pig-illustration.png" class="pig-img" alt="">
               </button>
 
               <button class="create-card">
                 <div class="create-label">ボックス作成</div>
-                <div class="plus-badge">＋</div>
-                <svg viewBox="0 0 170 120" class="house-svg" aria-hidden="true">
-                  <path d="M64 93V62l26-18 27 18v31Z" class="line-light-fill"/>
-                  <path d="M77 93V73h13v20M64 62h53" class="line-light"/>
-                  <path d="M87 44h26" class="line-light"/>
-                </svg>
+                <img src="assets/create-box-illustration.png" class="create-box-img" alt="">
               </button>
             </div>
 
@@ -182,7 +160,7 @@
             <div class="bank-list">
               <button class="bank-list-row">
                 <span class="list-icon">
-                  <svg viewBox="0 0 24 24" class="icon-line"><path d="M5 5h14v14H5z"/><path d="M9 3v4M15 3v4M8 11h8M8 15h5"/></svg>
+                  <img src="assets/schedule-icon.png" class="list-icon-img" alt="">
                 </span>
                 <span class="list-text">お金の移動 スケジュール一覧</span>
                 <span class="list-chevron">›</span>
@@ -190,7 +168,7 @@
 
               <button class="bank-list-row">
                 <span class="list-icon">
-                  <svg viewBox="0 0 24 24" class="icon-line"><path d="M8 5 4 9l4 4M16 19l4-4-4-4"/><path d="M4 9h9V4M20 15h-9v5"/></svg>
+                  <img src="assets/sort-icon.png" class="list-icon-img" alt="">
                 </span>
                 <span class="list-text">ボックスの並び替え</span>
                 <span class="list-chevron">›</span>
@@ -265,6 +243,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
