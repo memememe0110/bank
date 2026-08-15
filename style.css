@@ -889,3 +889,156 @@ body {
     width: 64% !important;
   }
 }
+
+
+/* =========================
+   v23 Banking arrow + Record screen
+   ========================= */
+
+/* Banking: > はカード右上へ固定 */
+.account-card {
+  position: relative !important;
+}
+.account-card-arrow {
+  position: absolute !important;
+  top: 14px !important;
+  right: 18px !important;
+  font-size: 42px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  z-index: 10 !important;
+}
+.branch-row {
+  width: auto !important;
+  padding-right: 54px !important;
+}
+
+/* Record */
+.record-page {
+  width: 100%;
+  min-height: 100dvh;
+  padding: max(28px, env(safe-area-inset-top)) 26px calc(126px + env(safe-area-inset-bottom));
+  background: #fff;
+  color: #000;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.record-header h1 {
+  margin: 0;
+  font-size: 54px;
+  line-height: .95;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+.record-header p {
+  margin: 9px 0 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+.record-header-actions {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  padding-top: 12px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.record-tabs {
+  display: flex;
+  gap: 28px;
+  margin-top: 60px;
+  overflow: hidden;
+}
+.record-tab {
+  position: relative;
+  flex: 0 0 auto;
+  padding-bottom: 13px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.record-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #000;
+}
+
+.record-cards {
+  margin-top: 26px;
+  display: grid;
+  gap: 24px;
+}
+.record-card {
+  position: relative;
+  width: 100%;
+  min-height: 188px;
+  border: 2.5px solid #111;
+  background: #fff;
+  overflow: hidden;
+  text-align: left;
+}
+.record-card-copy {
+  position: relative;
+  z-index: 4;
+  padding: 19px 18px;
+  max-width: 58%;
+}
+.record-card-title {
+  font-size: 17px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.record-card-title span {
+  font-weight: 500;
+}
+.record-card-amount {
+  margin-top: 10px;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.record-card-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  max-height: 88%;
+  object-fit: contain;
+  object-position: right bottom;
+}
+.cash-img { width: 44%; }
+.credit-img { width: 42%; }
+.debit-img { width: 42%; }
+.other-img { width: 40%; }
+
+.record-add {
+  width: 100%;
+  min-height: 72px;
+  margin-top: 2px;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+@media (max-width: 390px) {
+  .record-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .record-header h1 { font-size: 50px; }
+  .record-tabs { gap: 22px; margin-top: 52px; }
+  .record-tab { font-size: 15px; }
+  .record-card { min-height: 180px; }
+  .record-card-title { font-size: 16px; }
+  .record-card-amount { font-size: 31px; }
+}

@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=22">
+<link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
 <div class="app">
@@ -64,8 +64,8 @@
             <div class="account-copy">
               <div class="branch-row">
                 <span>丸善ジュンク堂支店</span>
-                <span class="arrow">›</span>
               </div>
+              <span class="account-card-arrow">›</span>
               <div class="balance">¥0</div>
             </div>
             <img src="assets/bank-book.jpeg" alt="" class="bank-img">
@@ -110,7 +110,62 @@
       </div>
     </section>
 
-    <section id="record" class="screen"><div class="simple"><h1>Record</h1><p>レコード</p></div></section>
+    <section id="record" class="screen">
+      <div class="record-page">
+        <header class="record-header">
+          <div>
+            <h1>Record</h1>
+            <p>資産をまとめて管理</p>
+          </div>
+          <div class="record-header-actions" aria-hidden="true">
+            <span>?</span><span>↻</span><span>•••</span>
+          </div>
+        </header>
+
+        <div class="record-tabs">
+          <button class="record-tab active">トップ</button>
+          <button class="record-tab">資産推移</button>
+          <button class="record-tab">明細</button>
+          <button class="record-tab">ハッシュタグ</button>
+        </div>
+
+        <div class="record-cards">
+          <button class="record-card">
+            <div class="record-card-copy">
+              <div class="record-card-title">預金 <span>(2)</span></div>
+              <div class="record-card-amount">¥24,000</div>
+            </div>
+            <img src="assets/record-cash.png" class="record-card-img cash-img" alt="">
+          </button>
+
+          <button class="record-card">
+            <div class="record-card-copy">
+              <div class="record-card-title">クレジットカード <span>(0)</span></div>
+              <div class="record-card-amount">¥0</div>
+            </div>
+            <img src="assets/record-credit.png" class="record-card-img credit-img" alt="">
+          </button>
+
+          <button class="record-card">
+            <div class="record-card-copy">
+              <div class="record-card-title">デビット・電子マネー <span>(0)</span></div>
+              <div class="record-card-amount">¥0</div>
+            </div>
+            <img src="assets/record-debit.png" class="record-card-img debit-img" alt="">
+          </button>
+
+          <button class="record-card">
+            <div class="record-card-copy">
+              <div class="record-card-title">その他資産 <span>(0)</span></div>
+              <div class="record-card-amount">¥0</div>
+            </div>
+            <img src="assets/record-other.png" class="record-card-img other-img" alt="">
+          </button>
+
+          <button class="record-add">連携先を追加</button>
+        </div>
+      </div>
+    </section>
     <section id="links" class="screen"><div class="simple"><h1>Links</h1><p>リンクス</p></div></section>
     <section id="circle" class="screen"><div class="simple"><h1>Circle</h1><p>サークル</p></div></section>
   </main>
@@ -133,6 +188,6 @@
     </button>
   </nav>
 </div>
-<script src="app.js?v=22"></script>
+<script src="app.js?v=23"></script>
 </body>
 </html>

@@ -143,3 +143,13 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
   // 最初は必ずWallet
   activate("wallet");
 })();
+
+
+/* v23: Record預金額はBankingの合計に同期 */
+(function(){
+  const checking = 0;
+  const saving = 24000;
+  const total = checking + saving;
+  const amount = document.querySelector("#record .record-card-amount");
+  if (amount) amount.textContent = "¥" + total.toLocaleString("ja-JP");
+})();
