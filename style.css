@@ -775,3 +775,117 @@ body {
     height: 74px !important;
   }
 }
+
+
+/* v21: clean Wallet nav source has no baked-in yellow dot.
+   Disable the old wallet-only mask; active dot remains CSS-driven. */
+.bottom-nav .nav-item[data-screen="wallet"] .nav-art::before {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================
+   v22: Maruzen branch + book illustration + Saving alignment
+   ========================= */
+
+/* 普通預金カード */
+.account-card {
+  height: 220px !important;
+  min-height: 220px !important;
+}
+
+.account-copy {
+  left: 18px !important;
+  right: 18px !important;
+  top: 18px !important;
+}
+
+.branch-row {
+  width: 62% !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
+
+.balance {
+  margin-top: 12px !important;
+  font-size: 39px !important;
+}
+
+/* 丸善ジュンク堂支店に合わせて、本の画像を右下へ */
+.bank-img {
+  right: 8px !important;
+  bottom: 10px !important;
+  width: 47% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+}
+
+/* Savingカード内の文字位置を元画面寄りに */
+.saving-card {
+  padding: 0 !important;
+}
+
+.saving-title {
+  position: absolute !important;
+  left: 20px !important;
+  top: 22px !important;
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  z-index: 4 !important;
+}
+
+.saving-balance {
+  position: absolute !important;
+  left: 20px !important;
+  top: 55px !important;
+  margin: 0 !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  z-index: 4 !important;
+}
+
+/* 豚は文字に被せず右下 */
+.pig-img {
+  right: -3px !important;
+  bottom: 4px !important;
+  width: 66% !important;
+  max-height: 68% !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  z-index: 1 !important;
+}
+
+@media (max-width: 390px) {
+  .account-card {
+    height: 214px !important;
+    min-height: 214px !important;
+  }
+
+  .branch-row {
+    font-size: 15px !important;
+  }
+
+  .bank-img {
+    width: 46% !important;
+  }
+
+  .saving-title {
+    left: 18px !important;
+    top: 20px !important;
+    font-size: 15px !important;
+  }
+
+  .saving-balance {
+    left: 18px !important;
+    top: 51px !important;
+    font-size: 26px !important;
+  }
+
+  .pig-img {
+    width: 64% !important;
+  }
+}
