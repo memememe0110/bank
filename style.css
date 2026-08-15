@@ -569,3 +569,49 @@ body {
   position: relative !important;
   white-space: nowrap;
 }
+
+
+/* =========================
+   v18 exact supplied nav artwork
+   ========================= */
+.bottom-nav .nav-item .nav-icon::before,
+.bottom-nav .nav-item .nav-icon::after,
+.bottom-nav .nav-item .nav-label::before,
+.bottom-nav .nav-item .nav-label::after {
+  content: none !important;
+  display: none !important;
+}
+
+.bottom-nav .nav-item .nav-icon {
+  width: 54px !important;
+  height: 54px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.bottom-nav .nav-item .nav-icon img {
+  display: block !important;
+  width: 54px !important;
+  height: 54px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+/* 画像内に文字も含まれているため既存ラベルは非表示 */
+.bottom-nav .nav-item > .nav-label {
+  display: none !important;
+}
+
+/* 元画像の黒背景をナビ背景へ自然につなぐ */
+.bottom-nav .nav-item {
+  gap: 0 !important;
+}
+
+/* Banking等の未選択色は提供画像のグレーをそのまま利用。
+   Wallet選択画像には白＋黄色ドットが既に入っている。 */

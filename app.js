@@ -84,3 +84,5 @@ document.addEventListener("dragstart", function (e) {
   action.querySelector("span").textContent = v.action;
   action.classList.toggle("dark", v.dark);
 })();
+
+window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
