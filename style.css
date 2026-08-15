@@ -1413,3 +1413,227 @@ body {
     width: 83% !important;
   }
 }
+
+
+/* =========================
+   v11: exact user-supplied image assets
+   ========================= */
+
+html, body {
+  background: #fff !important;
+}
+
+.app-shell,
+.screen-inner {
+  background: #fff !important;
+}
+
+/* Keep the whole Banking layout roomy without giant side gutters. */
+.screen-inner {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.banking-screen {
+  padding-top: calc(env(safe-area-inset-top) + 18px) !important;
+}
+
+.banking-screen .page-title {
+  font-size: 48px !important;
+  line-height: .96 !important;
+  letter-spacing: -1.7px !important;
+}
+
+.banking-screen .page-subtitle {
+  font-size: 15px !important;
+  margin-top: 7px !important;
+}
+
+.banking-screen .bank-section {
+  margin-top: 48px !important;
+}
+
+.banking-screen .section-label {
+  font-size: 16px !important;
+  margin-bottom: 18px !important;
+}
+
+/* Main account card */
+.banking-screen .account-card {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: 214px !important;
+  min-height: 214px !important;
+  padding: 18px !important;
+  overflow: hidden !important;
+  border: 2.5px solid #111 !important;
+}
+
+.banking-screen .card-copy {
+  position: relative !important;
+  z-index: 5 !important;
+  width: 62% !important;
+}
+
+.banking-screen .card-title-row {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.banking-screen .card-branch {
+  font-size: 17px !important;
+}
+
+.banking-screen .card-chevron {
+  margin-left: auto !important;
+  font-size: 34px !important;
+}
+
+.banking-screen .card-balance {
+  margin-top: 10px !important;
+  font-size: 40px !important;
+}
+
+/* Exact bank image, uncropped. */
+.bank-card-illustration-img {
+  position: absolute !important;
+  right: 4px !important;
+  bottom: 4px !important;
+  width: 48% !important;
+  max-width: none !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  z-index: 2 !important;
+}
+
+/* All accounts button */
+.banking-screen .show-all-btn {
+  margin-top: 16px !important;
+  font-size: 15px !important;
+}
+
+.banking-screen .tab-filter {
+  margin-top: 38px !important;
+  gap: 28px !important;
+}
+
+.banking-screen .tab-filter-item {
+  font-size: 16px !important;
+}
+
+/* Two small cards */
+.banking-screen .card-grid {
+  margin-top: 30px !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 18px !important;
+}
+
+.banking-screen .savings-card,
+.banking-screen .create-card {
+  height: 190px !important;
+  min-height: 190px !important;
+  padding: 16px !important;
+  overflow: hidden !important;
+}
+
+.banking-screen .small-card-title,
+.banking-screen .create-label {
+  font-size: 16px !important;
+  z-index: 5 !important;
+}
+
+.banking-screen .savings-balance {
+  font-size: 30px !important;
+  margin-top: 10px !important;
+  z-index: 5 !important;
+  position: relative !important;
+  white-space: nowrap !important;
+}
+
+/* Exact pig image, placed under the amount without clipping. */
+.pig-img {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 8px !important;
+  width: 72% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  z-index: 1 !important;
+}
+
+/* Exact user-provided create-box image, includes its own border/title/plus/books. */
+.create-box-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  z-index: 1 !important;
+}
+
+/* Hide duplicate text because the supplied create-box image already contains it. */
+.banking-screen .create-card .create-label {
+  display: none !important;
+}
+
+/* List area */
+.banking-screen .divider {
+  margin: 46px 0 14px !important;
+}
+
+.banking-screen .bank-list-row {
+  min-height: 64px !important;
+}
+
+.banking-screen .list-text {
+  font-size: 17px !important;
+}
+
+/* Use the exact supplied icons. */
+.list-icon-img {
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Bottom nav remains separate/fixed. */
+.bottom-nav {
+  width: min(100%, 430px) !important;
+  height: calc(96px + env(safe-area-inset-bottom)) !important;
+}
+
+/* iPhone-sized tuning */
+@media (max-width: 390px) {
+  .screen-inner {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  .banking-screen .page-title {
+    font-size: 46px !important;
+  }
+
+  .banking-screen .account-card {
+    height: 206px !important;
+    min-height: 206px !important;
+  }
+
+  .bank-card-illustration-img {
+    width: 49% !important;
+  }
+
+  .banking-screen .savings-card,
+  .banking-screen .create-card {
+    height: 182px !important;
+    min-height: 182px !important;
+  }
+
+  .banking-screen .savings-balance {
+    font-size: 28px !important;
+  }
+}
