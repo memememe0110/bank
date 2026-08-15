@@ -86,3 +86,25 @@ document.addEventListener("dragstart", function (e) {
 })();
 
 window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
+
+
+/* v19: bottom-nav active state sync */
+(function () {
+  const items = [...document.querySelectorAll(".bottom-nav .nav-item")];
+
+  function setActiveNav(target) {
+    items.forEach((item) => {
+      item.classList.toggle("active", item.dataset.target === target);
+    });
+  }
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      const target = item.dataset.target;
+      setActiveNav(target);
+    });
+  });
+
+  // 初期表示はWallet
+  setActiveNav("wallet");
+})();

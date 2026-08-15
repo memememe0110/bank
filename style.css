@@ -615,3 +615,52 @@ body {
 
 /* Banking等の未選択色は提供画像のグレーをそのまま利用。
    Wallet選択画像には白＋黄色ドットが既に入っている。 */
+
+
+/* =========================
+   v19: dynamic nav active states
+   ========================= */
+
+/* 送ってもらった画像の形はそのまま使い、
+   状態だけCSSで切替 */
+.bottom-nav .nav-item .nav-icon img {
+  filter: grayscale(1) brightness(.62) !important;
+  opacity: .95 !important;
+  transition: filter .16s ease, opacity .16s ease, transform .16s ease !important;
+}
+
+.bottom-nav .nav-item.active .nav-icon img {
+  filter: grayscale(1) brightness(3.2) contrast(1.08) !important;
+  opacity: 1 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 画像内の元の黄色点などは使わず、CSSの点を状態連動 */
+.bottom-nav .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 9px;
+  height: 9px;
+  transform: translateX(-50%) scale(.65);
+  border-radius: 50%;
+  background: #effb00;
+  opacity: 0;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.bottom-nav .nav-item.active::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* 選択中だけ少し前に出る */
+.bottom-nav .nav-item.active {
+  z-index: 2;
+}
+
+/* タップ感 */
+.bottom-nav .nav-item:active .nav-icon img {
+  transform: scale(.96);
+}
