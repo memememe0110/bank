@@ -1,12 +1,15 @@
-# Wallet Mock v12
+# Wallet Mock v13
 
-v11で画像の割り当てが間違っていました。
-v12はコードをいったん整理し直し、送ってもらった5画像を正しく割り当てています。
+修正点:
+- ダブルタップ拡大を抑止
+- iOSのgesture zoomも抑止
+- 横の余白をかなり減らして全体を少し大きく表示
+- 下部ナビは固定のまま
 
-- bank.jpeg = 銀行
-- create-box.jpeg = ボックス作成
-- pig.jpeg = 豚
-- schedule.jpeg = スケジュール
-- sort.jpeg = 並び替え
+GitHubでは次を上書き:
+- index.html
+- style.css
+- app.js
+- manifest.json
 
-GitHubでは index.html / style.css / app.js / manifest.json / assets を上書きしてください。
+assets は v12 と同じなので、すでに入っていれば上書き不要です。
