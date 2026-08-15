@@ -1,15 +1,13 @@
-# Wallet Mock v13
+# Wallet Mock v14
 
 修正点:
-- ダブルタップ拡大を抑止
-- iOSのgesture zoomも抑止
-- 横の余白をかなり減らして全体を少し大きく表示
-- 下部ナビは固定のまま
+- 文字選択・コピーUIを無効化
+- 長押しメニューを抑止
+- スクロールバーを非表示
+- 縦スクロール自体は維持
+- 下部ナビを画面の左右いっぱいまで表示
+- app の max-width:430px を解除して横の無駄な余白を削減
+- v14 でキャッシュ対策
 
-GitHubでは次を上書き:
-- index.html
-- style.css
-- app.js
-- manifest.json
-
-assets は v12 と同じなので、すでに入っていれば上書き不要です。
+今回は assets は変更なしです。
+GitHubでは index.html / style.css / app.js / manifest.json を上書きすればOKです。

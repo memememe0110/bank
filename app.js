@@ -34,3 +34,17 @@ document.addEventListener("touchend", function (e) {
 document.addEventListener("dblclick", function (e) {
   e.preventDefault();
 }, { passive: false });
+
+
+/* v14: prevent copy/select/context menu */
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener("selectstart", function (e) {
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener("dragstart", function (e) {
+  e.preventDefault();
+}, { passive: false });
