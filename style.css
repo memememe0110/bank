@@ -1957,3 +1957,117 @@ body {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* =========================
+   v40 fixes
+   ========================= */
+
+/* Banking tabs: one underline only */
+#bankSavingsTab,
+#bankLoanTab {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  position: relative !important;
+  padding-bottom: 8px !important;
+}
+
+#bankSavingsTab.active::after,
+#bankLoanTab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #111;
+}
+
+#bankSavingsTab:not(.active)::after,
+#bankLoanTab:not(.active)::after {
+  content: none !important;
+}
+
+/* Loan tab: hide everything below tabs except the empty message */
+.bank-loan-content {
+  min-height: 300px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 72px 20px 140px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.bank-loan-content[hidden] {
+  display: none !important;
+}
+
+.bank-loan-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Saving detail is smaller and closer to the reference */
+.saving-detail-page {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.saving-detail-back {
+  margin-top: 18px !important;
+  width: 42px !important;
+  height: 42px !important;
+  font-size: 40px !important;
+}
+
+.saving-detail-hero {
+  height: 250px !important;
+}
+
+.saving-detail-pig {
+  width: 190px !important;
+  max-width: 52% !important;
+}
+
+.saving-detail-name {
+  font-size: 18px !important;
+}
+
+.saving-detail-balance {
+  margin-top: 12px !important;
+  font-size: 44px !important;
+}
+
+.saving-transfer-btn {
+  margin-top: 34px !important;
+  width: 150px !important;
+  height: 72px !important;
+  font-size: 18px !important;
+}
+
+.saving-detail-divider {
+  margin: 40px 0 30px !important;
+}
+
+.saving-detail-title-row h2 {
+  font-size: 20px !important;
+}
+
+.saving-history-label {
+  margin-top: 48px !important;
+  font-size: 17px !important;
+}
+
+@media (max-width: 390px) {
+  .saving-detail-hero {
+    height: 220px !important;
+  }
+  .saving-detail-pig {
+    width: 170px !important;
+  }
+  .saving-detail-balance {
+    font-size: 40px !important;
+  }
+}

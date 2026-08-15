@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* v39: Saving detail. Edit the transaction data below in code to change the mock history. */
+/* v38: Saving detail + editable transactions */
 (function () {
   const savingButton = document.getElementById("savingCardButton");
   const backButton = document.getElementById("savingDetailBack");
@@ -252,9 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!savingButton || !backButton || !historyEl) return;
 
-  // ===== Saving transaction mock data =====
-  // Edit/add/remove rows here. No editing controls are shown in the UI.
-  const savingTransactions = [
+  const defaultTransactions = [
     { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 12000, date: "2026.8.15" },
     { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 8000,  date: "2026.8.15" },
     { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 27740, date: "2026.8.15" },
@@ -264,7 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" }
   ];
 
-  const transactions = savingTransactions;
+  let transactions = JSON.parse(localStorage.getItem("walletMockSavingTx") || "null") || defaultTransactions;
+
+  function save() {
+    localStorage.setItem("walletMockSavingTx", JSON.stringify(transactions));
+  }
 
   function money(n) {
     return "¥" + Number(n || 0).toLocaleString("ja-JP");
@@ -291,10 +293,31 @@ document.addEventListener('DOMContentLoaded', () => {
       amount.className = "saving-tx-amount";
       amount.textContent = (tx.type === "credit" ? "+ " : "") + money(tx.amount);
 
-      row.append(icon, main, amount);
+      const edit = document.createElement("div");
+      edit.className = "saving-tx-edit";
+      edit.innerHTML = `
+        <input data-field="desc" data-index="${index}" value="${tx.desc.replace(/"/g, '&quot;')}">
+        <input data-field="date" data-index="${index}" value="${tx.date}">
+        <input data-field="amount" data-index="${index}" inputmode="numeric" value="${tx.amount}">
+        <select data-field="type" data-index="${index}">
+          <option value="debit" ${tx.type === "debit" ? "selected" : ""}>出金</option>
+          <option value="credit" ${tx.type === "credit" ? "selected" : ""}>入金</option>
+        </select>
+      `;
+
+      row.append(icon, main, amount, edit);
       historyEl.appendChild(row);
     });
 
+    historyEl.querySelectorAll("input, select").forEach(el => {
+      el.addEventListener("change", e => {
+        const i = Number(e.target.dataset.index);
+        const field = e.target.dataset.field;
+        transactions[i][field] = field === "amount" ? Number(e.target.value.replace(/,/g, "")) : e.target.value;
+        save();
+        render();
+      });
+    });
   }
 
   function showSavingDetail() {
@@ -315,4 +338,51 @@ document.addEventListener('DOMContentLoaded', () => {
   backButton.addEventListener("click", showBanking);
 
   render();
+})();
+
+
+/* v40: reliable Banking savings/loan tabs */
+(function () {
+  const savingsTab = document.getElementById("bankSavingsTab");
+  const loanTab = document.getElementById("bankLoanTab");
+  const savingsContent = document.getElementById("bankSavingsContent");
+  const loanContent = document.getElementById("bankLoanContent");
+
+  if (!savingsTab || !loanTab || !loanContent) return;
+
+  // Anything below the tabs that should disappear on Loan.
+  const bankingScreen = document.getElementById("banking");
+  const extraBlocks = bankingScreen
+    ? [...bankingScreen.querySelectorAll(".banking-menu, .bank-menu, .banking-actions, .bank-actions, .banking-list")]
+    : [];
+
+  function showSavings() {
+    savingsTab.classList.add("active");
+    loanTab.classList.remove("active");
+    if (savingsContent) savingsContent.style.display = "";
+    loanContent.hidden = true;
+    extraBlocks.forEach(el => el.style.display = "");
+  }
+
+  function showLoan() {
+    savingsTab.classList.remove("active");
+    loanTab.classList.add("active");
+    if (savingsContent) savingsContent.style.display = "none";
+    loanContent.hidden = false;
+    extraBlocks.forEach(el => el.style.display = "none");
+  }
+
+  savingsTab.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    showSavings();
+  });
+
+  loanTab.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    showLoan();
+  });
+
+  showSavings();
 })();

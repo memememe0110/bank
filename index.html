@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=38">
+<link rel="stylesheet" href="style.css?v=40">
 </head>
 <body>
 <div class="app">
@@ -69,9 +69,13 @@
 
         <section class="savings-area">
           <div class="tabs">
-            <button class="tab active">貯蓄預金</button>
-            <button class="tab" id="bankLoanTab">ローン</button>
+            <button class="tab active" id="bankSavingsTab">貯蓄預金</button>
+            <button class="tab" id="bankLoanTab" id="bankLoanTab">ローン</button>
           </div>
+<div id="bankLoanContent" class="bank-loan-content" hidden>
+  <div class="bank-loan-title">ご利用中のローンはありません</div>
+</div>
+
 
           <div class="card-row">
             <button class="saving-card" id="savingCardButton" type="button">
@@ -257,6 +261,6 @@
     </button>
   </nav>
 </div>
-<script src="app.js?v=38"></script>
+<script src="app.js?v=40"></script>
 </body>
 </html>
