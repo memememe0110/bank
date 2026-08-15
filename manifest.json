@@ -1,9 +1,9 @@
 {
   "name": "Wallet Mock",
   "short_name": "Wallet",
-  "start_url": "./?v=3",
+  "start_url": "./?v=4",
   "display": "standalone",
-  "background_color": "#e8e8e8",
-  "theme_color": "#e8e8e8",
+  "background_color": "#ececec",
+  "theme_color": "#ececec",
   "icons": []
 }
