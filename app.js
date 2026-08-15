@@ -165,3 +165,28 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     });
   });
 });
+
+
+/* v28: Wallet balance hide/show */
+(function(){
+  const balance = document.getElementById("walletBalance");
+  const button = document.getElementById("balanceToggle");
+  const text = document.getElementById("balanceToggleText");
+  if (!balance || !button || !text) return;
+
+  let hidden = true;
+  const shownValue = "¥0";
+
+  button.addEventListener("click", function(){
+    hidden = !hidden;
+    if (hidden) {
+      balance.textContent = "¥ ********";
+      balance.classList.add("is-hidden");
+      text.textContent = "残高を表示";
+    } else {
+      balance.textContent = shownValue;
+      balance.classList.remove("is-hidden");
+      text.textContent = "残高を隠す";
+    }
+  });
+})();

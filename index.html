@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=26">
+<link rel="stylesheet" href="style.css?v=29">
 </head>
 <body>
 <div class="app">
@@ -22,8 +22,8 @@
             <p>よく使う銀行機能</p>
           </div>
           <div class="wallet-header-icons" aria-hidden="true">
-            <span class="bell-icon">♧<i></i></span>
-            <span class="person-icon">♙</span>
+            <img class="wallet-header-icon" src="assets/header-notice.jpeg" alt="">
+            <img class="wallet-header-icon" src="assets/header-person.jpeg" alt="">
           </div>
         </header>
 
@@ -34,10 +34,10 @@
         <section class="wallet-account">
           <div class="wallet-account-line">普通預金 <span id="walletBranch">丸善ジュンク堂支店</span></div>
           <div class="wallet-account-actions">
-            <strong>¥0</strong>
+            <strong id="walletBalance" class="is-hidden">¥ ********</strong>
             <button class="deposit-btn">♧ 入金方法を見る</button>
           </div>
-          <button class="hide-balance">◉　残高を隠す</button>
+          <button class="hide-balance" id="balanceToggle"><span class="eye-mark">◉</span><span id="balanceToggleText">残高を表示</span></button>
         </section>
 
         <button class="wallet-link" id="walletArticle">
@@ -188,6 +188,6 @@
     </button>
   </nav>
 </div>
-<script src="app.js?v=26"></script>
+<script src="app.js?v=29"></script>
 </body>
 </html>

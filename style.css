@@ -1327,3 +1327,47 @@ body {
     width: 44% !important;
   }
 }
+
+
+/* v27: 普通預金カードの > を右上へ */
+.account-card .account-card-arrow {
+  position: absolute !important;
+  top: 18px !important;
+  right: 18px !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  z-index: 20 !important;
+}
+
+
+/* v28: Wallet header icons supplied by user */
+.wallet-header-icons{
+  gap: 22px !important;
+  padding-top: 10px !important;
+  align-items: center !important;
+}
+.wallet-header-icon{
+  width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+  display: block !important;
+  mix-blend-mode: multiply;
+}
+/* old red notification dot is no longer used */
+.bell-icon i{ display:none !important; }
+
+/* v28: balance hide/show */
+.hide-balance{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+}
+.hide-balance .eye-mark{
+  font-size:20px;
+  line-height:1;
+}
+#walletBalance.is-hidden{
+  letter-spacing: 2px;
+}
