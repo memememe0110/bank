@@ -680,3 +680,237 @@ button {
     font-size: 15px;
   }
 }
+
+
+/* =========================
+   v7: iPhone target matching
+   ========================= */
+
+/* iOSの文字自動拡大を止める。これが金額の巨大化・横はみ出し対策の中心。 */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  background: #fff !important;
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
+}
+
+body {
+  display: block !important;
+  overflow-x: hidden !important;
+}
+
+/* flexのmin-content幅で430pxまで膨らむ現象を防ぐ */
+.app-shell {
+  display: block !important;
+  width: 100% !important;
+  max-width: 430px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  background: #fff !important;
+  overflow-x: hidden !important;
+}
+
+.app-main,
+.screen,
+.screen-inner {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.screen-inner {
+  background: #fff !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* 元画像のBankingに合わせる */
+.banking-screen {
+  padding-top: calc(env(safe-area-inset-top) + 22px) !important;
+}
+
+.banking-screen .page-title {
+  font-size: 36px !important;
+  line-height: .96 !important;
+  letter-spacing: -1.2px !important;
+}
+
+.banking-screen .page-subtitle {
+  margin-top: 6px !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+}
+
+.banking-screen .bank-section {
+  margin-top: 38px !important;
+}
+
+.banking-screen .section-label {
+  margin-bottom: 17px !important;
+  font-size: 14px !important;
+}
+
+/* 普通預金カード: 24px左右余白、約190px高 */
+.banking-screen .account-card {
+  width: 100% !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  grid-template-columns: minmax(0, 1fr) 46% !important;
+  padding: 14px 14px 10px !important;
+  overflow: hidden !important;
+}
+
+.banking-screen .card-copy {
+  min-width: 0 !important;
+}
+
+.banking-screen .card-title-row {
+  min-width: 0 !important;
+}
+
+.banking-screen .card-branch {
+  font-size: 15px !important;
+  white-space: nowrap !important;
+}
+
+.banking-screen .card-chevron {
+  font-size: 31px !important;
+}
+
+.banking-screen .card-balance {
+  margin-top: 8px !important;
+  font-size: 32px !important;
+  white-space: nowrap !important;
+}
+
+.banking-screen .bank-card-illustration {
+  width: 100% !important;
+  max-width: 150px !important;
+  min-width: 0 !important;
+  align-self: end !important;
+  justify-self: end !important;
+}
+
+.banking-screen .show-all-btn {
+  margin-top: 14px !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+}
+
+/* 貯蓄預金 / ローン */
+.banking-screen .tab-filter {
+  margin-top: 30px !important;
+  gap: 26px !important;
+}
+
+.banking-screen .tab-filter-item {
+  font-size: 14px !important;
+}
+
+.banking-screen .tab-filter-item.active::after {
+  bottom: -9px !important;
+  height: 2px !important;
+}
+
+/* 2枚のカードは必ず画面内に収める */
+.banking-screen .card-grid {
+  width: 100% !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 26px !important;
+}
+
+.banking-screen .savings-card,
+.banking-screen .create-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 158px !important;
+  min-height: 158px !important;
+  padding: 14px !important;
+  overflow: hidden !important;
+}
+
+.banking-screen .small-card-title {
+  font-size: 13px !important;
+}
+
+.banking-screen .savings-balance {
+  position: relative !important;
+  z-index: 4 !important;
+  margin-top: 8px !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* 豚は金額の下に回し、文字へ被せない */
+.banking-screen .pig-svg {
+  z-index: 1 !important;
+  width: 61% !important;
+  right: -2px !important;
+  left: auto !important;
+  bottom: 4px !important;
+  transform: none !important;
+}
+
+.banking-screen .create-label {
+  font-size: 13px !important;
+}
+
+.banking-screen .house-svg {
+  width: 96px !important;
+  right: 8px !important;
+  bottom: 10px !important;
+}
+
+.banking-screen .plus-badge {
+  width: 58px !important;
+  height: 58px !important;
+  font-size: 42px !important;
+}
+
+/* 一番下まで見える余白 */
+.banking-screen .divider {
+  margin: 46px 0 14px !important;
+}
+
+.banking-screen .bank-list-row {
+  min-height: 58px !important;
+}
+
+.banking-screen .list-text {
+  font-size: 15px !important;
+}
+
+/* 下部バーは画面と独立固定 */
+.bottom-nav {
+  width: min(100%, 430px) !important;
+  height: calc(96px + env(safe-area-inset-bottom)) !important;
+}
+
+.nav-item span {
+  font-size: 11px !important;
+}
+
+/* 小さめiPhoneでも同じ比率で収める */
+@media (max-width: 390px) {
+  .screen-inner {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .banking-screen .page-title {
+    font-size: 36px !important;
+  }
+
+  .banking-screen .card-balance {
+    font-size: 32px !important;
+  }
+
+  .banking-screen .savings-balance {
+    font-size: 21px !important;
+  }
+}
