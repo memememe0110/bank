@@ -48,3 +48,39 @@ document.addEventListener("selectstart", function (e) {
 document.addEventListener("dragstart", function (e) {
   e.preventDefault();
 }, { passive: false });
+
+
+/* v15: トップ画像は起動ごとに2種類から切り替え */
+(function () {
+  const hero = document.getElementById("walletHero");
+  const branch = document.getElementById("walletBranch");
+  const article = document.getElementById("walletArticle");
+  const action = document.getElementById("walletAction");
+  if (!hero) return;
+
+  const variants = [
+    {
+      image: "assets/wallet-hero-1.jpeg",
+      branch: "ハーバーブリッジ支店",
+      article: "熊本につなごう Cheer Box/Cheerコード",
+      action: "送金・ATM・デビットカード",
+      dark: false
+    },
+    {
+      image: "assets/wallet-hero-2.jpeg",
+      branch: "丸善ジュンク堂支店",
+      article: "Money Talk：ESG投資って？",
+      action: "お金のアクションメニュー",
+      dark: true
+    }
+  ];
+
+  const index = Math.floor(Math.random() * variants.length);
+  const v = variants[index];
+
+  hero.src = v.image;
+  branch.textContent = "丸善ジュンク堂支店";
+  article.querySelector("span").textContent = v.article;
+  action.querySelector("span").textContent = v.action;
+  action.classList.toggle("dark", v.dark);
+})();

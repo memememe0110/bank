@@ -8,20 +8,45 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 <div class="app">
 
   <main>
     <section id="wallet" class="screen">
-      <div class="simple">
-        <h1>Wallet</h1>
-        <p>よく使う銀行機能</p>
-        <div class="simple-card">
-          <div>普通預金　ハーバーブリッジ支店</div>
-          <strong>¥0</strong>
+      <div class="wallet-page">
+        <header class="wallet-header">
+          <div>
+            <h1>Wallet</h1>
+            <p>よく使う銀行機能</p>
+          </div>
+          <div class="wallet-header-icons" aria-hidden="true">
+            <span class="bell-icon">♧<i></i></span>
+            <span class="person-icon">♙</span>
+          </div>
+        </header>
+
+        <div class="wallet-hero-wrap">
+          <img id="walletHero" src="assets/wallet-hero-1.jpeg" alt="" class="wallet-hero">
         </div>
+
+        <section class="wallet-account">
+          <div class="wallet-account-line">普通預金 <span id="walletBranch">丸善ジュンク堂支店</span></div>
+          <div class="wallet-account-actions">
+            <strong>¥0</strong>
+            <button class="deposit-btn">♧ 入金方法を見る</button>
+          </div>
+          <button class="hide-balance">◉　残高を隠す</button>
+        </section>
+
+        <button class="wallet-link" id="walletArticle">
+          <span>熊本につなごう Cheer Box/Cheerコード</span><b>›</b>
+        </button>
+
+        <button class="wallet-action" id="walletAction">
+          <span>送金・ATM・デビットカード</span><b>⌃</b>
+        </button>
       </div>
     </section>
 
@@ -108,6 +133,6 @@
     </button>
   </nav>
 </div>
-<script src="app.js?v=14"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

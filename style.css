@@ -229,3 +229,343 @@ body {
     padding-right: 12px !important;
   }
 }
+
+
+/* =========================
+   v15 Wallet top
+   ========================= */
+.wallet-page {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100dvh;
+  padding: max(28px, env(safe-area-inset-top)) 26px calc(122px + env(safe-area-inset-bottom));
+  background: #fff;
+  color: #000;
+}
+
+.wallet-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.wallet-header h1 {
+  margin: 0;
+  font-size: clamp(48px, 14vw, 68px);
+  line-height: .95;
+  letter-spacing: -3px;
+  font-weight: 900;
+}
+
+.wallet-header p {
+  margin: 10px 0 0;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.wallet-header-icons {
+  display: flex;
+  gap: 24px;
+  padding-top: 12px;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.bell-icon {
+  position: relative;
+}
+.bell-icon i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: red;
+  right: -2px;
+  top: -5px;
+}
+
+.wallet-hero-wrap {
+  width: 100%;
+  height: min(47vh, 430px);
+  min-height: 340px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wallet-hero {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wallet-account {
+  margin-top: 22px;
+}
+
+.wallet-account-line {
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.wallet-account-actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wallet-account-actions strong {
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.deposit-btn {
+  flex: 0 0 auto;
+  min-width: 190px;
+  padding: 18px 14px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.hide-balance {
+  margin-top: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.wallet-link {
+  width: 100%;
+  margin-top: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.wallet-link b {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.wallet-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: min(78%, 500px);
+  margin: 52px auto 0;
+  padding: 17px 20px;
+  border: 3px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.wallet-action.dark {
+  background: #000;
+  color: #fff;
+}
+
+@media (max-width: 390px) {
+  .wallet-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .wallet-hero-wrap {
+    margin-top: 38px;
+    min-height: 315px;
+  }
+  .wallet-account-line {
+    font-size: 16px;
+  }
+  .deposit-btn {
+    min-width: 172px;
+    font-size: 15px;
+  }
+}
+
+
+/* =========================
+   v17 bottom navigation icons
+   Wallet参考画面に合わせる
+   ========================= */
+.bottom-nav {
+  height: calc(108px + env(safe-area-inset-bottom)) !important;
+  padding: 17px 18px env(safe-area-inset-bottom) !important;
+  box-sizing: border-box !important;
+  background: #000 !important;
+}
+
+.nav-item {
+  position: relative !important;
+  color: #898a91 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  gap: 7px !important;
+}
+
+.nav-item.active {
+  color: #fff !important;
+}
+
+.nav-item .nav-icon {
+  width: 34px !important;
+  height: 34px !important;
+  display: block !important;
+  position: relative !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: currentColor !important;
+}
+
+/* Wallet: wallet outline */
+.nav-item[data-target="wallet"] .nav-icon::before {
+  content: "";
+  position: absolute;
+  left: 3px; top: 8px;
+  width: 25px; height: 19px;
+  border: 3px solid currentColor;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.nav-item[data-target="wallet"] .nav-icon::after {
+  content: "";
+  position: absolute;
+  right: 1px; top: 13px;
+  width: 12px; height: 10px;
+  border: 3px solid currentColor;
+  background: #000;
+  box-sizing: border-box;
+}
+
+/* Banking: bank building */
+.nav-item[data-target="banking"] .nav-icon::before {
+  content: "▴";
+  position: absolute;
+  left: 2px; top: 0;
+  width: 30px;
+  font-size: 31px;
+  line-height: 17px;
+  text-align: center;
+  color: currentColor;
+}
+.nav-item[data-target="banking"] .nav-icon::after {
+  content: "▥";
+  position: absolute;
+  left: 3px; top: 13px;
+  width: 28px;
+  font-size: 28px;
+  line-height: 22px;
+  text-align: center;
+  color: currentColor;
+}
+
+/* Record: target */
+.nav-item[data-target="records"] .nav-icon::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.nav-item[data-target="records"] .nav-icon::after {
+  content: "";
+  position: absolute;
+  left: 11px; top: 11px;
+  width: 12px; height: 12px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Links: two people / loops */
+.nav-item[data-target="links"] .nav-icon::before,
+.nav-item[data-target="links"] .nav-icon::after {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  top: 3px;
+  box-sizing: border-box;
+}
+.nav-item[data-target="links"] .nav-icon::before { left: 3px; }
+.nav-item[data-target="links"] .nav-icon::after { right: 3px; }
+.nav-item[data-target="links"] {
+  --people: currentColor;
+}
+.nav-item[data-target="links"] .nav-label::before {
+  content: "";
+  position: absolute;
+  top: 33px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px; height: 13px;
+  border: 3px solid currentColor;
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  box-sizing: border-box;
+}
+
+/* Circle: linked rings */
+.nav-item[data-target="circle"] .nav-icon::before {
+  content: "";
+  position: absolute;
+  left: 5px; top: 4px;
+  width: 19px; height: 25px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  transform: rotate(28deg);
+  box-sizing: border-box;
+}
+.nav-item[data-target="circle"] .nav-icon::after {
+  content: "";
+  position: absolute;
+  right: 5px; top: 4px;
+  width: 19px; height: 25px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  transform: rotate(-28deg);
+  box-sizing: border-box;
+}
+
+/* active yellow dot */
+.nav-item.active .nav-label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #eaff00;
+}
+
+.nav-label {
+  position: relative !important;
+  white-space: nowrap;
+}
