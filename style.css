@@ -1042,3 +1042,98 @@ body {
   .record-card-title { font-size: 16px; }
   .record-card-amount { font-size: 31px; }
 }
+
+
+/* =========================
+   v24: avoid overlap on Banking card + exact Record images
+   ========================= */
+
+/* Banking: keep branch/arrow completely separate from the book art */
+.account-card {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.account-copy {
+  position: relative !important;
+  z-index: 6 !important;
+  width: 52% !important;
+  max-width: 52% !important;
+}
+
+.branch-row {
+  width: 100% !important;
+  padding-right: 0 !important;
+}
+
+.account-card-arrow {
+  top: 14px !important;
+  right: 18px !important;
+  z-index: 9 !important;
+}
+
+/* Book art gets a dedicated lower-right region */
+.bank-img {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 10px !important;
+  width: 43% !important;
+  max-height: 74% !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  z-index: 2 !important;
+}
+
+/* Reserve the top-right corner for the arrow, so the image doesn't crowd it */
+.account-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 72px;
+  height: 68px;
+  background: #fff;
+  z-index: 4;
+  pointer-events: none;
+}
+.account-card-arrow {
+  position: absolute !important;
+  z-index: 10 !important;
+}
+
+/* Record images: use the supplied artwork directly and keep them inside the cards */
+.record-card-img {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.cash-img {
+  width: 45% !important;
+  max-height: 84% !important;
+}
+
+.credit-img {
+  width: 42% !important;
+  max-height: 86% !important;
+}
+
+.debit-img {
+  width: 42% !important;
+  max-height: 86% !important;
+}
+
+.other-img {
+  width: 39% !important;
+  max-height: 82% !important;
+}
+
+.record-card-copy {
+  position: relative !important;
+  z-index: 5 !important;
+}
