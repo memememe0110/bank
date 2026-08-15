@@ -192,3 +192,127 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     }
   });
 })();
+
+
+// v37: Banking loan tab
+document.addEventListener('DOMContentLoaded', () => {
+  const banking = [...document.querySelectorAll('section, main, div')].find(el =>
+    el.querySelector && /Banking/.test(el.textContent || '') &&
+    /貯蓄預金/.test(el.textContent || '') &&
+    /ローン/.test(el.textContent || '')
+  );
+
+  const loanEmpty = document.getElementById('bankLoanEmpty');
+  if (!loanEmpty) return;
+
+  const candidates = [...document.querySelectorAll('button, [role="tab"], .tab, .bank-tab, span, div')];
+  const savingsTab = candidates.find(el => (el.textContent || '').trim() === '貯蓄預金');
+  const loanTab = document.getElementById('bankLoanTab') ||
+                  candidates.find(el => (el.textContent || '').trim() === 'ローン');
+
+  if (!loanTab || !savingsTab) return;
+
+  const findSavingsArea = () => {
+    const savingText = [...document.querySelectorAll('*')].find(el =>
+      (el.textContent || '').trim() === 'Saving'
+    );
+    if (!savingText) return null;
+    let p = savingText;
+    for (let i = 0; i < 5 && p; i++, p = p.parentElement) {
+      if (p && p.querySelector && /ボックス作成/.test(p.textContent || '')) return p;
+    }
+    return savingText.parentElement;
+  };
+
+  const savingsArea = findSavingsArea();
+
+  const setLoan = (on) => {
+    if (savingsArea) savingsArea.style.display = on ? 'none' : '';
+    loanEmpty.hidden = !on;
+
+    loanTab.classList.toggle('active', on);
+    savingsTab.classList.toggle('active', !on);
+
+    // 元デザインの下線を維持
+    loanTab.style.borderBottom = on ? '3px solid #111' : '';
+    savingsTab.style.borderBottom = on ? '' : '3px solid #111';
+  };
+
+  loanTab.addEventListener('click', () => setLoan(true));
+  savingsTab.addEventListener('click', () => setLoan(false));
+});
+
+
+/* v39: Saving detail. Edit the transaction data below in code to change the mock history. */
+(function () {
+  const savingButton = document.getElementById("savingCardButton");
+  const backButton = document.getElementById("savingDetailBack");
+  const screens = [...document.querySelectorAll(".screen")];
+  const historyEl = document.getElementById("savingHistory");
+
+  if (!savingButton || !backButton || !historyEl) return;
+
+  // ===== Saving transaction mock data =====
+  // Edit/add/remove rows here. No editing controls are shown in the UI.
+  const savingTransactions = [
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 12000, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 8000,  date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 27740, date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 1205,  date: "2026.8.15" },
+    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（ハーバーブリッジ支店）", amount: 28945, date: "2026.8.15" },
+    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" }
+  ];
+
+  const transactions = savingTransactions;
+
+  function money(n) {
+    return "¥" + Number(n || 0).toLocaleString("ja-JP");
+  }
+
+  function render() {
+    historyEl.innerHTML = "";
+    transactions.forEach((tx, index) => {
+      const row = document.createElement("div");
+      row.className = "saving-tx " + tx.type;
+
+      const icon = document.createElement("div");
+      icon.className = "saving-tx-icon";
+      icon.textContent = tx.type === "credit" ? "↓" : "↑";
+
+      const main = document.createElement("div");
+      main.className = "saving-tx-main";
+      main.innerHTML = `
+        <div class="saving-tx-desc">${tx.desc}</div>
+        <div class="saving-tx-date">${tx.date}</div>
+      `;
+
+      const amount = document.createElement("div");
+      amount.className = "saving-tx-amount";
+      amount.textContent = (tx.type === "credit" ? "+ " : "") + money(tx.amount);
+
+      row.append(icon, main, amount);
+      historyEl.appendChild(row);
+    });
+
+  }
+
+  function showSavingDetail() {
+    screens.forEach(s => s.classList.remove("active"));
+    const detail = document.getElementById("saving-detail");
+    if (detail) detail.classList.add("active");
+    window.scrollTo(0, 0);
+  }
+
+  function showBanking() {
+    screens.forEach(s => s.classList.remove("active"));
+    const banking = document.getElementById("banking");
+    if (banking) banking.classList.add("active");
+    window.scrollTo(0, 0);
+  }
+
+  savingButton.addEventListener("click", showSavingDetail);
+  backButton.addEventListener("click", showBanking);
+
+  render();
+})();

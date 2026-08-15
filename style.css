@@ -1694,3 +1694,266 @@ body {
 .wallet-action {
   display: none !important;
 }
+
+
+/* =========================
+   v36: Circle card cleanup
+   ========================= */
+
+/* 画像側に本来の枠線が入っているため、CSSの追加枠は消す */
+.circle-card {
+  border: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  background: #fff !important;
+}
+
+/* Learning下部にメニューバー画像が混ざらないよう再切り出し済み。
+   ページ側にも固定ナビ分の余白を確保する */
+.circle-page {
+  padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important;
+}
+
+.circle-grid {
+  padding-bottom: 24px !important;
+}
+
+
+/* v37: Banking loan empty state */
+.bank-loan-empty {
+  min-height: 300px;
+  padding: 82px 24px 150px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.bank-loan-empty-title {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #111;
+}
+.bank-loan-empty-sub {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #777;
+}
+
+
+/* =========================
+   v38: Saving detail screen
+   ========================= */
+
+.saving-detail-page {
+  min-height: 100dvh;
+  padding: max(26px, env(safe-area-inset-top)) 26px calc(126px + env(safe-area-inset-bottom));
+  background: #fff;
+  color: #000;
+}
+
+.saving-detail-back {
+  display: block;
+  margin: 26px 0 0;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 0;
+  font-size: 46px;
+  line-height: 1;
+  text-align: left;
+}
+
+.saving-detail-hero {
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.saving-detail-pig {
+  width: 250px;
+  max-width: 62%;
+  height: auto;
+  object-fit: contain;
+}
+
+.saving-detail-summary {
+  margin-top: 4px;
+}
+
+.saving-detail-name {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.saving-detail-balance {
+  margin-top: 18px;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.saving-transfer-btn {
+  margin-top: 54px;
+  width: 188px;
+  height: 92px;
+  background: #000;
+  color: #fff;
+  border: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.saving-detail-divider {
+  height: 3px;
+  background: #111;
+  margin: 56px 0 42px;
+}
+
+.saving-detail-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saving-detail-title-row h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.saving-search-icon {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 8px;
+}
+.saving-search-icon::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  bottom: -4px;
+  width: 15px;
+  height: 3px;
+  background: #111;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.saving-history-label {
+  margin-top: 74px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.saving-history {
+  margin-top: 28px;
+  display: grid;
+  gap: 30px;
+}
+
+.saving-tx {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.saving-tx-icon {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.saving-tx-main {
+  min-width: 0;
+}
+
+.saving-tx-desc {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.saving-tx-date {
+  margin-top: 7px;
+  font-size: 15px;
+  color: #222;
+}
+
+.saving-tx-amount {
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.saving-tx.credit .saving-tx-amount {
+  background: #effb00;
+  padding: 0 3px;
+}
+
+.saving-tx-edit {
+  grid-column: 2 / 4;
+  display: grid;
+  grid-template-columns: 1.3fr .8fr .9fr auto;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.saving-tx-edit input,
+.saving-tx-edit select,
+.saving-tx-edit button {
+  height: 36px;
+  border: 1px solid #bbb;
+  background: #fff;
+  font-size: 13px;
+  padding: 0 8px;
+}
+
+.saving-tx-edit button {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  font-weight: 700;
+}
+
+@media (max-width: 390px) {
+  .saving-detail-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .saving-detail-hero {
+    height: 300px;
+  }
+
+  .saving-detail-pig {
+    width: 220px;
+  }
+
+  .saving-detail-balance {
+    font-size: 48px;
+  }
+
+  .saving-tx-desc,
+  .saving-tx-amount {
+    font-size: 16px;
+  }
+
+  .saving-tx-edit {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,8 +1,10 @@
-# Wallet Mock v34
+# Wallet Mock v38
 
-修正:
-- Linksの空状態にあった不自然な黒い〇アイコンを削除
-- Circleカード画像の端を少しトリミング
-- Circleの枠線は画像ではなくCSSで統一して描画
-- 途切れて見えていた線を改善
-- v33までのLinks/Circle以外の仕様は維持
+追加:
+- BankingのSavingカードを押すとSaving詳細画面へ遷移
+- 参考画像に合わせたSaving詳細UI
+- 残高 ¥24,000
+- 取引明細一覧
+- 明細は各行の説明・日付・金額・入出金区分を書き換え可能
+- 変更内容はlocalStorageに保存
+- 戻るボタンでBankingへ復帰
