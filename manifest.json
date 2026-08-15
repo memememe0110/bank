@@ -1,7 +1,7 @@
 {
   "name": "Wallet Mock",
   "short_name": "Wallet",
-  "start_url": "./?v=19",
+  "start_url": "./?v=20",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff"

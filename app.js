@@ -108,3 +108,38 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
   // 初期表示はWallet
   setActiveNav("wallet");
 })();
+
+
+/* v20: bottom nav - exactly one active item */
+(function () {
+  const items = Array.from(document.querySelectorAll(".bottom-nav .nav-item"));
+  const allScreens = Array.from(document.querySelectorAll(".screen"));
+
+  function activate(screenName) {
+    items.forEach(item => {
+      item.classList.remove("active");
+    });
+    allScreens.forEach(screen => {
+      screen.classList.remove("active");
+    });
+
+    const activeItem = items.find(item => item.dataset.screen === screenName);
+    const activeScreen = document.getElementById(screenName);
+
+    if (activeItem) activeItem.classList.add("active");
+    if (activeScreen) activeScreen.classList.add("active");
+
+    window.scrollTo(0, 0);
+  }
+
+  items.forEach(item => {
+    item.onclick = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      activate(item.dataset.screen);
+    };
+  });
+
+  // 最初は必ずWallet
+  activate("wallet");
+})();
