@@ -2,20 +2,31 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
+  >
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#e8e8e8">
   <title>Wallet Mock</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
+    }
+
     html, body {
       margin: 0;
-      background: #e8e8e8;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       min-height: 100%;
+      background: #e8e8e8;
       overflow-x: hidden;
+      touch-action: pan-y;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
@@ -33,73 +44,82 @@
 
     .screen {
       display: none;
-      position: relative;
-      width: 100%;
+      min-height: 100vh;
+      padding-bottom: calc(104px + env(safe-area-inset-bottom));
+      background: #e8e8e8;
     }
 
     .screen.active {
       display: block;
     }
 
+    .image-screen {
+      position: relative;
+    }
+
     .screen-image {
       display: block;
       width: 100%;
       height: auto;
-      user-select: none;
-      -webkit-user-drag: none;
       pointer-events: none;
+      -webkit-user-drag: none;
     }
 
-    .hotspot {
+    .content-hotspot {
       position: absolute;
-      display: block;
-      background: transparent;
       border: 0;
+      background: transparent;
       padding: 0;
       margin: 0;
       cursor: pointer;
     }
 
-    /* Bottom tab tap areas: percentages based on screenshot */
-    .tab-wallet  { left: 0%;  top: 87%; width: 20%; height: 13%; }
-    .tab-banking { left: 20%; top: 87%; width: 20%; height: 13%; }
-    .tab-record  { left: 40%; top: 87%; width: 20%; height: 13%; }
-    .tab-links   { left: 60%; top: 87%; width: 20%; height: 13%; }
-    .tab-circle  { left: 80%; top: 87%; width: 20%; height: 13%; }
+    .wallet-main-action {
+      left: 18%;
+      width: 64%;
+      height: 5.5%;
+      bottom: 8.4%;
+    }
+
+    .banking-account-card {
+      left: 5%;
+      width: 90%;
+      top: 20%;
+      height: 26%;
+    }
 
     .page {
+      padding: calc(env(safe-area-inset-top) + 24px) 24px calc(130px + env(safe-area-inset-bottom));
       min-height: 100vh;
-      padding: calc(env(safe-area-inset-top) + 24px) 24px calc(120px + env(safe-area-inset-bottom));
       background: #ececec;
       color: #111;
-      position: relative;
     }
 
     .title {
-      font-size: 50px;
+      margin: 0;
+      font-size: 48px;
       line-height: 1;
       font-weight: 900;
-      margin: 0;
       letter-spacing: -2px;
     }
 
     .subtitle {
+      margin: 8px 0 0;
       font-size: 18px;
       font-weight: 800;
-      margin: 8px 0 0;
     }
 
-    .placeholder-box {
-      margin-top: 36px;
-      border: 3px solid #111;
-      border-radius: 24px;
-      padding: 24px;
-      background: white;
+    .placeholder-card {
+      margin-top: 34px;
+      border: 2px solid #111;
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
     }
 
-    .placeholder-box p {
+    .placeholder-card p {
       margin: 0;
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.7;
       font-weight: 600;
     }
@@ -110,31 +130,33 @@
       transform: translateX(-50%);
       bottom: 0;
       width: min(100%, 430px);
-      height: calc(96px + env(safe-area-inset-bottom));
+      height: calc(100px + env(safe-area-inset-bottom));
       background: #000;
       display: flex;
       padding-bottom: env(safe-area-inset-bottom);
-      z-index: 20;
+      z-index: 50;
     }
 
     .nav-button {
       flex: 1;
       border: 0;
       background: transparent;
-      color: #8e8e93;
+      color: #8c8c96;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 25px;
+      gap: 7px;
+      font: inherit;
       position: relative;
+      padding: 0;
     }
 
     .nav-button span {
       font-size: 11px;
       font-weight: 700;
       color: inherit;
+      line-height: 1;
     }
 
     .nav-button.active {
@@ -143,42 +165,43 @@
 
     .nav-button.active::after {
       content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #f0f900;
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #f3ff00;
+    }
+
+    .icon-svg {
+      width: 28px;
+      height: 28px;
+      display: block;
     }
 
     .hidden {
       display: none !important;
     }
-
-    /* Keep image page clean when using the screenshot tabs */
-    .image-screen .bottom-nav {
-      display: none;
-    }
   </style>
 </head>
 <body>
   <div class="app">
-    <section id="wallet" class="screen active image-screen">
-      <img class="screen-image" src="wallet.png" alt="Wallet mock screen">
-      <button class="hotspot tab-banking" aria-label="バンキングへ" onclick="showScreen('banking')"></button>
+    <section id="wallet" class="screen active image-screen" aria-label="Wallet screen">
+      <img class="screen-image" src="wallet-v3.png" alt="Wallet mock screen">
+      <button class="content-hotspot wallet-main-action" aria-label="送金・ATM・デビットカード"></button>
     </section>
 
-    <section id="banking" class="screen image-screen">
-      <img class="screen-image" src="banking.png" alt="Banking mock screen">
-      <button class="hotspot tab-wallet" aria-label="ウォレットへ" onclick="showScreen('wallet')"></button>
+    <section id="banking" class="screen image-screen" aria-label="Banking screen">
+      <img class="screen-image" src="banking-v3.png" alt="Banking mock screen">
+      <button class="content-hotspot banking-account-card" aria-label="普通預金カード"></button>
     </section>
 
     <section id="record" class="screen">
       <div class="page">
         <h1 class="title">Record</h1>
         <p class="subtitle">レコード</p>
-        <div class="placeholder-box">
-          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        <div class="placeholder-card">
+          <p>このタブはまだモック未作成です。<br>必要なら次に同じテイストで追加できます。</p>
         </div>
       </div>
     </section>
@@ -187,8 +210,8 @@
       <div class="page">
         <h1 class="title">Links</h1>
         <p class="subtitle">リンクス</p>
-        <div class="placeholder-box">
-          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        <div class="placeholder-card">
+          <p>このタブはまだモック未作成です。<br>必要なら次に同じテイストで追加できます。</p>
         </div>
       </div>
     </section>
@@ -197,24 +220,62 @@
       <div class="page">
         <h1 class="title">Circle</h1>
         <p class="subtitle">サークル</p>
-        <div class="placeholder-box">
-          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        <div class="placeholder-card">
+          <p>このタブはまだモック未作成です。<br>必要なら次に同じテイストで追加できます。</p>
         </div>
       </div>
     </section>
 
-    <nav id="customNav" class="bottom-nav hidden" aria-label="Bottom Navigation">
-      <button class="nav-button" data-screen="wallet" onclick="showScreen('wallet')">▣<span>ウォレット</span></button>
-      <button class="nav-button" data-screen="banking" onclick="showScreen('banking')">🏛<span>バンキング</span></button>
-      <button class="nav-button" data-screen="record" onclick="showScreen('record')">◎<span>レコード</span></button>
-      <button class="nav-button" data-screen="links" onclick="showScreen('links')">♧<span>リンクス</span></button>
-      <button class="nav-button" data-screen="circle" onclick="showScreen('circle')">◉<span>サークル</span></button>
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button class="nav-button active" data-screen="wallet" onclick="showScreen('wallet')">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3.5 7.5h13.5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5.5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"/>
+          <path d="M16 7.5V5.8A1.8 1.8 0 0 0 14.2 4H6"/>
+          <path d="M15.5 13h3.5"/>
+        </svg>
+        <span>ウォレット</span>
+      </button>
+
+      <button class="nav-button" data-screen="banking" onclick="showScreen('banking')">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3.5 9.5L12 4l8.5 5.5"/>
+          <path d="M5.5 10.5h13"/>
+          <path d="M6.5 10.5v7.5M10.2 10.5v7.5M13.8 10.5v7.5M17.5 10.5v7.5"/>
+          <path d="M4.5 19h15"/>
+        </svg>
+        <span>バンキング</span>
+      </button>
+
+      <button class="nav-button" data-screen="record" onclick="showScreen('record')">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="7.8"/>
+          <circle cx="12" cy="12" r="2.6"/>
+        </svg>
+        <span>レコード</span>
+      </button>
+
+      <button class="nav-button" data-screen="links" onclick="showScreen('links')">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="8" cy="9" r="2.4"/>
+          <circle cx="16.5" cy="8.6" r="2.2"/>
+          <path d="M4.8 17.7c.9-2.4 2.7-3.6 5.2-3.6 2.5 0 4.4 1.2 5.3 3.6"/>
+          <path d="M13.8 16.2c.5-1.6 1.8-2.5 3.6-2.5 1.5 0 2.8.7 3.6 2.2"/>
+        </svg>
+        <span>リンクス</span>
+      </button>
+
+      <button class="nav-button" data-screen="circle" onclick="showScreen('circle')">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.8 5.3a6.6 6.6 0 1 0 0 13.4"/>
+          <path d="M9.2 18.7a6.6 6.6 0 1 0 0-13.4"/>
+        </svg>
+        <span>サークル</span>
+      </button>
     </nav>
   </div>
 
   <script>
     const screens = document.querySelectorAll('.screen');
-    const customNav = document.getElementById('customNav');
     const navButtons = document.querySelectorAll('.nav-button');
 
     function showScreen(name) {
@@ -222,15 +283,15 @@
         screen.classList.toggle('active', screen.id === name);
       });
 
-      const isImageScreen = name === 'wallet' || name === 'banking';
-      customNav.classList.toggle('hidden', isImageScreen);
-
       navButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.screen === name);
       });
 
       window.scrollTo(0, 0);
     }
+
+    document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+    document.addEventListener('dblclick', function (e) { e.preventDefault(); }, { passive: false });
   </script>
 </body>
 </html>

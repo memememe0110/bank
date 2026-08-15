@@ -1,15 +1,12 @@
-# Wallet Mock v2
+# Wallet Mock v3
 
-GitHub Pages向けのモックです。
+変更点:
+- 下のバーを画像から分離して固定表示
+- ホーム画面アプリらしく、拡大縮小しにくい設定
+- 画像名を `wallet-v3.png` / `banking-v3.png` に変更（キャッシュ対策）
 
-## 使い方
-1. このZIPを展開
-2. 中身をGitHubリポジトリにアップロード
-3. Settings → Pages → Deploy from a branch → main / root
-4. 発行されたURLをiPhoneのSafariで開く
-5. 共有 → ホーム画面に追加
-
-## メモ
-- Wallet画面とBanking画面は、もとのスクリーンショットをそのまま使用しています。
-- ウォレット下部の「バンキング」タブを押すと Banking へ移動
-- バンキング下部の「ウォレット」タブを押すと Wallet へ移動
+更新方法:
+1. GitHubの同じリポジトリで、古い `index.html` / `manifest.json` / 画像を上書き
+2. `wallet-v3.png` と `banking-v3.png` もアップロード
+3. Commit changes
+4. 数十秒待ってからホーム画面アプリを閉じて開き直す
