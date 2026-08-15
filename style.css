@@ -969,3 +969,239 @@ body {
     width: 82%;
   }
 }
+
+
+/* =========================
+   v9: tighten positions and remove awkward blank space
+   ========================= */
+
+html,
+body {
+  background: #ececec !important;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+
+/* Main canvas */
+.app-shell {
+  max-width: 430px !important;
+  background: #ececec !important;
+}
+
+.app-main {
+  min-height: auto !important;
+}
+
+.screen,
+.screen.active {
+  min-height: auto !important;
+}
+
+.screen-inner {
+  min-height: auto !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
+  background: #ececec !important;
+}
+
+/* Banking page should match the target screenshot more closely */
+.banking-screen {
+  padding-top: calc(env(safe-area-inset-top) + 20px) !important;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
+}
+
+/* Title block */
+.banking-screen .page-title {
+  font-size: 38px !important;
+  line-height: .96 !important;
+  letter-spacing: -1.2px !important;
+  margin: 0 !important;
+}
+
+.banking-screen .page-subtitle {
+  margin-top: 6px !important;
+  font-size: 14px !important;
+  line-height: 1.15 !important;
+}
+
+.banking-screen .bank-section {
+  margin-top: 40px !important;
+}
+
+.banking-screen .section-label {
+  margin-bottom: 16px !important;
+  font-size: 14px !important;
+}
+
+/* Main account card */
+.banking-screen .account-card {
+  width: 100% !important;
+  height: 174px !important;
+  min-height: 174px !important;
+  grid-template-columns: minmax(0, 1fr) 47% !important;
+  padding: 14px 14px 12px !important;
+  border-width: 2.3px !important;
+}
+
+.banking-screen .card-branch {
+  font-size: 15px !important;
+}
+
+.banking-screen .card-chevron {
+  font-size: 31px !important;
+  margin-top: -1px !important;
+}
+
+.banking-screen .card-balance {
+  margin-top: 8px !important;
+  font-size: 30px !important;
+}
+
+.bank-card-illustration-img {
+  max-width: 178px !important;
+  width: 100% !important;
+  justify-self: end !important;
+  align-self: end !important;
+  margin-right: -2px !important;
+  margin-bottom: -2px !important;
+}
+
+/* Show all */
+.banking-screen .show-all-btn {
+  margin-top: 14px !important;
+  font-size: 14px !important;
+  gap: 7px !important;
+}
+
+.banking-screen .tab-filter {
+  margin-top: 34px !important;
+  gap: 26px !important;
+}
+
+.banking-screen .tab-filter-item {
+  font-size: 15px !important;
+}
+
+.banking-screen .tab-filter-item.active::after {
+  bottom: -9px !important;
+  height: 2px !important;
+}
+
+/* Savings / create cards */
+.banking-screen .card-grid {
+  width: 100% !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 28px !important;
+}
+
+.banking-screen .savings-card,
+.banking-screen .create-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 170px !important;
+  min-height: 170px !important;
+  padding: 14px !important;
+  overflow: hidden !important;
+}
+
+.banking-screen .small-card-title {
+  position: relative !important;
+  z-index: 5 !important;
+  font-size: 14px !important;
+}
+
+.banking-screen .savings-balance {
+  position: relative !important;
+  z-index: 5 !important;
+  margin-top: 10px !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.pig-img {
+  width: 62% !important;
+  right: -6px !important;
+  bottom: 6px !important;
+  z-index: 1 !important;
+}
+
+.banking-screen .create-label {
+  position: relative !important;
+  z-index: 5 !important;
+  font-size: 14px !important;
+  color: #bcbcbc !important;
+}
+
+.create-box-img {
+  width: 78% !important;
+  right: 6px !important;
+  bottom: 8px !important;
+}
+
+/* Divider and list */
+.banking-screen .divider {
+  margin: 40px 0 12px !important;
+  height: 2.2px !important;
+}
+
+.banking-screen .bank-list {
+  gap: 0 !important;
+}
+
+.banking-screen .bank-list-row {
+  min-height: 58px !important;
+  grid-template-columns: 34px minmax(0, 1fr) auto !important;
+}
+
+.banking-screen .list-text {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+/* Reduce mysterious extra bottom blank gap */
+#screen-banking {
+  min-height: auto !important;
+}
+
+/* Bottom nav fixed and visually close to reference */
+.bottom-nav {
+  height: calc(96px + env(safe-area-inset-bottom)) !important;
+  width: min(100%, 430px) !important;
+}
+
+@media (max-width: 390px) {
+  .screen-inner {
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+  }
+
+  .banking-screen .page-title {
+    font-size: 37px !important;
+  }
+
+  .banking-screen .account-card {
+    height: 172px !important;
+    min-height: 172px !important;
+  }
+
+  .banking-screen .card-balance {
+    font-size: 30px !important;
+  }
+
+  .banking-screen .savings-balance {
+    font-size: 22px !important;
+  }
+
+  .pig-img {
+    width: 61% !important;
+  }
+
+  .create-box-img {
+    width: 78% !important;
+  }
+}
