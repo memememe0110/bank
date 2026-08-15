@@ -80,9 +80,11 @@ document.addEventListener("dragstart", function (e) {
 
   hero.src = v.image;
   branch.textContent = "丸善ジュンク堂支店";
-  article.querySelector("span").textContent = v.article;
-  action.querySelector("span").textContent = v.action;
-  action.classList.toggle("dark", v.dark);
+  if (article) article.querySelector("span").textContent = v.article;
+  if (action) {
+    action.querySelector("span").textContent = v.action;
+    action.classList.toggle("dark", v.dark);
+  }
 })();
 
 window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';

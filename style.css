@@ -1638,3 +1638,59 @@ body {
     margin-top: 44px;
   }
 }
+
+
+/* =========================
+   v34: Links empty state + Circle border cleanup
+   ========================= */
+
+/* Links: 不自然な黒丸アイコンを削除して、空状態をシンプルに */
+.links-empty {
+  min-height: 420px !important;
+  padding: 40px 12px !important;
+}
+.links-empty-icon {
+  display: none !important;
+}
+.links-empty-title {
+  margin-top: 0 !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+.links-empty-sub {
+  margin-top: 10px !important;
+  font-size: 14px !important;
+  color: #777 !important;
+}
+
+/* Circle: 画像内の途切れた線ではなく、外枠をCSSで統一 */
+.circle-card {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border: 2px solid #111 !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+}
+
+/* カード間の線がつながったり欠けたり見えないよう、各カードを独立 */
+.circle-grid {
+  align-items: start !important;
+}
+.circle-maruzen,
+.circle-invest,
+.circle-travel,
+.circle-lifestyle,
+.circle-learning {
+  overflow: hidden !important;
+  background: #fff !important;
+}
+
+/* v35: wallet cleanup */
+.wallet-header-icon:first-child {
+  filter: grayscale(1) !important;
+}
+.wallet-link,
+.wallet-action {
+  display: none !important;
+}
