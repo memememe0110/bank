@@ -1,57 +1,236 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#fff">
-<title>Wallet Mock</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;background:#fff;color:#000;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}body{min-height:100vh}.screen{display:none;padding:calc(env(safe-area-inset-top) + 24px) 26px calc(118px + env(safe-area-inset-bottom));min-height:100vh}.screen.active{display:block}.top{display:flex;justify-content:space-between;align-items:flex-start}.top h1{font-size:48px;line-height:1;margin:0 0 8px;font-weight:900;letter-spacing:-2px}.top p{font-size:17px;font-weight:800;margin:0}.top-icons{display:flex;gap:16px;padding-top:8px}.icon{border:0;background:none;font-size:25px}.hero{height:365px;position:relative;margin-top:38px}.window{position:absolute;left:12%;top:8%;width:34%;height:56%;border:4px solid #000;border-radius:48% 48% 6% 6%;padding:17px;font-size:40px;font-weight:900}.person{position:absolute;left:49%;top:37%;font-size:108px}.book{position:absolute;left:27%;bottom:10%;font-size:75px}.shelf{position:absolute;right:2%;top:28%;font-size:100px}.phone{position:absolute;right:24%;bottom:7%;font-size:48px}.account-label{font-size:17px;font-weight:800}.balance-row{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:12px}.balance{font-size:56px;font-weight:900}.outline{border:3px solid #000;background:#fff;padding:15px 16px;font-size:15px;font-weight:800}.text-btn{border:0;background:none;padding:0;margin-top:14px;font-size:16px;font-weight:800}.cheer-row,.schedule-row{width:100%;border:0;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:29px 0;font-size:16px;font-weight:800;text-align:left}.pill{display:block;margin:10px auto 0;width:72%;border:3px solid #000;border-radius:999px;background:#fff;padding:16px 10px;font-size:16px;font-weight:800}.section-title{font-size:17px;font-weight:800;margin:70px 0 18px}.main-card{border:3px solid #000;height:250px;padding:18px;position:relative}.card-top{display:flex;justify-content:space-between;font-size:17px}.card-balance{font-size:36px;font-weight:900;margin-top:6px}.bank-ill{position:absolute;right:22px;bottom:7px;font-size:100px;filter:grayscale(1)}.show-all{display:block;margin:18px 0 46px auto;border:0;background:#fff;font-size:17px;font-weight:800}.tabs-line{display:flex;gap:26px;font-size:17px;font-weight:800;margin-bottom:22px}.tabs-line .selected{border-bottom:4px solid #000;padding-bottom:11px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.small-card{border:3px solid #000;height:220px;padding:16px;position:relative}.small-card strong{font-size:18px}.saving-balance{font-size:31px;font-weight:900;margin-top:10px}.pig{position:absolute;right:10px;bottom:22px;font-size:75px;filter:grayscale(1)}.create{border:3px dashed #ccc;color:#bbb}.house{position:absolute;right:8px;bottom:18px;font-size:76px;filter:grayscale(1)}.plus{position:absolute;left:37%;bottom:73px;background:#555;color:#fff;width:60px;height:60px;border-radius:50%;font-size:44px;line-height:56px;text-align:center}.divider{height:4px;background:#000;margin:58px 0 18px}.bottom-nav{position:fixed;left:0;right:0;bottom:0;background:#000;height:calc(106px + env(safe-area-inset-bottom));display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}.nav-btn{flex:1;border:0;background:#000;color:#8d8d96;font-size:25px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.nav-btn span{font-size:11px;font-weight:800}.nav-btn i{width:8px;height:8px;border-radius:50%;background:#eaff00;opacity:0}.nav-btn.active{color:#fff}.nav-btn.active i{opacity:1}.placeholder h1{font-size:48px}.placeholder{padding-top:calc(env(safe-area-inset-top) + 34px)}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#e8e8e8">
+  <title>Wallet Mock</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      background: #e8e8e8;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: #e8e8e8;
+      position: relative;
+    }
+
+    .screen {
+      display: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .screen-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      display: block;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    /* Bottom tab tap areas: percentages based on screenshot */
+    .tab-wallet  { left: 0%;  top: 87%; width: 20%; height: 13%; }
+    .tab-banking { left: 20%; top: 87%; width: 20%; height: 13%; }
+    .tab-record  { left: 40%; top: 87%; width: 20%; height: 13%; }
+    .tab-links   { left: 60%; top: 87%; width: 20%; height: 13%; }
+    .tab-circle  { left: 80%; top: 87%; width: 20%; height: 13%; }
+
+    .page {
+      min-height: 100vh;
+      padding: calc(env(safe-area-inset-top) + 24px) 24px calc(120px + env(safe-area-inset-bottom));
+      background: #ececec;
+      color: #111;
+      position: relative;
+    }
+
+    .title {
+      font-size: 50px;
+      line-height: 1;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: -2px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 8px 0 0;
+    }
+
+    .placeholder-box {
+      margin-top: 36px;
+      border: 3px solid #111;
+      border-radius: 24px;
+      padding: 24px;
+      background: white;
+    }
+
+    .placeholder-box p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: min(100%, 430px);
+      height: calc(96px + env(safe-area-inset-bottom));
+      background: #000;
+      display: flex;
+      padding-bottom: env(safe-area-inset-bottom);
+      z-index: 20;
+    }
+
+    .nav-button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: #8e8e93;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 25px;
+      position: relative;
+    }
+
+    .nav-button span {
+      font-size: 11px;
+      font-weight: 700;
+      color: inherit;
+    }
+
+    .nav-button.active {
+      color: #fff;
+    }
+
+    .nav-button.active::after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #f0f900;
+      position: absolute;
+      bottom: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Keep image page clean when using the screenshot tabs */
+    .image-screen .bottom-nav {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<main>
-<section id="wallet" class="screen active">
-<header class="top"><div><h1>Wallet</h1><p>よく使う銀行機能</p></div><div class="top-icons"><button class="icon">🔔</button><button class="icon">👤</button></div></header>
-<div class="hero"><div class="window">☾<br>⋆ ⋆ ⋆</div><div class="person">✍︎</div><div class="book">▱▱</div><div class="shelf">▥</div><div class="phone">▯</div></div>
-<div class="account-label">普通預金&nbsp;&nbsp;ハーバーブリッジ支店</div>
-<div class="balance-row"><div id="wb" class="balance">¥0</div><button class="outline">⌄ 入金方法を見る</button></div>
-<button id="toggle" class="text-btn">◉ 残高を隠す</button>
-<button class="cheer-row"><span>熊本につなごう Cheer Box/Cheerコード</span><b>›</b></button>
-<button class="pill">送金・ATM・デビットカード⌃</button>
-</section>
+  <div class="app">
+    <section id="wallet" class="screen active image-screen">
+      <img class="screen-image" src="wallet.png" alt="Wallet mock screen">
+      <button class="hotspot tab-banking" aria-label="バンキングへ" onclick="showScreen('banking')"></button>
+    </section>
 
-<section id="banking" class="screen">
-<header class="top"><div><h1>Banking</h1><p>すべての銀行機能</p></div></header>
-<div class="section-title">普通預金</div>
-<div class="main-card"><div class="card-top"><strong>ハーバーブリッジ支店</strong><b>›</b></div><div id="bb" class="card-balance">¥0</div><div class="bank-ill">🏛</div></div>
-<button id="show" class="show-all">口座をすべて表示⌄</button>
-<div class="tabs-line"><span class="selected">貯蓄預金</span><span>ローン</span></div>
-<div class="grid"><div class="small-card"><strong>Saving</strong><div id="sb" class="saving-balance">¥24,000</div><div class="pig">🐷</div></div><div class="small-card create"><strong>ボックス作成</strong><div class="house">🏠</div><div class="plus">＋</div></div></div>
-<div class="divider"></div><button class="schedule-row"><span>▣ お金の移動 スケジュール一覧</span><b>›</b></button>
-</section>
+    <section id="banking" class="screen image-screen">
+      <img class="screen-image" src="banking.png" alt="Banking mock screen">
+      <button class="hotspot tab-wallet" aria-label="ウォレットへ" onclick="showScreen('wallet')"></button>
+    </section>
 
-<section id="record" class="screen placeholder"><h1>Record</h1><p>レコード</p></section>
-<section id="links" class="screen placeholder"><h1>Links</h1><p>リンクス</p></section>
-<section id="circle" class="screen placeholder"><h1>Circle</h1><p>サークル</p></section>
-</main>
+    <section id="record" class="screen">
+      <div class="page">
+        <h1 class="title">Record</h1>
+        <p class="subtitle">レコード</p>
+        <div class="placeholder-box">
+          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        </div>
+      </div>
+    </section>
 
-<nav class="bottom-nav">
-<button data-target="wallet" class="nav-btn active">▣<span>ウォレット</span><i></i></button>
-<button data-target="banking" class="nav-btn">🏛<span>バンキング</span><i></i></button>
-<button data-target="record" class="nav-btn">◎<span>レコード</span><i></i></button>
-<button data-target="links" class="nav-btn">♧<span>リンクス</span><i></i></button>
-<button data-target="circle" class="nav-btn">◉<span>サークル</span><i></i></button>
-</nav>
+    <section id="links" class="screen">
+      <div class="page">
+        <h1 class="title">Links</h1>
+        <p class="subtitle">リンクス</p>
+        <div class="placeholder-box">
+          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        </div>
+      </div>
+    </section>
 
-<script>
-let hidden=false;
-const screens=[...document.querySelectorAll('.screen')];
-const nav=[...document.querySelectorAll('.nav-btn')];
-nav.forEach(b=>b.onclick=()=>{screens.forEach(s=>s.classList.toggle('active',s.id===b.dataset.target));nav.forEach(x=>x.classList.toggle('active',x===b));scrollTo(0,0)});
-toggle.onclick=()=>{hidden=!hidden;wb.textContent=hidden?'••••••':'¥0';bb.textContent=hidden?'••••••':'¥0';sb.textContent=hidden?'••••••':'¥24,000';toggle.textContent=hidden?'◉ 残高を表示':'◉ 残高を隠す'};
-show.onclick=()=>{show.textContent=show.textContent.includes('すべて表示')?'口座を閉じる⌃':'口座をすべて表示⌄'};
-</script>
+    <section id="circle" class="screen">
+      <div class="page">
+        <h1 class="title">Circle</h1>
+        <p class="subtitle">サークル</p>
+        <div class="placeholder-box">
+          <p>このタブはまだモック未作成です。<br>必要なら次にこの画面も同じテイストで追加できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <nav id="customNav" class="bottom-nav hidden" aria-label="Bottom Navigation">
+      <button class="nav-button" data-screen="wallet" onclick="showScreen('wallet')">▣<span>ウォレット</span></button>
+      <button class="nav-button" data-screen="banking" onclick="showScreen('banking')">🏛<span>バンキング</span></button>
+      <button class="nav-button" data-screen="record" onclick="showScreen('record')">◎<span>レコード</span></button>
+      <button class="nav-button" data-screen="links" onclick="showScreen('links')">♧<span>リンクス</span></button>
+      <button class="nav-button" data-screen="circle" onclick="showScreen('circle')">◉<span>サークル</span></button>
+    </nav>
+  </div>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    const customNav = document.getElementById('customNav');
+    const navButtons = document.querySelectorAll('.nav-button');
+
+    function showScreen(name) {
+      screens.forEach(screen => {
+        screen.classList.toggle('active', screen.id === name);
+      });
+
+      const isImageScreen = name === 'wallet' || name === 'banking';
+      customNav.classList.toggle('hidden', isImageScreen);
+
+      navButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.screen === name);
+      });
+
+      window.scrollTo(0, 0);
+    }
+  </script>
 </body>
 </html>
