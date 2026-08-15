@@ -1,16 +1,12 @@
-# Wallet Mock v11
+# Wallet Mock v12
 
-今回の修正:
-- ユーザーが送った画像をそのまま使用
-  - 銀行イラスト
-  - ボックス作成
-  - 豚
-  - スケジュールアイコン
-  - 並び替えアイコン
-- 自動生成画像・切り出し画像は使わない
-- 画像が切れないよう object-fit と配置を調整
-- 下部ナビは独立固定のまま
-- v11でキャッシュ対策
+v11で画像の割り当てが間違っていました。
+v12はコードをいったん整理し直し、送ってもらった5画像を正しく割り当てています。
 
-GitHub更新:
-index.html / style.css / app.js / manifest.json / assets を上書きして Commit changes。
+- bank.jpeg = 銀行
+- create-box.jpeg = ボックス作成
+- pig.jpeg = 豚
+- schedule.jpeg = スケジュール
+- sort.jpeg = 並び替え
+
+GitHubでは index.html / style.css / app.js / manifest.json / assets を上書きしてください。

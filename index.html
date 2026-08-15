@@ -1,248 +1,113 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
-  >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#ececec">
-  <title>Wallet Mock</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css?v=11">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+<title>Wallet Mock</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
-  <div class="app-shell">
-    <main class="app-main">
-      <!-- Wallet -->
-      <section id="screen-wallet" class="screen active">
-        <div class="screen-inner wallet-screen">
-          <header class="page-header">
-            <div>
-              <h1 class="page-title">Wallet</h1>
-              <p class="page-subtitle">よく使う銀行機能</p>
-            </div>
-            <div class="header-icons">
-              <button class="icon-btn" aria-label="お知らせ">
-                <svg viewBox="0 0 24 24" class="icon-line"><path d="M12 3c-3.1 0-5.5 2.3-5.5 5.4V11c0 .7-.2 1.3-.6 1.8L4.3 15c-.4.5 0 1.3.7 1.3h14c.7 0 1.1-.8.7-1.3l-1.6-2.2c-.4-.5-.6-1.1-.6-1.8V8.4C17.5 5.3 15.1 3 12 3Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
-                <span class="notif-dot"></span>
-              </button>
-              <button class="icon-btn" aria-label="プロフィール">
-                <svg viewBox="0 0 24 24" class="icon-line"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.2-3 3.7-4.5 7-4.5s5.8 1.5 7 4.5"/></svg>
-              </button>
-            </div>
-          </header>
+<div class="app">
 
-          <section class="wallet-hero">
-            <svg viewBox="0 0 360 270" class="hero-svg" aria-label="illustration">
-              <!-- lamp -->
-              <path d="M22 176h44l-4-40H26z" class="line-fill"/>
-              <path d="M38 175v56M24 231h30" class="line"/>
-              <path d="M34 186c5 5 9 5 14 0 5 5 9 5 14 0" class="line-thin"/>
-
-              <!-- window -->
-              <rect x="82" y="38" width="112" height="142" rx="20" class="line"/>
-              <path d="M138 40v142M82 110h112" class="line"/>
-              <path d="M95 64c7 1 9 4 11 10-8 2-16-3-18-10 1-6 5-10 11-12-2 4-2 8-4 12Z" class="fill"/>
-              <circle cx="115" cy="74" r="1.8" class="fill"/>
-              <circle cx="132" cy="79" r="1.8" class="fill"/>
-              <circle cx="150" cy="73" r="1.8" class="fill"/>
-              <circle cx="163" cy="91" r="1.5" class="fill"/>
-              <circle cx="102" cy="97" r="1.5" class="fill"/>
-              <path d="M88 180h19v-35h10v35h13v-26h12v26h15v-34h10v34h18" class="fill skyline"/>
-
-              <!-- shelf -->
-              <path d="M282 80h64v114M282 86h58M286 121h52M286 159h52M300 90v26M314 89v27M331 93v23M292 126v26M307 127v25M321 126v26M335 126v26M297 163v24M314 163v24M331 163v23" class="line"/>
-
-              <!-- desk -->
-              <path d="M20 206c100-2 180-1 325 0" class="line"/>
-
-              <!-- woman / book / phone -->
-              <path d="M204 150c5-14 18-21 33-20 22 2 42 22 39 47l-3 21-18-2-5-21c-2-8-9-13-17-12-8 1-14 8-14 16v11h-17l2-40c1-13 1-21 0-27Z" class="line"/>
-              <path d="M230 124c1 7-4 13-11 14-7 0-13-5-14-12-1-8 4-14 11-14s13 4 14 12Z" class="fill"/>
-              <path d="M237 125c6 3 10 9 11 17l2 15" class="line"/>
-              <path d="M211 182c-8-13-18-18-32-19-8-1-16 3-21 10l-10 13" class="line"/>
-              <path d="M170 179c14 0 26 4 35 13" class="line"/>
-              <path d="M161 172c-8-17-18-24-33-29-9-3-16 2-16 10 0 12 12 18 19 24" class="fill"/>
-              <path d="M219 161l10-1 1 16" class="line"/>
-              <path d="M240 179c6 8 12 12 20 12" class="line"/>
-              <path d="M181 217l-44-1-26-8 8-20h60l9 10z" class="line"/>
-              <path d="M137 188l17 27" class="line"/>
-              <path d="M111 208c7-5 15-4 24 0M116 201c8-3 15-2 21 1" class="line-thin"/>
-              <rect x="226" y="205" width="36" height="16" rx="3" transform="rotate(-20 226 205)" class="line"/>
-            </svg>
-          </section>
-
-          <section class="account-summary">
-            <div class="account-title">普通預金&nbsp;&nbsp;ハーバーブリッジ支店</div>
-            <div class="wallet-balance-row">
-              <div id="wallet-balance" class="balance-large">¥0</div>
-              <button class="outline-btn small-btn">入金方法を見る</button>
-            </div>
-
-            <button id="toggle-balance" class="text-row balance-toggle">
-              <svg viewBox="0 0 24 24" class="row-icon"><path d="M2.5 12s3.5-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.5 5.5-9.5 5.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/><path id="eye-slash-path" d="M4 20 20 4"/></svg>
-              <span id="toggle-balance-label">残高を隠す</span>
-            </button>
-
-            <button class="text-row link-row">
-              <span>熊本につなごう Cheer Box/Cheerコード</span>
-              <span class="chevron">›</span>
-            </button>
-
-            <button id="open-action-sheet" class="pill-btn">送金・ATM・デビットカード <span class="chevron-up">⌃</span></button>
-          </section>
+  <main>
+    <section id="wallet" class="screen">
+      <div class="simple">
+        <h1>Wallet</h1>
+        <p>よく使う銀行機能</p>
+        <div class="simple-card">
+          <div>普通預金　ハーバーブリッジ支店</div>
+          <strong>¥0</strong>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Banking -->
-      <section id="screen-banking" class="screen">
-        <div class="screen-inner banking-screen">
-          <header class="page-header">
-            <div>
-              <h1 class="page-title">Banking</h1>
-              <p class="page-subtitle">すべての銀行機能</p>
-            </div>
-          </header>
+    <section id="banking" class="screen active">
+      <div class="banking-page">
+        <header class="header">
+          <h1>Banking</h1>
+          <p>すべての銀行機能</p>
+        </header>
 
-          <section class="bank-section">
-            <div class="section-label">普通預金</div>
+        <section class="ordinary">
+          <h2>普通預金</h2>
 
-            <button class="account-card">
-              <div class="card-copy">
-                <div class="card-title-row">
-                  <div class="card-branch">ハーバーブリッジ支店</div>
-                  <div class="card-chevron">›</div>
-                </div>
-                <div id="banking-balance" class="card-balance">¥0</div>
+          <button class="account-card">
+            <div class="account-copy">
+              <div class="branch-row">
+                <span>ハーバーブリッジ支店</span>
+                <span class="arrow">›</span>
               </div>
+              <div class="balance">¥0</div>
+            </div>
+            <img src="assets/bank.jpeg" alt="" class="bank-img">
+          </button>
 
-              <img src="assets/bank-illustration.png" class="bank-card-illustration-img" alt="">
+          <button class="show-all">口座をすべて表示 <span>⌄</span></button>
+        </section>
+
+        <section class="savings-area">
+          <div class="tabs">
+            <button class="tab active">貯蓄預金</button>
+            <button class="tab">ローン</button>
+          </div>
+
+          <div class="card-row">
+            <button class="saving-card">
+              <div class="saving-title">Saving</div>
+              <div class="saving-balance">¥24,000</div>
+              <img src="assets/pig.jpeg" alt="" class="pig-img">
             </button>
 
-            <div class="show-all-wrap">
-              <button id="toggle-accounts" class="show-all-btn">
-                <span id="toggle-accounts-label">口座をすべて表示</span>
-                <span id="toggle-accounts-chevron">⌄</span>
-              </button>
-            </div>
+            <button class="create-card">
+              <img src="assets/create-box.jpeg" alt="ボックス作成" class="create-img">
+            </button>
+          </div>
+        </section>
 
-            <div id="extra-accounts" class="extra-accounts hidden">
-              <button class="mini-account-row">
-                <span>貯蓄預金 Saving</span>
-                <strong id="mini-saving-balance">¥24,000</strong>
-              </button>
-            </div>
+        <div class="divider"></div>
 
-            <div class="tab-filter">
-              <button class="tab-filter-item active">貯蓄預金</button>
-              <button class="tab-filter-item">ローン</button>
-            </div>
+        <section class="menu-list">
+          <button class="menu-row">
+            <img src="assets/schedule.jpeg" alt="" class="menu-icon">
+            <span>お金の移動 スケジュール一覧</span>
+            <span class="menu-arrow">›</span>
+          </button>
+          <button class="menu-row">
+            <img src="assets/sort.jpeg" alt="" class="menu-icon">
+            <span>ボックスの並び替え</span>
+            <span class="menu-arrow">›</span>
+          </button>
+        </section>
+      </div>
+    </section>
 
-            <div class="card-grid">
-              <button class="savings-card">
-                <div class="small-card-title">Saving</div>
-                <div id="saving-balance" class="savings-balance">¥24,000</div>
-                <img src="assets/pig-illustration.jpeg" class="pig-img" alt="">
-              </button>
+    <section id="record" class="screen"><div class="simple"><h1>Record</h1><p>レコード</p></div></section>
+    <section id="links" class="screen"><div class="simple"><h1>Links</h1><p>リンクス</p></div></section>
+    <section id="circle" class="screen"><div class="simple"><h1>Circle</h1><p>サークル</p></div></section>
+  </main>
 
-              <button class="create-card">
-                <div class="create-label">ボックス作成</div>
-                <img src="assets/create-box-illustration.jpeg" class="create-box-img" alt="">
-              </button>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="bank-list">
-              <button class="bank-list-row">
-                <span class="list-icon">
-                  <img src="assets/schedule-icon.jpeg" class="list-icon-img" alt="">
-                </span>
-                <span class="list-text">お金の移動 スケジュール一覧</span>
-                <span class="list-chevron">›</span>
-              </button>
-
-              <button class="bank-list-row">
-                <span class="list-icon">
-                  <img src="assets/sort-icon.jpeg" class="list-icon-img" alt="">
-                </span>
-                <span class="list-text">ボックスの並び替え</span>
-                <span class="list-chevron">›</span>
-              </button>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <!-- Placeholder tabs -->
-      <section id="screen-record" class="screen">
-        <div class="screen-inner placeholder-screen">
-          <h1 class="page-title">Record</h1>
-          <p class="page-subtitle">レコード</p>
-          <div class="placeholder-card">このタブはまだモック未作成です。</div>
-        </div>
-      </section>
-
-      <section id="screen-links" class="screen">
-        <div class="screen-inner placeholder-screen">
-          <h1 class="page-title">Links</h1>
-          <p class="page-subtitle">リンクス</p>
-          <div class="placeholder-card">このタブはまだモック未作成です。</div>
-        </div>
-      </section>
-
-      <section id="screen-circle" class="screen">
-        <div class="screen-inner placeholder-screen">
-          <h1 class="page-title">Circle</h1>
-          <p class="page-subtitle">サークル</p>
-          <div class="placeholder-card">このタブはまだモック未作成です。</div>
-        </div>
-      </section>
-    </main>
-
-    <nav class="bottom-nav">
-      <button class="nav-item active" data-screen="wallet">
-        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M4 7h12.5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6A2 2 0 0 1 4 17V9a2 2 0 0 1 2-2Z"/><path d="M14.5 7V5.7A1.7 1.7 0 0 0 12.8 4H6"/><path d="M14.5 13.3H18"/></svg>
-        <span>ウォレット</span>
-      </button>
-
-      <button class="nav-item" data-screen="banking">
-        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M3.5 9.3 12 4l8.5 5.3"/><path d="M5 10.2h14M6.2 10.5V18M10 10.5V18M14 10.5V18M17.8 10.5V18M4.5 19h15"/></svg>
-        <span>バンキング</span>
-      </button>
-
-      <button class="nav-item" data-screen="record">
-        <svg viewBox="0 0 24 24" class="nav-icon"><circle cx="12" cy="12" r="7.2"/><circle cx="12" cy="12" r="2.6"/></svg>
-        <span>レコード</span>
-      </button>
-
-      <button class="nav-item" data-screen="links">
-        <svg viewBox="0 0 24 24" class="nav-icon"><circle cx="8" cy="8" r="2.5"/><circle cx="16.5" cy="8" r="2.2"/><path d="M4.8 18c.9-2.3 2.8-3.6 5.3-3.6s4.4 1.3 5.2 3.6"/><path d="M13.4 17.2c.5-1.6 1.9-2.5 3.8-2.5 1.6 0 2.9.8 3.7 2.2"/></svg>
-        <span>リンクス</span>
-      </button>
-
-      <button class="nav-item" data-screen="circle">
-        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M14.6 5.2a6.6 6.6 0 1 0 0 13.6"/><path d="M9.4 18.8a6.6 6.6 0 1 0 0-13.6"/></svg>
-        <span>サークル</span>
-      </button>
-    </nav>
-
-    <div id="sheet-backdrop" class="sheet-backdrop hidden"></div>
-    <div id="action-sheet" class="action-sheet hidden">
-      <div class="action-title">Action</div>
-      <div class="action-subtitle">よく使う銀行機能</div>
-      <button class="action-row">出金する</button>
-      <button class="action-row">ことら送金する</button>
-      <button class="action-row">ATM入出金する</button>
-      <button class="action-row">デビットカードを使う</button>
-      <button id="close-sheet" class="close-sheet">閉じる</button>
-    </div>
-  </div>
-
-  <script src="app.js?v=11"></script>
+  <nav class="bottom-nav">
+    <button data-screen="wallet" class="nav-item">
+      <span class="nav-symbol">▣</span><span>ウォレット</span><i></i>
+    </button>
+    <button data-screen="banking" class="nav-item active">
+      <span class="nav-symbol">⌂</span><span>バンキング</span><i></i>
+    </button>
+    <button data-screen="record" class="nav-item">
+      <span class="nav-symbol">◎</span><span>レコード</span><i></i>
+    </button>
+    <button data-screen="links" class="nav-item">
+      <span class="nav-symbol">♧</span><span>リンクス</span><i></i>
+    </button>
+    <button data-screen="circle" class="nav-item">
+      <span class="nav-symbol">◉</span><span>サークル</span><i></i>
+    </button>
+  </nav>
+</div>
+<script src="app.js?v=12"></script>
 </body>
 </html>
