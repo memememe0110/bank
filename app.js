@@ -153,3 +153,15 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
   const amount = document.querySelector("#record .record-card-amount");
   if (amount) amount.textContent = "¥" + total.toLocaleString("ja-JP");
 })();
+
+
+/* v26: always reset page to top when switching bottom tabs */
+document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    requestAnimationFrame(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    });
+  });
+});

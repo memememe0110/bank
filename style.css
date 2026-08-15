@@ -1137,3 +1137,193 @@ body {
   position: relative !important;
   z-index: 5 !important;
 }
+
+
+/* =========================
+   v25: Record text up / book further right
+   ========================= */
+
+/* Banking: 本をもう少し右寄せ */
+.bank-img {
+  right: -4px !important;
+  bottom: 8px !important;
+  width: 45% !important;
+  max-height: 76% !important;
+}
+
+/* 本の左側に余裕を残しつつ、> は右上固定 */
+.account-copy {
+  width: 50% !important;
+  max-width: 50% !important;
+}
+
+.account-card-arrow {
+  top: 14px !important;
+  right: 16px !important;
+}
+
+/* Record: 文字をカード上側へ戻す */
+.record-card {
+  min-height: 188px !important;
+}
+
+.record-card-copy {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 58% !important;
+  max-width: 58% !important;
+  padding: 18px 18px 0 !important;
+  z-index: 5 !important;
+}
+
+.record-card-title {
+  margin: 0 !important;
+  font-size: 17px !important;
+  line-height: 1.15 !important;
+}
+
+.record-card-amount {
+  margin-top: 10px !important;
+  font-size: 34px !important;
+  line-height: 1 !important;
+}
+
+/* Record画像は右下のまま */
+.record-card-img {
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+/* 小さいiPhoneでも文字位置を維持 */
+@media (max-width: 390px) {
+  .bank-img {
+    right: -6px !important;
+    width: 45% !important;
+  }
+
+  .record-card-copy {
+    width: 60% !important;
+    max-width: 60% !important;
+    padding: 17px 16px 0 !important;
+  }
+
+  .record-card-title {
+    font-size: 16px !important;
+  }
+
+  .record-card-amount {
+    font-size: 31px !important;
+  }
+}
+
+
+/* =========================
+   v26: Banking card layout correction
+   ========================= */
+
+/* 普通預金カードは参考画像のように、文字を左上へ */
+.account-card {
+  position: relative !important;
+  height: 220px !important;
+  min-height: 220px !important;
+  overflow: hidden !important;
+}
+
+.account-copy {
+  position: absolute !important;
+  left: 18px !important;
+  top: 16px !important;
+  width: 56% !important;
+  max-width: 56% !important;
+  z-index: 8 !important;
+}
+
+.branch-row {
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.branch-row span {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+.balance {
+  margin: 10px 0 0 !important;
+  font-size: 39px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+}
+
+/* > は必ず右上 */
+.account-card-arrow {
+  position: absolute !important;
+  top: 12px !important;
+  right: 17px !important;
+  margin: 0 !important;
+  font-size: 40px !important;
+  line-height: 1 !important;
+  z-index: 12 !important;
+}
+
+/* 本は右下。文字や > と重ならない */
+.bank-img {
+  position: absolute !important;
+  right: -2px !important;
+  bottom: 7px !important;
+  width: 44% !important;
+  max-height: 72% !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  z-index: 2 !important;
+}
+
+/* v24の右上白マスクは不要 */
+.account-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 口座をすべて表示を削除した分だけ詰める */
+.savings-area {
+  margin-top: 34px !important;
+}
+
+/* Recordはタブ切替時に上端から見える前提 */
+.record-page {
+  scroll-margin-top: 0 !important;
+}
+
+@media (max-width: 390px) {
+  .account-card {
+    height: 214px !important;
+    min-height: 214px !important;
+  }
+  .account-copy {
+    left: 16px !important;
+    top: 15px !important;
+    width: 58% !important;
+    max-width: 58% !important;
+  }
+  .branch-row span {
+    font-size: 15px !important;
+  }
+  .balance {
+    font-size: 37px !important;
+  }
+  .account-card-arrow {
+    top: 11px !important;
+    right: 15px !important;
+    font-size: 38px !important;
+  }
+  .bank-img {
+    right: -4px !important;
+    width: 44% !important;
+  }
+}
