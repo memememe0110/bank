@@ -299,20 +299,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!savingButton || !backButton || !historyEl) return;
 
-  // =========================================================
-  // Saving transaction mock data
-  // ここを書き換えると、画面の明細が変わります。
-  // type: "credit" = 入金 / "debit" = 出金
-  // =========================================================
-  const savingTransactions = [
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 12000, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 8000,  date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 27740, date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 1205,  date: "2026.8.15" },
-    { type: "credit", desc: "振替入金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（ハーバーブリッジ支店）", amount: 28945, date: "2026.8.15" },
-    { type: "debit",  desc: "振替出金｜普通預金（丸善ジュンク堂支店）", amount: 15055, date: "2026.8.15" }
-  ];
+  // Saving明細は saving-data.js だけ編集すればOK
+  const savingTransactions = Array.isArray(window.SAVING_TRANSACTIONS)
+    ? window.SAVING_TRANSACTIONS
+    : [];
 
   const money = n => "¥" + Number(n || 0).toLocaleString("ja-JP");
 
