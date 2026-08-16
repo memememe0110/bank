@@ -473,7 +473,7 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
   const D = 250;
 
   function getSavingDetail() {
-    return document.getElementById("savingDetail");
+    return document.getElementById("saving-detail");
   }
 
   function getBanking() {
@@ -542,4 +542,170 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
 
   // Expose for any existing inline back handler if needed.
   window.walletMockCloseSavingDetail = closeSavingDetail;
+})();
+
+
+/* v54: Maruzen Junkudo ordinary account detail */
+(function () {
+  const D = 250;
+
+  function detail() {
+    return document.getElementById("account-detail");
+  }
+
+  function banking() {
+    return document.getElementById("banking");
+  }
+
+  function openAccountDetail() {
+    const d = detail();
+    const b = banking();
+    if (!d || !b) return;
+
+    b.classList.add("account-underlay");
+    d.classList.remove("account-leave-right");
+    d.style.display = "";
+    d.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      d.classList.add("active");
+    });
+
+    setTimeout(() => {
+      b.classList.remove("active");
+      b.classList.remove("account-underlay");
+    }, D);
+  }
+
+  function closeAccountDetail() {
+    const d = detail();
+    const b = banking();
+    if (!d || !b) return;
+
+    b.classList.add("active", "account-underlay");
+    d.classList.add("account-leave-right");
+
+    setTimeout(() => {
+      d.classList.remove("active", "account-leave-right");
+      d.style.display = "";
+      d.style.opacity = "";
+      b.classList.remove("account-underlay");
+    }, D);
+  }
+
+  document.addEventListener("click", function(e) {
+    const accountCard = e.target.closest(".account-card");
+    if (accountCard && banking()?.classList.contains("active")) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openAccountDetail();
+      return;
+    }
+
+    const d = detail();
+    if (!d || !d.classList.contains("active")) return;
+
+    const back = e.target.closest("#accountDetailBack, [aria-label='戻る']");
+    if (back) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      closeAccountDetail();
+    }
+  }, true);
+})();
+
+
+/* v55: Maruzen account data / automatic balance */
+(function () {
+  const account = window.MARUZEN_ACCOUNT || { openingBalance: 0, transactions: [] };
+  const transactions = Array.isArray(account.transactions) ? account.transactions : [];
+  const openingBalance = Number(account.openingBalance || 0);
+
+  function money(n) {
+    return "¥" + Number(n || 0).toLocaleString("ja-JP");
+  }
+
+  function calculateMaruzenBalance() {
+    return transactions.reduce((total, tx) => {
+      const amount = Number(tx.amount || 0);
+      return tx.type === "credit" ? total + amount : total - amount;
+    }, openingBalance);
+  }
+
+  function calculateSavingBalanceForRecord() {
+    const saving = Array.isArray(window.SAVING_TRANSACTIONS)
+      ? window.SAVING_TRANSACTIONS
+      : [];
+
+    return saving.reduce((total, tx) => {
+      const amount = Number(tx.amount || 0);
+      return tx.type === "credit" ? total + amount : total - amount;
+    }, 0);
+  }
+
+  function renderMaruzenHistory() {
+    const history = document.getElementById("accountHistory");
+    if (!history) return;
+
+    history.innerHTML = "";
+
+    transactions.forEach(tx => {
+      const row = document.createElement("div");
+      row.className = "account-tx " + tx.type;
+
+      const icon = document.createElement("div");
+      icon.className = "account-tx-icon";
+      icon.textContent = tx.type === "credit" ? "↓" : "↑";
+
+      const main = document.createElement("div");
+      main.className = "account-tx-main";
+
+      const desc = document.createElement("div");
+      desc.className = "account-tx-desc";
+      desc.textContent = tx.desc;
+
+      const date = document.createElement("div");
+      date.className = "account-tx-date";
+      date.textContent = tx.date;
+
+      main.append(desc, date);
+
+      const amount = document.createElement("div");
+      amount.className = "account-tx-amount";
+      amount.textContent =
+        (tx.type === "credit" ? "+ " : "") + money(tx.amount);
+
+      row.append(icon, main, amount);
+      history.appendChild(row);
+    });
+  }
+
+  function updateMaruzenBalances() {
+    const maruzenBalance = calculateMaruzenBalance();
+    const formatted = money(maruzenBalance);
+
+    // 丸善口座詳細
+    const detailBalance = document.querySelector(".account-detail-balance");
+    if (detailBalance) detailBalance.textContent = formatted;
+
+    // Bankingの普通預金カード
+    const bankingCardBalance = document.querySelector(".account-card .account-balance");
+    if (bankingCardBalance) bankingCardBalance.textContent = formatted;
+
+    // Recordの預金 = Saving + 丸善口座
+    const recordTotal = calculateSavingBalanceForRecord() + maruzenBalance;
+    const recordAmount = document.querySelector("#record .record-card-amount");
+    if (recordAmount) {
+      recordAmount.textContent = money(recordTotal);
+    }
+  }
+
+  renderMaruzenHistory();
+  updateMaruzenBalances();
+
+  // 他の処理からも必要なら呼べるように
+  window.updateMaruzenAccount = function () {
+    renderMaruzenHistory();
+    updateMaruzenBalances();
+  };
 })();

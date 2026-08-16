@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#ffffff">
 <title>Wallet Mock</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=52">
+<link rel="stylesheet" href="style.css?v=55">
 </head>
 <body>
 <div class="app">
@@ -108,7 +108,56 @@
     </section>
 
     
-    <section id="saving-detail" class="screen">
+    
+    <section id="account-detail" class="screen">
+      <div class="account-detail-page">
+        <button class="account-detail-back" id="accountDetailBack" type="button" aria-label="戻る">←</button>
+
+        <div class="account-detail-hero">
+          <img src="assets/account-detail-book.jpeg?v=54" alt="" class="account-detail-book">
+        </div>
+
+        <div class="account-detail-summary">
+          <div class="account-detail-name">普通預金 丸善ジュンク堂支店</div>
+          <div class="account-detail-balance">¥0</div>
+        </div>
+
+        <div class="account-action-grid">
+          <div class="account-action-item">
+            <img src="assets/account-action-transfer.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-kotora.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-atm.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-auto.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-debit.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-bill.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+          <div class="account-action-item">
+            <img src="assets/account-action-boxtransfer.jpeg?v=54" alt="" class="account-action-img">
+          </div>
+        </div>
+
+        <div class="account-detail-title-row">
+          <h2>取引明細</h2>
+          <span class="account-search-icon" aria-hidden="true"></span>
+        </div>
+
+        <div class="account-history-label">これまでの履歴</div>
+
+        <div class="account-history" id="accountHistory"></div>
+      </div>
+    </section>
+
+<section id="saving-detail" class="screen">
       <div class="saving-detail-page">
         <button class="saving-detail-back" id="savingDetailBack" type="button" aria-label="戻る">←</button>
 
@@ -256,7 +305,8 @@
     </button>
   </nav>
 </div>
-<script src="saving-data.js?v=52"></script>
-<script src="app.js?v=52"></script>
+<script src="saving-data.js?v=55"></script>
+<script src="account-data.js?v=55"></script>
+<script src="app.js?v=55"></script>
 </body>
 </html>
