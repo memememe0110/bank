@@ -304,10 +304,34 @@ document.addEventListener('DOMContentLoaded', () => {
     ? window.SAVING_TRANSACTIONS
     : [];
 
+  function calculateSavingBalance() {
+    return savingTransactions.reduce((total, tx) => {
+      const amount = Number(tx.amount || 0);
+      return tx.type === "credit" ? total + amount : total - amount;
+    }, 0);
+  }
+
+  function updateSavingBalanceDisplays() {
+    const balance = calculateSavingBalance();
+    const formatted = "¥" + balance.toLocaleString("ja-JP");
+
+    const detailBalance = document.querySelector(".saving-detail-balance");
+    if (detailBalance) detailBalance.textContent = formatted;
+
+    const cardAmount = document.querySelector(".saving-card .saving-amount, .saving-card .amount, .saving-card strong");
+    if (cardAmount) cardAmount.textContent = formatted;
+
+    // Record預金もBanking合計としてSaving残高を反映
+    const recordDeposit = document.querySelector("#record .record-card-amount");
+    if (recordDeposit) recordDeposit.textContent = formatted;
+  }
+
+
   const money = n => "¥" + Number(n || 0).toLocaleString("ja-JP");
 
   function render() {
     historyEl.innerHTML = "";
+    updateSavingBalanceDisplays();
 
     savingTransactions.forEach(tx => {
       const row = document.createElement("div");
@@ -355,4 +379,5 @@ document.addEventListener('DOMContentLoaded', () => {
   backButton.addEventListener("click", showBanking);
 
   render();
+  updateSavingBalanceDisplays();
 })();

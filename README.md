@@ -1,24 +1,21 @@
-# Wallet Mock v47
+# Wallet Mock v48
 
-## Saving明細を変更する場所
-**`saving-data.js` だけ編集してください。**
+## Saving残高は明細から自動計算
+` saving-data.js ` の明細だけ編集すればOKです。
 
-各明細はこの4項目です。
-
-- `type`: `"debit"` = 出金 / `"credit"` = 入金
-- `date`: 日付
-- `amount`: 金額（カンマなしの数字）
-- `desc`: 表示する明細名
+計算ルール:
+- `type: "credit"` → 入金として加算
+- `type: "debit"` → 出金として減算
 
 例:
-
 ```js
-{
-  type: "credit",
-  date: "2026.8.16",
-  amount: 5000,
-  desc: "振替入金｜普通預金（丸善ジュンク堂支店）"
-}
+{ type: "credit", amount: 30000, ... } // +30,000
+{ type: "debit",  amount: 6000,  ... } // -6,000
 ```
 
-画面上には編集欄は出ません。
+この場合、Saving残高は **¥24,000** になります。
+
+自動反映先:
+- BankingのSavingカード
+- Saving詳細画面の残高
+- Recordの預金金額
