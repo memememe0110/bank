@@ -26,47 +26,41 @@ window.MARUZEN_ACCOUNT = {
 
   transactions: [
 
-    {
-      type: "debit",
-      date: "2026.8.15",
-      amount: 20000,
-      desc: "振替出金｜普通預金（ハーバーブリッジ支店）"
-    },
-
-    {
-      type: "credit",
-      date: "2026.8.15",
-      amount: 12000,
-      desc: "振替入金｜Saving"
-    },
-
-    {
-      type: "credit",
-      date: "2026.8.15",
-      amount: 8000,
-      desc: "振替入金｜Saving"
-    },
 
     {
       type: "debit",
-      date: "2026.8.15",
+      date: "2026.8.14",
       amount: 27740,
       desc: "振替出金｜Saving"
     },
 
     {
       type: "debit",
-      date: "2026.8.15",
+      date: "2026.8.14",
       amount: 1205,
       desc: "振替出金｜Saving"
     },
 
     {
       type: "debit",
-      date: "2026.8.15",
+      date: "2026.8.14",
       amount: 15055,
       desc: "振替出金｜Saving"
-    }
+    },
+
+    {
+      type: "credit",
+      date: "2026.8.14",
+      amount: 15055,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
+
+    {
+      type: "credit",
+      date: "2026.8.14",
+      amount: 50000,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
 
   ]
 };
