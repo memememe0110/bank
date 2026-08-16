@@ -21,52 +21,24 @@ Saving 明細データ
 window.SAVING_TRANSACTIONS = [
 
   {
-    type: "debit",
-    date: "2026.8.15",
-    amount: 12000,
-    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
-  },
-
-  {
-    type: "debit",
-    date: "2026.8.15",
-    amount: 8000,
-    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
-  },
-
-  {
     type: "credit",
-    date: "2026.8.15",
+    date: "2026.8.14",
     amount: 27740,
     desc: "振替入金｜普通預金（丸善ジュンク堂支店）"
   },
 
   {
     type: "credit",
-    date: "2026.8.15",
+    date: "2026.8.14",
     amount: 1205,
     desc: "振替入金｜普通預金（丸善ジュンク堂支店）"
   },
 
   {
     type: "credit",
-    date: "2026.8.15",
+    date: "2026.8.14",
     amount: 15055,
     desc: "振替入金｜普通預金（丸善ジュンク堂支店）"
   },
-
-  {
-    type: "debit",
-    date: "2026.8.15",
-    amount: 28945,
-    desc: "振替出金｜普通預金（ハーバーブリッジ支店）"
-  },
-
-  {
-    type: "debit",
-    date: "2026.8.15",
-    amount: 15055,
-    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
-  }
 
 ];
