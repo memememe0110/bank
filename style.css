@@ -2571,3 +2571,60 @@ body {
     transition: none !important;
   }
 }
+
+
+/* =========================
+   v56: 丸善ジュンク堂支店 詳細
+   少し小さく + 参考動画のpush遷移
+   ========================= */
+.account-detail-page {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+.account-detail-back {
+  margin-top: 18px !important;
+  width: 42px !important;
+  height: 42px !important;
+  font-size: 40px !important;
+}
+.account-detail-hero { height: 235px !important; }
+.account-detail-book { width: 188px !important; max-width: 54% !important; }
+.account-detail-name { font-size: 17px !important; }
+.account-detail-balance { margin-top: 10px !important; font-size: 42px !important; }
+.account-action-grid { margin-top: 30px !important; gap: 10px 6px !important; }
+.account-action-img { max-width: 82px !important; }
+.account-detail-title-row { margin-top: 38px !important; }
+.account-history-label { margin-top: 48px !important; }
+
+/* 前画面も一緒に少し左へ動く、iOS風push */
+#banking.v56-account-underlay {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(-22%) !important;
+  transition: transform 280ms cubic-bezier(.32,.72,0,1) !important;
+  pointer-events: none !important;
+}
+#banking.v56-account-underlay.v56-returning { transform: translateX(0) !important; }
+#banking.v56-no-transition { transition: none !important; }
+
+#account-detail.v56-account-detail {
+  display: block;
+  opacity: 1 !important;
+  transform: translateX(100%) !important;
+  transition: transform 280ms cubic-bezier(.32,.72,0,1) !important;
+  z-index: 40 !important;
+  background: #fff;
+}
+#account-detail.v56-account-detail.active { transform: translateX(0) !important; }
+#account-detail.v56-account-detail.v56-leave-right { transform: translateX(100%) !important; }
+
+@media (max-width: 390px) {
+  .account-detail-hero { height: 215px !important; }
+  .account-detail-book { width: 175px !important; }
+  .account-action-img { max-width: 76px !important; }
+  .account-detail-balance { font-size: 40px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #account-detail.v56-account-detail,
+  #banking.v56-account-underlay { transition: none !important; }
+}

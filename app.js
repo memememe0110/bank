@@ -545,36 +545,29 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
 })();
 
 
-/* v54: Maruzen Junkudo ordinary account detail */
+/* v56: Maruzen account native-style push / pop */
 (function () {
-  const D = 250;
-
-  function detail() {
-    return document.getElementById("account-detail");
-  }
-
-  function banking() {
-    return document.getElementById("banking");
-  }
+  const D = 280;
+  const detail = () => document.getElementById("account-detail");
+  const banking = () => document.getElementById("banking");
 
   function openAccountDetail() {
     const d = detail();
     const b = banking();
     if (!d || !b) return;
 
-    b.classList.add("account-underlay");
-    d.classList.remove("account-leave-right");
-    d.style.display = "";
+    d.classList.add("v56-account-detail");
+    d.classList.remove("v56-leave-right");
+    d.style.display = "block";
     d.style.opacity = "1";
 
-    requestAnimationFrame(() => {
-      d.classList.add("active");
-    });
+    b.classList.add("v56-account-underlay");
 
-    setTimeout(() => {
-      b.classList.remove("active");
-      b.classList.remove("account-underlay");
-    }, D);
+    d.classList.remove("active");
+    void d.offsetWidth;
+    requestAnimationFrame(() => d.classList.add("active"));
+
+    setTimeout(() => b.classList.remove("active"), D);
   }
 
   function closeAccountDetail() {
@@ -582,29 +575,35 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     const b = banking();
     if (!d || !b) return;
 
-    b.classList.add("active", "account-underlay");
-    d.classList.add("account-leave-right");
+    b.classList.add("active", "v56-account-underlay", "v56-no-transition");
+    b.classList.remove("v56-returning");
+    void b.offsetWidth;
+    b.classList.remove("v56-no-transition");
+
+    requestAnimationFrame(() => {
+      b.classList.add("v56-returning");
+      d.classList.add("v56-leave-right");
+      d.classList.remove("active");
+    });
 
     setTimeout(() => {
-      d.classList.remove("active", "account-leave-right");
+      d.classList.remove("v56-leave-right", "v56-account-detail");
       d.style.display = "";
       d.style.opacity = "";
-      b.classList.remove("account-underlay");
+      b.classList.remove("v56-account-underlay", "v56-returning");
     }, D);
   }
 
-  document.addEventListener("click", function(e) {
-    const accountCard = e.target.closest(".account-card");
-    if (accountCard && banking()?.classList.contains("active")) {
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".account-card");
+    if (card && banking()?.classList.contains("active")) {
       e.preventDefault();
       e.stopImmediatePropagation();
       openAccountDetail();
       return;
     }
 
-    const d = detail();
-    if (!d || !d.classList.contains("active")) return;
-
+    if (!detail()?.classList.contains("v56-account-detail")) return;
     const back = e.target.closest("#accountDetailBack, [aria-label='戻る']");
     if (back) {
       e.preventDefault();
