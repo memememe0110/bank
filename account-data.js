@@ -62,5 +62,18 @@ window.MARUZEN_ACCOUNT = {
       desc: "ことら入金｜イイジマ　メイナ"
     },
 
+    {
+      type: "debit",
+      date: "2026.8.14",
+      amount: 22260,
+      desc: "振込出金｜ｶ)ｾﾌﾞﾝCSｶｰﾄﾞｻｰﾋﾞｽ"
+    },
+
+    {
+      type: "credit",
+      date: "2026.8.13",
+      amount: 1205,
+      desc: "振込入金｜メルカリ"
+    },
   ]
 };
