@@ -2687,3 +2687,103 @@ body {
     transition: none !important;
   }
 }
+
+
+/* =========================
+   v58: transition reset / stable animation
+   ========================= */
+
+/* Old transition rules must never leave a main page translated. */
+#wallet.screen,
+#banking.screen,
+#record.screen,
+#links.screen,
+#circle.screen {
+  transform: none !important;
+  transition: opacity 140ms ease !important;
+}
+
+#wallet.screen.active,
+#banking.screen.active,
+#record.screen.active,
+#links.screen.active,
+#circle.screen.active {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.screen.v58-fade-out {
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+.screen.v58-fade-in {
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+/* Detail pages are independent full-screen overlays.
+   Banking never moves, so a half-finished transform cannot freeze the page. */
+#saving-detail.v58-detail-overlay,
+#account-detail.v58-detail-overlay {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: #fff !important;
+  opacity: 1 !important;
+  transform: translateX(100%) !important;
+  transition: transform 260ms cubic-bezier(.32,.72,0,1) !important;
+  z-index: 50 !important;
+  pointer-events: auto !important;
+  will-change: transform;
+}
+
+#saving-detail.v58-detail-overlay.v58-detail-ready,
+#account-detail.v58-detail-overlay.v58-detail-ready {
+  transform: translateX(0) !important;
+}
+
+#saving-detail.v58-detail-overlay.v58-detail-leave,
+#account-detail.v58-detail-overlay.v58-detail-leave {
+  transform: translateX(100%) !important;
+}
+
+/* Keep global bottom nav above detail pages, matching the reference. */
+.bottom-nav {
+  z-index: 100 !important;
+}
+
+/* Explicitly cancel all old Banking underlay translation classes. */
+#banking.v56-account-underlay,
+#banking.v56-account-underlay.v56-returning,
+#banking.saving-underlay,
+#banking.account-underlay,
+#banking.v57-nav-out,
+#banking.v57-nav-in {
+  transform: none !important;
+  transition: opacity 140ms ease !important;
+}
+
+/* Tap feedback only, no positional movement. */
+.bottom-nav .nav-item:active,
+.saving-card:active,
+.account-card:active {
+  transform: scale(.985) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #saving-detail.v58-detail-overlay,
+  #account-detail.v58-detail-overlay,
+  #wallet.screen,
+  #banking.screen,
+  #record.screen,
+  #links.screen,
+  #circle.screen {
+    transition: none !important;
+  }
+}

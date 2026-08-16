@@ -5,7 +5,6 @@ function show(name){
   nav.forEach(b=>b.classList.toggle("active",b.dataset.screen===name));
   window.scrollTo(0,0);
 }
-nav.forEach(b=>b.addEventListener("click",()=>show(b.dataset.screen)));
 document.addEventListener("gesturestart",e=>e.preventDefault());
 
 
@@ -90,63 +89,6 @@ document.addEventListener("dragstart", function (e) {
 window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
 
 
-/* v19: bottom-nav active state sync */
-(function () {
-  const items = [...document.querySelectorAll(".bottom-nav .nav-item")];
-
-  function setActiveNav(target) {
-    items.forEach((item) => {
-      item.classList.toggle("active", item.dataset.target === target);
-    });
-  }
-
-  items.forEach((item) => {
-    item.addEventListener("click", () => {
-      const target = item.dataset.target;
-      setActiveNav(target);
-    });
-  });
-
-  // 初期表示はWallet
-  setActiveNav("wallet");
-})();
-
-
-/* v20: bottom nav - exactly one active item */
-(function () {
-  const items = Array.from(document.querySelectorAll(".bottom-nav .nav-item"));
-  const allScreens = Array.from(document.querySelectorAll(".screen"));
-
-  function activate(screenName) {
-    items.forEach(item => {
-      item.classList.remove("active");
-    });
-    allScreens.forEach(screen => {
-      screen.classList.remove("active");
-    });
-
-    const activeItem = items.find(item => item.dataset.screen === screenName);
-    const activeScreen = document.getElementById(screenName);
-
-    if (activeItem) activeItem.classList.add("active");
-    if (activeScreen) activeScreen.classList.add("active");
-
-    window.scrollTo(0, 0);
-  }
-
-  items.forEach(item => {
-    item.onclick = function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      activate(item.dataset.screen);
-    };
-  });
-
-  // 最初は必ずWallet
-  activate("wallet");
-})();
-
-
 /* v23: Record預金額はBankingの合計に同期 */
 (function(){
   const checking = 0;
@@ -155,18 +97,6 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
   const amount = document.querySelector("#record .record-card-amount");
   if (amount) amount.textContent = "¥" + total.toLocaleString("ja-JP");
 })();
-
-
-/* v26: always reset page to top when switching bottom tabs */
-document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    requestAnimationFrame(() => {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    });
-  });
-});
 
 
 /* v28: Wallet balance hide/show */
@@ -332,49 +262,11 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     window.scrollTo(0, 0);
   }
 
-  savingButton.addEventListener("click", showSavingDetail);
-  backButton.addEventListener("click", showBanking);
 
   render();
   updateSavingBalanceDisplays();
 })();
 
-
-/* v51: smooth screen transitions */
-(function () {
-  const TRANSITION_MS = 180;
-
-  window.walletMockShowScreenSmooth = function(target) {
-    if (!target) return;
-
-    const current = document.querySelector(".screen.active");
-    if (!current || current === target) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      target.classList.add("active");
-      return;
-    }
-
-    current.style.opacity = "0";
-    current.style.transform = "translateY(6px)";
-
-    setTimeout(() => {
-      current.classList.remove("active");
-      current.style.opacity = "";
-      current.style.transform = "";
-
-      target.classList.add("active");
-
-      requestAnimationFrame(() => {
-        target.style.opacity = "0";
-        target.style.transform = "translateY(6px)";
-        requestAnimationFrame(() => {
-          target.style.opacity = "";
-          target.style.transform = "";
-        });
-      });
-    }, TRANSITION_MS);
-  };
-})();
 
 /* v51: Banking tab transition override */
 (function () {
@@ -464,152 +356,6 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     e.preventDefault();
     e.stopImmediatePropagation();
     showLoanSmooth();
-  }, true);
-})();
-
-
-/* v52: Saving detail push / pop transition */
-(function () {
-  const D = 250;
-
-  function getSavingDetail() {
-    return document.getElementById("saving-detail");
-  }
-
-  function getBanking() {
-    return document.getElementById("banking");
-  }
-
-  function openSavingDetail() {
-    const detail = getSavingDetail();
-    const banking = getBanking();
-    if (!detail || !banking) return;
-
-    // Keep Banking behind the detail page while it slides in.
-    banking.classList.add("saving-underlay");
-    detail.classList.remove("saving-leave-right");
-    detail.style.display = "";
-
-    // Do not let generic screen fade animate this transition.
-    detail.style.opacity = "1";
-
-    requestAnimationFrame(() => {
-      detail.classList.add("active");
-    });
-
-    setTimeout(() => {
-      banking.classList.remove("active");
-      banking.classList.remove("saving-underlay");
-    }, D);
-  }
-
-  function closeSavingDetail() {
-    const detail = getSavingDetail();
-    const banking = getBanking();
-    if (!detail || !banking) return;
-
-    // Put Banking back underneath before sliding detail away.
-    banking.classList.add("active", "saving-underlay");
-    detail.classList.add("saving-leave-right");
-
-    setTimeout(() => {
-      detail.classList.remove("active", "saving-leave-right");
-      detail.style.display = "";
-      detail.style.opacity = "";
-      banking.classList.remove("saving-underlay");
-    }, D);
-  }
-
-  document.addEventListener("click", function (e) {
-    const savingCard = e.target.closest(".saving-card");
-    if (savingCard && getBanking()?.classList.contains("active")) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      openSavingDetail();
-      return;
-    }
-
-    const detail = getSavingDetail();
-    if (!detail || !detail.classList.contains("active")) return;
-
-    const back = e.target.closest(".back-btn, .back-button, [data-back], [aria-label='戻る']");
-    if (back) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      closeSavingDetail();
-    }
-  }, true);
-
-  // Expose for any existing inline back handler if needed.
-  window.walletMockCloseSavingDetail = closeSavingDetail;
-})();
-
-
-/* v56: Maruzen account native-style push / pop */
-(function () {
-  const D = 280;
-  const detail = () => document.getElementById("account-detail");
-  const banking = () => document.getElementById("banking");
-
-  function openAccountDetail() {
-    const d = detail();
-    const b = banking();
-    if (!d || !b) return;
-
-    d.classList.add("v56-account-detail");
-    d.classList.remove("v56-leave-right");
-    d.style.display = "block";
-    d.style.opacity = "1";
-
-    b.classList.add("v56-account-underlay");
-
-    d.classList.remove("active");
-    void d.offsetWidth;
-    requestAnimationFrame(() => d.classList.add("active"));
-
-    setTimeout(() => b.classList.remove("active"), D);
-  }
-
-  function closeAccountDetail() {
-    const d = detail();
-    const b = banking();
-    if (!d || !b) return;
-
-    b.classList.add("active", "v56-account-underlay", "v56-no-transition");
-    b.classList.remove("v56-returning");
-    void b.offsetWidth;
-    b.classList.remove("v56-no-transition");
-
-    requestAnimationFrame(() => {
-      b.classList.add("v56-returning");
-      d.classList.add("v56-leave-right");
-      d.classList.remove("active");
-    });
-
-    setTimeout(() => {
-      d.classList.remove("v56-leave-right", "v56-account-detail");
-      d.style.display = "";
-      d.style.opacity = "";
-      b.classList.remove("v56-account-underlay", "v56-returning");
-    }, D);
-  }
-
-  document.addEventListener("click", function (e) {
-    const card = e.target.closest(".account-card");
-    if (card && banking()?.classList.contains("active")) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      openAccountDetail();
-      return;
-    }
-
-    if (!detail()?.classList.contains("v56-account-detail")) return;
-    const back = e.target.closest("#accountDetailBack, [aria-label='戻る']");
-    if (back) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      closeAccountDetail();
-    }
   }, true);
 })();
 
@@ -710,121 +456,189 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
 })();
 
 
-/* v57: transition stability fix + unified navigation */
-(function () {
-  const D = 240;
-  const MAIN = ["wallet", "banking", "record", "links", "circle"];
-  let busy = false;
 
-  function clearTransitionResidue() {
-    const banking = document.getElementById("banking");
-    if (banking) {
-      banking.classList.remove(
-        "v56-account-underlay", "v56-returning", "v56-no-transition",
-        "saving-underlay", "account-underlay", "v57-nav-out", "v57-nav-in"
-      );
-      banking.style.transform = "";
-      banking.style.transition = "";
-      banking.style.opacity = "";
-    }
+
+/* v58: single transition controller (no competing handlers) */
+(function () {
+  const MAIN = ["wallet", "banking", "record", "links", "circle"];
+  const NAV_MS = 140;
+  const PUSH_MS = 260;
+  let locked = false;
+
+  const byId = id => document.getElementById(id);
+
+  function resetStyles() {
     document.querySelectorAll(".screen").forEach(s => {
-      s.classList.remove("v57-nav-out", "v57-nav-in");
+      s.classList.remove(
+        "v58-fade-out", "v58-fade-in",
+        "v58-detail-overlay", "v58-detail-ready", "v58-detail-leave",
+        "v56-account-underlay", "v56-returning", "v56-no-transition",
+        "v56-account-detail", "v56-leave-right",
+        "saving-underlay", "saving-leave-right",
+        "account-underlay", "account-leave-right",
+        "v57-nav-out", "v57-nav-in", "v57-detail", "v57-preopen", "v57-leave-right"
+      );
+      s.style.transform = "";
+      s.style.opacity = "";
+      s.style.transition = "";
     });
   }
 
-  // Recover automatically even if v56 was left half-way through a push animation.
-  clearTransitionResidue();
-  window.addEventListener("pageshow", clearTransitionResidue);
-
-  function setNavActive(name) {
+  function setNav(name) {
     document.querySelectorAll(".bottom-nav .nav-item").forEach(item => {
       item.classList.toggle("active", item.dataset.screen === name);
     });
   }
 
-  function switchMainScreen(name) {
-    if (!MAIN.includes(name) || busy) return;
-    const target = document.getElementById(name);
-    if (!target) return;
-    const current = MAIN.map(id => document.getElementById(id)).find(s => s?.classList.contains("active"));
+  function currentMain() {
+    return MAIN.map(byId).find(el => el?.classList.contains("active"));
+  }
 
-    clearTransitionResidue();
-    setNavActive(name);
+  function showMain(name) {
+    if (locked || !MAIN.includes(name)) return;
+    const target = byId(name);
+    if (!target) return;
+
+    // Close detail overlays immediately before changing main tabs.
+    ["saving-detail", "account-detail"].forEach(id => {
+      const d = byId(id);
+      if (d) d.classList.remove("active", "v58-detail-overlay", "v58-detail-ready", "v58-detail-leave");
+    });
+
+    const current = currentMain();
+    setNav(name);
 
     if (!current || current === target) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      MAIN.map(byId).forEach(el => el?.classList.remove("active"));
       target.classList.add("active");
       window.scrollTo(0, 0);
       return;
     }
 
-    busy = true;
-    current.classList.add("v57-nav-out");
+    locked = true;
+    current.classList.add("v58-fade-out");
+
     setTimeout(() => {
-      current.classList.remove("active", "v57-nav-out");
-      target.classList.add("active", "v57-nav-in");
+      current.classList.remove("active", "v58-fade-out");
+      target.classList.add("active", "v58-fade-in");
       window.scrollTo(0, 0);
-      requestAnimationFrame(() => requestAnimationFrame(() => target.classList.remove("v57-nav-in")));
-      setTimeout(() => { busy = false; }, D);
-    }, 105);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => target.classList.remove("v58-fade-in"));
+      });
+
+      setTimeout(() => { locked = false; }, NAV_MS);
+    }, NAV_MS);
   }
 
-  // Capture phase overrides the older instant bottom-nav handlers.
-  document.addEventListener("click", function (e) {
-    const item = e.target.closest(".bottom-nav .nav-item[data-screen]");
-    if (!item) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    switchMainScreen(item.dataset.screen);
-  }, true);
+  function openDetail(id) {
+    if (locked) return;
+    const banking = byId("banking");
+    const detail = byId(id);
+    if (!banking || !detail) return;
 
-  // Replace v56 account push with a stable detail-only slide.
-  function openAccount() {
-    if (busy) return;
-    const b = document.getElementById("banking");
-    const d = document.getElementById("account-detail");
-    if (!b || !d) return;
-    busy = true;
-    clearTransitionResidue();
-    d.classList.add("v57-detail", "v57-preopen");
-    d.classList.remove("v56-account-detail", "v56-leave-right", "v57-leave-right");
-    d.style.display = "block";
-    d.style.opacity = "1";
-    b.classList.add("active");
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      d.classList.add("active");
-      d.classList.remove("v57-preopen");
-    }));
-    setTimeout(() => { b.classList.remove("active"); busy = false; }, D);
+    locked = true;
+
+    // Banking stays fully in place behind the detail page.
+    banking.classList.add("active");
+
+    detail.classList.remove("v58-detail-leave");
+    detail.classList.add("active", "v58-detail-overlay");
+    detail.style.transform = "translateX(100%)";
+
+    // Force the starting frame, then slide to zero.
+    void detail.offsetWidth;
+    requestAnimationFrame(() => {
+      detail.classList.add("v58-detail-ready");
+      detail.style.transform = "";
+    });
+
+    setTimeout(() => { locked = false; }, PUSH_MS);
   }
 
-  function closeAccount() {
-    if (busy) return;
-    const b = document.getElementById("banking");
-    const d = document.getElementById("account-detail");
-    if (!b || !d) return;
-    busy = true;
-    clearTransitionResidue();
-    b.classList.add("active");
-    d.classList.add("v57-detail", "v57-leave-right");
-    requestAnimationFrame(() => d.classList.remove("active"));
+  function closeDetail(id) {
+    if (locked) return;
+    const banking = byId("banking");
+    const detail = byId(id);
+    if (!banking || !detail) return;
+
+    locked = true;
+    banking.classList.add("active");
+    setNav("banking");
+
+    detail.classList.add("v58-detail-leave");
+    detail.classList.remove("v58-detail-ready");
+
     setTimeout(() => {
-      d.classList.remove("v57-detail", "v57-leave-right", "v57-preopen");
-      d.style.display = "";
-      d.style.opacity = "";
-      busy = false;
-    }, D);
+      detail.classList.remove("active", "v58-detail-overlay", "v58-detail-leave");
+      detail.style.transform = "";
+      window.scrollTo(0, 0);
+      locked = false;
+    }, PUSH_MS);
   }
 
-  document.addEventListener("click", function (e) {
-    const card = e.target.closest(".account-card");
-    if (card && document.getElementById("banking")?.classList.contains("active")) {
-      e.preventDefault(); e.stopImmediatePropagation(); openAccount(); return;
-    }
-    const d = document.getElementById("account-detail");
-    if (!d?.classList.contains("v57-detail")) return;
-    if (e.target.closest("#accountDetailBack, [aria-label='戻る']")) {
-      e.preventDefault(); e.stopImmediatePropagation(); closeAccount();
-    }
-  }, true);
+  // Replace nav items with clones to remove every older direct click handler.
+  document.querySelectorAll(".bottom-nav .nav-item").forEach(oldItem => {
+    const item = oldItem.cloneNode(true);
+    oldItem.replaceWith(item);
+    item.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      showMain(item.dataset.screen);
+    });
+  });
+
+  // Clone clickable detail controls too, removing legacy direct listeners.
+  const savingOld = document.querySelector(".saving-card");
+  if (savingOld) {
+    const saving = savingOld.cloneNode(true);
+    savingOld.replaceWith(saving);
+    saving.addEventListener("click", e => {
+      e.preventDefault();
+      openDetail("saving-detail");
+    });
+  }
+
+  const accountOld = document.querySelector(".account-card");
+  if (accountOld) {
+    const account = accountOld.cloneNode(true);
+    accountOld.replaceWith(account);
+    account.addEventListener("click", e => {
+      e.preventDefault();
+      openDetail("account-detail");
+    });
+  }
+
+  const savingBackOld = document.getElementById("savingDetailBack");
+  if (savingBackOld) {
+    const back = savingBackOld.cloneNode(true);
+    savingBackOld.replaceWith(back);
+    back.addEventListener("click", e => {
+      e.preventDefault();
+      closeDetail("saving-detail");
+    });
+  }
+
+  const accountBackOld = document.getElementById("accountDetailBack");
+  if (accountBackOld) {
+    const back = accountBackOld.cloneNode(true);
+    accountBackOld.replaceWith(back);
+    back.addEventListener("click", e => {
+      e.preventDefault();
+      closeDetail("account-detail");
+    });
+  }
+
+  resetStyles();
+
+  // Restore a valid initial/main state.
+  if (!currentMain()) byId("wallet")?.classList.add("active");
+  const active = currentMain()?.id || "wallet";
+  setNav(active);
+
+  window.addEventListener("pageshow", () => {
+    resetStyles();
+    if (!currentMain()) byId("wallet")?.classList.add("active");
+    setNav(currentMain()?.id || "wallet");
+  });
 })();
