@@ -192,10 +192,11 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     : [];
 
   function calculateSavingBalance() {
+    const openingBalance = Number(window.SAVING_OPENING_BALANCE || 0);
     return savingTransactions.reduce((total, tx) => {
       const amount = Number(tx.amount || 0);
       return tx.type === "credit" ? total + amount : total - amount;
-    }, 0);
+    }, openingBalance);
   }
 
   function updateSavingBalanceDisplays() {
@@ -381,11 +382,12 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     const saving = Array.isArray(window.SAVING_TRANSACTIONS)
       ? window.SAVING_TRANSACTIONS
       : [];
+    const openingBalance = Number(window.SAVING_OPENING_BALANCE || 0);
 
     return saving.reduce((total, tx) => {
       const amount = Number(tx.amount || 0);
       return tx.type === "credit" ? total + amount : total - amount;
-    }, 0);
+    }, openingBalance);
   }
 
   function renderMaruzenHistory() {
@@ -434,7 +436,7 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     if (detailBalance) detailBalance.textContent = formatted;
 
     // Bankingの普通預金カード
-    const bankingCardBalance = document.querySelector(".account-card .account-balance");
+    const bankingCardBalance = document.querySelector(".account-card .balance");
     if (bankingCardBalance) bankingCardBalance.textContent = formatted;
 
     // Recordの預金 = Saving + 丸善口座
@@ -642,3 +644,16 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     setNav(currentMain()?.id || "wallet");
   });
 })();
+
+
+/* v59: recalculate every displayed balance */
+window.recalculateAllBalances = function () {
+  try {
+    if (typeof window.updateMaruzenAccount === "function") {
+      window.updateMaruzenAccount();
+    }
+  } catch (_) {}
+
+  // Saving module is rendered on page load; force a reload is not required for display
+  // when data files are edited before page load.
+};

@@ -1,11 +1,20 @@
-# Wallet Mock v58
+# Wallet Mock v59
 
-遷移処理を作り直しました。
+残高自動計算を修正。
 
-- v51/v52/v56/v57の競合していた遷移イベントを削除
-- Banking本体は横移動させないため、途中位置で止まる問題を防止
-- Saving詳細 / 丸善ジュンク堂支店詳細は独立した固定オーバーレイとして右からスライド
-- 戻る時は右へスライドアウト
-- 下メニューは位置を動かさず短いフェードのみ
-- 古いclick handlerをクローン置換で完全に除去
-- saving-data.js / account-data.js は変更なし
+- Saving:
+  `balance-data.js` の開始残高 + saving-data.js の入金 - 出金
+- 丸善ジュンク堂支店:
+  account-data.js の openingBalance + 入金 - 出金
+- Record:
+  Saving残高 + 丸善ジュンク堂支店残高
+
+さらに、Bankingの丸善ジュンク堂支店カードが更新されなかった
+クラス名の不一致も修正。
+
+## 今後触るファイル
+- Saving明細 → `saving-data.js`
+- Saving開始残高 → `balance-data.js`
+- 丸善ジュンク堂支店明細/開始残高 → `account-data.js`
+
+既存の `saving-data.js` と `account-data.js` はこの更新ZIPには入れていません。
