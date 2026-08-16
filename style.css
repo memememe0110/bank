@@ -2306,7 +2306,7 @@ body {
 
 
 /* v52: Saving detail iOS-like horizontal transition */
-#savingDetail.screen {
+#saving-detail.screen {
   transform: translateX(100%);
   opacity: 1;
   transition: transform 250ms cubic-bezier(.32,.72,0,1);
@@ -2315,11 +2315,11 @@ body {
   will-change: transform;
 }
 
-#savingDetail.screen.active {
+#saving-detail.screen.active {
   transform: translateX(0);
 }
 
-#savingDetail.screen.saving-leave-right {
+#saving-detail.screen.saving-leave-right {
   display: block !important;
   transform: translateX(100%);
   pointer-events: none;
@@ -2334,7 +2334,240 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #savingDetail.screen {
+  #saving-detail.screen {
+    transition: none !important;
+  }
+}
+
+
+/* =========================
+   v54: Maruzen Junkudo account detail
+   ========================= */
+
+#account-detail.screen {
+  transform: translateX(100%);
+  opacity: 1;
+  transition: transform 250ms cubic-bezier(.32,.72,0,1);
+  z-index: 31;
+  background: #fff;
+  will-change: transform;
+}
+
+#account-detail.screen.active {
+  transform: translateX(0);
+}
+
+#account-detail.screen.account-leave-right {
+  display: block !important;
+  transform: translateX(100%);
+  pointer-events: none;
+}
+
+#banking.account-underlay {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: none;
+}
+
+.account-detail-page {
+  min-height: 100dvh;
+  padding: max(24px, env(safe-area-inset-top)) 26px calc(126px + env(safe-area-inset-bottom));
+  background: #fff;
+  color: #000;
+}
+
+.account-detail-back {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-top: 26px;
+  border: 0;
+  background: transparent;
+  font-size: 46px;
+  line-height: 1;
+  text-align: left;
+}
+
+.account-detail-hero {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.account-detail-book {
+  width: 245px;
+  max-width: 64%;
+  height: auto;
+  object-fit: contain;
+}
+
+.account-detail-summary {
+  margin-top: 2px;
+}
+
+.account-detail-name {
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.account-detail-balance {
+  margin-top: 14px;
+  font-size: 50px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.account-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 10px;
+  margin-top: 40px;
+}
+
+.account-action-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.account-action-img {
+  width: 100%;
+  max-width: 115px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.account-detail-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 54px;
+}
+
+.account-detail-title-row h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.account-search-icon {
+  width: 31px;
+  height: 31px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 8px;
+}
+.account-search-icon::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  bottom: -4px;
+  width: 15px;
+  height: 3px;
+  background: #111;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.account-history-label {
+  margin-top: 68px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.account-history {
+  margin-top: 28px;
+  display: grid;
+  gap: 32px;
+}
+
+.account-tx {
+  display: grid;
+  grid-template-columns: 44px minmax(0,1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.account-tx-icon {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.account-tx-main {
+  min-width: 0;
+}
+
+.account-tx-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.account-tx-date {
+  margin-top: 7px;
+  font-size: 15px;
+}
+
+.account-tx-amount {
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.account-tx.credit .account-tx-amount {
+  background: #effb00;
+  padding: 0 3px;
+}
+
+@media (max-width: 390px) {
+  .account-detail-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .account-detail-hero {
+    height: 270px;
+  }
+
+  .account-detail-book {
+    width: 225px;
+  }
+
+  .account-action-grid {
+    gap: 16px 8px;
+  }
+
+  .account-action-img {
+    max-width: 100px;
+  }
+
+  .account-detail-balance {
+    font-size: 46px;
+  }
+
+  .account-tx-desc,
+  .account-tx-amount {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #account-detail.screen {
     transition: none !important;
   }
 }
