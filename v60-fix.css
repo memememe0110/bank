@@ -1,0 +1,10 @@
+
+/* Detail -> bottom tab: destination is already underneath, fade detail only. */
+#saving-detail.v60-tab-exit,
+#account-detail.v60-tab-exit {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition: opacity 140ms ease !important;
+  pointer-events: none !important;
+  z-index: 50 !important;
+}

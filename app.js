@@ -382,12 +382,10 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     const saving = Array.isArray(window.SAVING_TRANSACTIONS)
       ? window.SAVING_TRANSACTIONS
       : [];
-    const openingBalance = Number(window.SAVING_OPENING_BALANCE || 0);
-
     return saving.reduce((total, tx) => {
       const amount = Number(tx.amount || 0);
       return tx.type === "credit" ? total + amount : total - amount;
-    }, openingBalance);
+    }, 0);
   }
 
   function renderMaruzenHistory() {
@@ -501,17 +499,49 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
     const target = byId(name);
     if (!target) return;
 
-    // Close detail overlays immediately before changing main tabs.
-    ["saving-detail", "account-detail"].forEach(id => {
-      const d = byId(id);
-      if (d) d.classList.remove("active", "v58-detail-overlay", "v58-detail-ready", "v58-detail-leave");
-    });
+    const openDetail = ["saving-detail", "account-detail"]
+      .map(byId)
+      .find(d => d?.classList.contains("active"));
 
-    const current = currentMain();
     setNav(name);
 
+    if (openDetail) {
+      locked = true;
+
+      // Show destination directly underneath the detail.
+      // Banking is removed before the detail disappears, so it cannot flash.
+      MAIN.map(byId).forEach(el => {
+        if (!el) return;
+        el.classList.remove("active", "v58-fade-out", "v58-fade-in");
+      });
+      target.classList.add("active");
+      target.style.opacity = "1";
+      target.style.transform = "none";
+
+      openDetail.classList.add("v60-tab-exit");
+      requestAnimationFrame(() => {
+        openDetail.style.opacity = "0";
+      });
+
+      setTimeout(() => {
+        openDetail.classList.remove(
+          "active", "v58-detail-overlay", "v58-detail-ready",
+          "v58-detail-leave", "v60-tab-exit"
+        );
+        openDetail.style.opacity = "";
+        openDetail.style.transform = "";
+        window.scrollTo(0, 0);
+        locked = false;
+      }, NAV_MS);
+      return;
+    }
+
+    const current = currentMain();
+
     if (!current || current === target) {
-      MAIN.map(byId).forEach(el => el?.classList.remove("active"));
+      MAIN.map(byId).forEach(el => {
+        if (el !== target) el?.classList.remove("active");
+      });
       target.classList.add("active");
       window.scrollTo(0, 0);
       return;
@@ -633,16 +663,26 @@ window.WALLET_EXTRA_HERO = 'assets/wallet-hero-alt-3.jpg';
 
   resetStyles();
 
-  // Restore a valid initial/main state.
-  if (!currentMain()) byId("wallet")?.classList.add("active");
-  const active = currentMain()?.id || "wallet";
-  setNav(active);
+  // Initial launch is always Wallet.
+  MAIN.map(byId).forEach(el => el?.classList.remove("active"));
+  ["saving-detail", "account-detail"].map(byId).forEach(el => el?.classList.remove("active"));
+  byId("wallet")?.classList.add("active");
+  setNav("wallet");
+  window.scrollTo(0, 0);
 
-  window.addEventListener("pageshow", () => {
+  window.addEventListener("pageshow", (e) => {
     resetStyles();
-    if (!currentMain()) byId("wallet")?.classList.add("active");
-    setNav(currentMain()?.id || "wallet");
+    if (e.persisted) {
+      MAIN.map(byId).forEach(el => el?.classList.remove("active"));
+      ["saving-detail", "account-detail"].map(byId).forEach(el => el?.classList.remove("active"));
+      byId("wallet")?.classList.add("active");
+      setNav("wallet");
+      window.scrollTo(0, 0);
+    } else {
+      setNav(currentMain()?.id || "wallet");
+    }
   });
+
 })();
 
 
