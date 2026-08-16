@@ -1,9 +1,7 @@
-# Wallet Mock v51
+# Wallet Mock v52
 
-追加:
-- 画面切り替えをフェード＋ごく軽いスライドに変更
-- Bankingの「貯蓄預金 / ローン」切り替えも自然にフェード
-- 下部メニューとSavingカードに軽いタップ反応を追加
-- iPhoneの「視差効果を減らす」相当設定ではアニメーションを抑制
-
-※ saving-data.js は変更していません。
+変更:
+- BankingのSavingカードを押すと、Saving詳細が右から左へ約0.25秒でスライド
+- Saving詳細の戻る操作では、詳細画面が右へ戻る
+- Banking画面を背面に残して、iPhoneアプリに近いpush/pop遷移に調整
+- saving-data.js は変更していません

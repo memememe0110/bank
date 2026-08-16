@@ -2303,3 +2303,38 @@ body {
     transform: none !important;
   }
 }
+
+
+/* v52: Saving detail iOS-like horizontal transition */
+#savingDetail.screen {
+  transform: translateX(100%);
+  opacity: 1;
+  transition: transform 250ms cubic-bezier(.32,.72,0,1);
+  z-index: 30;
+  background: #fff;
+  will-change: transform;
+}
+
+#savingDetail.screen.active {
+  transform: translateX(0);
+}
+
+#savingDetail.screen.saving-leave-right {
+  display: block !important;
+  transform: translateX(100%);
+  pointer-events: none;
+}
+
+/* Banking stays visually stable behind the pushed detail screen */
+#banking.saving-underlay {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #savingDetail.screen {
+    transition: none !important;
+  }
+}

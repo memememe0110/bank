@@ -466,3 +466,80 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     showLoanSmooth();
   }, true);
 })();
+
+
+/* v52: Saving detail push / pop transition */
+(function () {
+  const D = 250;
+
+  function getSavingDetail() {
+    return document.getElementById("savingDetail");
+  }
+
+  function getBanking() {
+    return document.getElementById("banking");
+  }
+
+  function openSavingDetail() {
+    const detail = getSavingDetail();
+    const banking = getBanking();
+    if (!detail || !banking) return;
+
+    // Keep Banking behind the detail page while it slides in.
+    banking.classList.add("saving-underlay");
+    detail.classList.remove("saving-leave-right");
+    detail.style.display = "";
+
+    // Do not let generic screen fade animate this transition.
+    detail.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      detail.classList.add("active");
+    });
+
+    setTimeout(() => {
+      banking.classList.remove("active");
+      banking.classList.remove("saving-underlay");
+    }, D);
+  }
+
+  function closeSavingDetail() {
+    const detail = getSavingDetail();
+    const banking = getBanking();
+    if (!detail || !banking) return;
+
+    // Put Banking back underneath before sliding detail away.
+    banking.classList.add("active", "saving-underlay");
+    detail.classList.add("saving-leave-right");
+
+    setTimeout(() => {
+      detail.classList.remove("active", "saving-leave-right");
+      detail.style.display = "";
+      detail.style.opacity = "";
+      banking.classList.remove("saving-underlay");
+    }, D);
+  }
+
+  document.addEventListener("click", function (e) {
+    const savingCard = e.target.closest(".saving-card");
+    if (savingCard && getBanking()?.classList.contains("active")) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openSavingDetail();
+      return;
+    }
+
+    const detail = getSavingDetail();
+    if (!detail || !detail.classList.contains("active")) return;
+
+    const back = e.target.closest(".back-btn, .back-button, [data-back], [aria-label='戻る']");
+    if (back) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      closeSavingDetail();
+    }
+  }, true);
+
+  // Expose for any existing inline back handler if needed.
+  window.walletMockCloseSavingDetail = closeSavingDetail;
+})();
