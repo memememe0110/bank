@@ -14,4 +14,4 @@ Saving の表示残高は、
 =========================================================
 */
 
-window.SAVING_OPENING_BALANCE = 44000;
+window.SAVING_OPENING_BALANCE = 0;
