@@ -2223,3 +2223,83 @@ body {
   #saving-detail .saving-detail-pig { width: 190px !important; max-height: 205px !important; }
   #saving-detail .saving-detail-balance { font-size: 43px !important; }
 }
+
+
+/* =========================
+   v51: natural transitions
+   ========================= */
+
+/* Main screen changes */
+.screen {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keep hidden screens non-interactive */
+.screen:not(.active) {
+  pointer-events: none;
+}
+
+/* Banking tab contents */
+#bankSavingsContent,
+#bankLoanContent,
+.card-row,
+.divider,
+.menu-list {
+  transition:
+    opacity 170ms ease,
+    transform 200ms cubic-bezier(.22,.61,.36,1);
+}
+
+/* Bottom nav tap feedback */
+.bottom-nav button,
+.bottom-nav .nav-item,
+.bottom-nav a {
+  transition:
+    opacity 140ms ease,
+    transform 120ms ease;
+}
+
+.bottom-nav button:active,
+.bottom-nav .nav-item:active,
+.bottom-nav a:active {
+  transform: scale(.96);
+  opacity: .82;
+}
+
+/* Saving card tap feedback */
+.saving-card {
+  transition:
+    transform 140ms ease,
+    opacity 140ms ease;
+}
+.saving-card:active {
+  transform: scale(.985);
+  opacity: .88;
+}
+
+/* Reduce motion for users who request it */
+@media (prefers-reduced-motion: reduce) {
+  .screen,
+  #bankSavingsContent,
+  #bankLoanContent,
+  .card-row,
+  .divider,
+  .menu-list,
+  .saving-card,
+  .bottom-nav button,
+  .bottom-nav .nav-item,
+  .bottom-nav a {
+    transition: none !important;
+    transform: none !important;
+  }
+}

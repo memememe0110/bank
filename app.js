@@ -194,95 +194,52 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
 })();
 
 
-// v37: Banking loan tab
-document.addEventListener('DOMContentLoaded', () => {
-  const banking = [...document.querySelectorAll('section, main, div')].find(el =>
-    el.querySelector && /Banking/.test(el.textContent || '') &&
-    /貯蓄預金/.test(el.textContent || '') &&
-    /ローン/.test(el.textContent || '')
-  );
-
-  const loanEmpty = document.getElementById('bankLoanEmpty');
-  if (!loanEmpty) return;
-
-  const candidates = [...document.querySelectorAll('button, [role="tab"], .tab, .bank-tab, span, div')];
-  const savingsTab = candidates.find(el => (el.textContent || '').trim() === '貯蓄預金');
-  const loanTab = document.getElementById('bankLoanTab') ||
-                  candidates.find(el => (el.textContent || '').trim() === 'ローン');
-
-  if (!loanTab || !savingsTab) return;
-
-  const findSavingsArea = () => {
-    const savingText = [...document.querySelectorAll('*')].find(el =>
-      (el.textContent || '').trim() === 'Saving'
-    );
-    if (!savingText) return null;
-    let p = savingText;
-    for (let i = 0; i < 5 && p; i++, p = p.parentElement) {
-      if (p && p.querySelector && /ボックス作成/.test(p.textContent || '')) return p;
-    }
-    return savingText.parentElement;
-  };
-
-  const savingsArea = findSavingsArea();
-
-  const setLoan = (on) => {
-    if (savingsArea) savingsArea.style.display = on ? 'none' : '';
-    loanEmpty.hidden = !on;
-
-    loanTab.classList.toggle('active', on);
-    savingsTab.classList.toggle('active', !on);
-
-    // 元デザインの下線を維持
-    loanTab.style.borderBottom = on ? '3px solid #111' : '';
-    savingsTab.style.borderBottom = on ? '' : '3px solid #111';
-  };
-
-  loanTab.addEventListener('click', () => setLoan(true));
-  savingsTab.addEventListener('click', () => setLoan(false));
-});
 
 
-/* v40: reliable Banking savings/loan tabs */
+/* v49: Banking savings / loan tabs */
 (function () {
   const savingsTab = document.getElementById("bankSavingsTab");
   const loanTab = document.getElementById("bankLoanTab");
-  const savingsContent = document.getElementById("bankSavingsContent");
   const loanContent = document.getElementById("bankLoanContent");
+  const banking = document.getElementById("banking");
 
-  if (!savingsTab || !loanTab || !loanContent) return;
+  if (!savingsTab || !loanTab || !loanContent || !banking) return;
 
-  // Anything below the tabs that should disappear on Loan.
-  const bankingScreen = document.getElementById("banking");
-  const extraBlocks = bankingScreen
-    ? [...bankingScreen.querySelectorAll(".banking-menu, .bank-menu, .banking-actions, .bank-actions, .banking-list")]
-    : [];
+  // ローン選択時に消すもの
+  const savingsCards = banking.querySelector(".card-row");
+  const divider = banking.querySelector(".divider");
+  const menuList = banking.querySelector(".menu-list");
 
   function showSavings() {
     savingsTab.classList.add("active");
     loanTab.classList.remove("active");
-    if (savingsContent) savingsContent.style.display = "";
+
+    if (savingsCards) savingsCards.style.display = "";
+    if (divider) divider.style.display = "";
+    if (menuList) menuList.style.display = "";
+
     loanContent.hidden = true;
-    extraBlocks.forEach(el => el.style.display = "");
   }
 
   function showLoan() {
     savingsTab.classList.remove("active");
     loanTab.classList.add("active");
-    if (savingsContent) savingsContent.style.display = "none";
+
+    // Saving、ボックス作成、下のメニューを全部消す
+    if (savingsCards) savingsCards.style.display = "none";
+    if (divider) divider.style.display = "none";
+    if (menuList) menuList.style.display = "none";
+
     loanContent.hidden = false;
-    extraBlocks.forEach(el => el.style.display = "none");
   }
 
   savingsTab.addEventListener("click", function (e) {
     e.preventDefault();
-    e.stopPropagation();
     showSavings();
   });
 
   loanTab.addEventListener("click", function (e) {
     e.preventDefault();
-    e.stopPropagation();
     showLoan();
   });
 
@@ -318,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailBalance = document.querySelector(".saving-detail-balance");
     if (detailBalance) detailBalance.textContent = formatted;
 
-    const cardAmount = document.querySelector(".saving-card .saving-amount, .saving-card .amount, .saving-card strong");
+    const cardAmount = document.querySelector(".saving-card .saving-balance");
     if (cardAmount) cardAmount.textContent = formatted;
 
     // Record預金もBanking合計としてSaving残高を反映
@@ -380,4 +337,132 @@ document.addEventListener('DOMContentLoaded', () => {
 
   render();
   updateSavingBalanceDisplays();
+})();
+
+
+/* v51: smooth screen transitions */
+(function () {
+  const TRANSITION_MS = 180;
+
+  window.walletMockShowScreenSmooth = function(target) {
+    if (!target) return;
+
+    const current = document.querySelector(".screen.active");
+    if (!current || current === target) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      target.classList.add("active");
+      return;
+    }
+
+    current.style.opacity = "0";
+    current.style.transform = "translateY(6px)";
+
+    setTimeout(() => {
+      current.classList.remove("active");
+      current.style.opacity = "";
+      current.style.transform = "";
+
+      target.classList.add("active");
+
+      requestAnimationFrame(() => {
+        target.style.opacity = "0";
+        target.style.transform = "translateY(6px)";
+        requestAnimationFrame(() => {
+          target.style.opacity = "";
+          target.style.transform = "";
+        });
+      });
+    }, TRANSITION_MS);
+  };
+})();
+
+/* v51: Banking tab transition override */
+(function () {
+  const savingsTab = document.getElementById("bankSavingsTab");
+  const loanTab = document.getElementById("bankLoanTab");
+  const loanContent = document.getElementById("bankLoanContent");
+  const banking = document.getElementById("banking");
+
+  if (!savingsTab || !loanTab || !loanContent || !banking) return;
+
+  const savingsCards = banking.querySelector(".card-row");
+  const divider = banking.querySelector(".divider");
+  const menuList = banking.querySelector(".menu-list");
+  const fadeTargets = [savingsCards, divider, menuList].filter(Boolean);
+  const D = 150;
+
+  function fadeOut(elements, done) {
+    elements.forEach(el => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(5px)";
+    });
+    setTimeout(done, D);
+  }
+
+  function fadeIn(elements) {
+    elements.forEach(el => {
+      el.style.display = "";
+      el.style.opacity = "0";
+      el.style.transform = "translateY(5px)";
+    });
+    requestAnimationFrame(() => {
+      elements.forEach(el => {
+        el.style.opacity = "";
+        el.style.transform = "";
+      });
+    });
+  }
+
+  function showSavingsSmooth() {
+    if (savingsTab.classList.contains("active")) return;
+
+    loanContent.style.opacity = "0";
+    loanContent.style.transform = "translateY(5px)";
+
+    setTimeout(() => {
+      loanContent.hidden = true;
+
+      loanTab.classList.remove("active");
+      savingsTab.classList.add("active");
+
+      fadeIn(fadeTargets);
+    }, D);
+  }
+
+  function showLoanSmooth() {
+    if (loanTab.classList.contains("active")) return;
+
+    fadeOut(fadeTargets, () => {
+      fadeTargets.forEach(el => {
+        el.style.display = "none";
+        el.style.opacity = "";
+        el.style.transform = "";
+      });
+
+      savingsTab.classList.remove("active");
+      loanTab.classList.add("active");
+
+      loanContent.hidden = false;
+      loanContent.style.opacity = "0";
+      loanContent.style.transform = "translateY(5px)";
+
+      requestAnimationFrame(() => {
+        loanContent.style.opacity = "1";
+        loanContent.style.transform = "translateY(0)";
+      });
+    });
+  }
+
+  // Capture phase so this smoother handler wins over older instant handlers.
+  savingsTab.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    showSavingsSmooth();
+  }, true);
+
+  loanTab.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    showLoanSmooth();
+  }, true);
 })();

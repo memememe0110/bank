@@ -1,21 +1,9 @@
-# Wallet Mock v48
+# Wallet Mock v51
 
-## Saving残高は明細から自動計算
-` saving-data.js ` の明細だけ編集すればOKです。
+追加:
+- 画面切り替えをフェード＋ごく軽いスライドに変更
+- Bankingの「貯蓄預金 / ローン」切り替えも自然にフェード
+- 下部メニューとSavingカードに軽いタップ反応を追加
+- iPhoneの「視差効果を減らす」相当設定ではアニメーションを抑制
 
-計算ルール:
-- `type: "credit"` → 入金として加算
-- `type: "debit"` → 出金として減算
-
-例:
-```js
-{ type: "credit", amount: 30000, ... } // +30,000
-{ type: "debit",  amount: 6000,  ... } // -6,000
-```
-
-この場合、Saving残高は **¥24,000** になります。
-
-自動反映先:
-- BankingのSavingカード
-- Saving詳細画面の残高
-- Recordの預金金額
+※ saving-data.js は変更していません。
