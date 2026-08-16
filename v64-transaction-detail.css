@@ -169,3 +169,68 @@
 body > .bottom-nav {
   z-index: 2147483000 !important;
 }
+
+
+/* v65: compact transaction-detail screen */
+#transaction-detail-v64 { padding-left: 24px; padding-right: 24px; }
+#transaction-detail-v64 .tx64-top { min-height: 52px; }
+#transaction-detail-v64 .tx64-back,
+#transaction-detail-v64 .tx64-star { font-size: 35px; }
+
+#transaction-detail-v64 .tx64-main { padding-top: 58px; }
+
+#transaction-detail-v64 .tx64-direction-icon {
+  width: 82px;
+  height: 82px;
+  border-width: 6px;
+  font-size: 46px;
+  margin-bottom: 34px;
+}
+
+#transaction-detail-v64 .tx64-title {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+#transaction-detail-v64 .tx64-amount {
+  margin-top: 14px;
+  font-size: 38px;
+}
+
+#transaction-detail-v64 .tx64-info { margin-top: 64px; }
+
+#transaction-detail-v64 .tx64-row {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#transaction-detail-v64 .tx64-divider {
+  height: 1px;
+  margin: 25px 0 48px;
+}
+
+#transaction-detail-v64 .tx64-label {
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+#transaction-detail-v64 .tx64-route {
+  gap: 10px;
+  font-size: 16px;
+  padding-bottom: 25px;
+  border-bottom-width: 1px;
+}
+
+#transaction-detail-v64 .tx64-route-arrow { font-size: 22px; }
+
+@media (max-width: 390px) {
+  #transaction-detail-v64 { padding-left: 21px; padding-right: 21px; }
+  #transaction-detail-v64 .tx64-main { padding-top: 52px; }
+  #transaction-detail-v64 .tx64-direction-icon {
+    width: 76px; height: 76px; font-size: 43px; margin-bottom: 31px;
+  }
+  #transaction-detail-v64 .tx64-title { font-size: 17px; }
+  #transaction-detail-v64 .tx64-amount { font-size: 36px; }
+  #transaction-detail-v64 .tx64-info { margin-top: 58px; }
+  #transaction-detail-v64 .tx64-route { font-size: 15px; }
+}
