@@ -72,13 +72,88 @@
       closeDetail();
     });
 
-    // Visual-only favorite button.
+    // Favorite is stored per transaction row.
     const star = el.querySelector(".tx64-star");
     star.addEventListener("click", function () {
-      star.textContent = star.textContent === "☆" ? "★" : "☆";
+      const key = el.dataset.favoriteKey;
+      if (!key) return;
+
+      const next = !isFavorite(key);
+      setFavorite(key, next);
+      renderFavorite(star, next);
     });
 
     return el;
+  }
+
+  function favoriteStoreKey(key) {
+    return "walletMockFavorite:" + key;
+  }
+
+  function isFavorite(key) {
+    try {
+      return localStorage.getItem(favoriteStoreKey(key)) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function setFavorite(key, value) {
+    try {
+      if (value) {
+        localStorage.setItem(favoriteStoreKey(key), "1");
+      } else {
+        localStorage.removeItem(favoriteStoreKey(key));
+      }
+    } catch (_) {}
+  }
+
+  function renderFavorite(star, value) {
+    if (!star) return;
+    star.textContent = value ? "★" : "☆";
+    star.setAttribute("aria-pressed", value ? "true" : "false");
+  }
+
+  function rowFavoriteKey(row) {
+    const desc = cleanDesc(
+      row.querySelector(".saving-tx-desc, .account-tx-desc")?.textContent
+    );
+    const date = cleanDesc(
+      row.querySelector(".saving-tx-date, .account-tx-date")?.textContent
+    );
+    const amount = cleanDesc(
+      row.querySelector(".saving-tx-amount, .account-tx-amount")?.textContent
+    );
+    const type = row.classList.contains("credit") ? "credit" : "debit";
+    const source = row.classList.contains("saving-tx") ? "saving" : "account";
+
+    // Distinguish duplicate rows with the same visible data.
+    const selector = row.classList.contains("saving-tx") ? ".saving-tx" : ".account-tx";
+    const rows = Array.from(document.querySelectorAll(selector));
+    const fingerprint = [source, type, date, amount, desc].join("|");
+
+    let occurrence = 0;
+    for (const candidate of rows) {
+      const cDesc = cleanDesc(
+        candidate.querySelector(".saving-tx-desc, .account-tx-desc")?.textContent
+      );
+      const cDate = cleanDesc(
+        candidate.querySelector(".saving-tx-date, .account-tx-date")?.textContent
+      );
+      const cAmount = cleanDesc(
+        candidate.querySelector(".saving-tx-amount, .account-tx-amount")?.textContent
+      );
+      const cType = candidate.classList.contains("credit") ? "credit" : "debit";
+      const cSource = candidate.classList.contains("saving-tx") ? "saving" : "account";
+      const cFingerprint = [cSource, cType, cDate, cAmount, cDesc].join("|");
+
+      if (cFingerprint === fingerprint) {
+        if (candidate === row) break;
+        occurrence += 1;
+      }
+    }
+
+    return fingerprint + "|occurrence:" + occurrence;
   }
 
   function openDetail(row) {
@@ -92,6 +167,10 @@
     const isCredit = row.classList.contains("credit");
     const context = getContextName(row);
     const other = getOtherName(desc, context);
+
+    const favoriteKey = rowFavoriteKey(row);
+    el.dataset.favoriteKey = favoriteKey;
+    renderFavorite(el.querySelector(".tx64-star"), isFavorite(favoriteKey));
 
     // 出金なら現在口座 → 相手、入金なら相手 → 現在口座
     const from = isCredit ? other : context;
