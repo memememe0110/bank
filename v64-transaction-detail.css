@@ -1,0 +1,171 @@
+
+/* =========================================================
+   v64 transaction detail
+   ========================================================= */
+
+#transaction-detail-v64 {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: #fff;
+  color: #000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: max(18px, env(safe-area-inset-top)) 28px
+           calc(130px + env(safe-area-inset-bottom));
+  transform: translateX(100%);
+  transition: transform 260ms cubic-bezier(.32,.72,0,1);
+  box-sizing: border-box;
+}
+
+#transaction-detail-v64.open {
+  transform: translateX(0);
+}
+
+#transaction-detail-v64.closing {
+  transform: translateX(100%);
+}
+
+.tx64-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.tx64-back,
+.tx64-star {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #000;
+  line-height: 1;
+}
+
+.tx64-back {
+  font-size: 45px;
+  font-weight: 400;
+}
+
+.tx64-star {
+  font-size: 44px;
+  font-weight: 400;
+}
+
+.tx64-main {
+  padding-top: 100px;
+}
+
+.tx64-direction-icon {
+  width: 118px;
+  height: 118px;
+  border: 9px solid #000;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 72px;
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 54px;
+  box-sizing: border-box;
+}
+
+.tx64-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.tx64-amount {
+  margin-top: 22px;
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .01em;
+}
+
+.tx64-info {
+  margin-top: 116px;
+}
+
+.tx64-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.tx64-divider {
+  height: 2px;
+  background: #111;
+  margin: 38px 0 76px;
+}
+
+.tx64-label {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 36px;
+}
+
+.tx64-route {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 21px;
+  line-height: 1.5;
+  font-weight: 800;
+  padding-bottom: 36px;
+  border-bottom: 2px solid #111;
+}
+
+.tx64-route-from,
+.tx64-route-to {
+  min-width: 0;
+}
+
+.tx64-route-arrow {
+  flex: 0 0 auto;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+@media (max-width: 390px) {
+  #transaction-detail-v64 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .tx64-main {
+    padding-top: 78px;
+  }
+  .tx64-direction-icon {
+    width: 104px;
+    height: 104px;
+    font-size: 62px;
+    margin-bottom: 46px;
+  }
+  .tx64-title {
+    font-size: 21px;
+  }
+  .tx64-amount {
+    font-size: 46px;
+  }
+  .tx64-info {
+    margin-top: 90px;
+  }
+  .tx64-route {
+    font-size: 18px;
+    gap: 12px;
+  }
+}
+
+/* Bottom menu remains above every detail screen and never moves. */
+.bottom-nav.v63-viewport-nav,
+body > .bottom-nav {
+  z-index: 2147483000 !important;
+}

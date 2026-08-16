@@ -1,8 +1,16 @@
 {
-  "name": "Wallet Mock",
-  "short_name": "Wallet",
-  "start_url": "./?v=60",
+  "name": "みんなの銀行",
+  "short_name": "みんなの銀行",
+  "start_url": "./?v=64",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "minna-bank-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }

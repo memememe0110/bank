@@ -6,10 +6,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#ffffff">
-<title>Wallet Mock</title>
+<title>みんなの銀行</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=59">
-  <link rel="stylesheet" href="v60-fix.css?v=61">
+<link rel="stylesheet" href="style.css?v=63">
+  <link rel="stylesheet" href="v60-fix.css?v=63">
+  <link rel="stylesheet" href="v63-fixed-nav.css?v=63">
+  <link rel="stylesheet" href="v64-transaction-detail.css?v=64">
+  <link rel="apple-touch-icon" href="minna-bank-icon.png?v=64">
 </head>
 <body>
 <div class="app">
@@ -149,7 +152,6 @@
 
         <div class="account-detail-title-row">
           <h2>取引明細</h2>
-          <span class="account-search-icon" aria-hidden="true"></span>
         </div>
 
         <div class="account-history-label">これまでの履歴</div>
@@ -176,7 +178,6 @@
 
         <div class="saving-detail-title-row">
           <h2>取引明細</h2>
-          <span class="saving-search-icon" aria-hidden="true"></span>
         </div>
 
         <div class="saving-history-label">これまでの履歴</div>
@@ -308,6 +309,8 @@
 </div>
 <script src="saving-data.js?v=59"></script>
 <script src="account-data.js?v=59"></script>
-<script src="app.js?v=61"></script>
+<script src="app.js?v=63"></script>
+<script src="v63-fixed-nav.js?v=63"></script>
+<script src="v64-transaction-detail.js?v=64"></script>
 </body>
 </html>
