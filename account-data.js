@@ -22,7 +22,7 @@ type:
 
 window.MARUZEN_ACCOUNT = {
 
-  openingBalance: 44000,
+  openingBalance: 0,
 
   transactions: [
 
