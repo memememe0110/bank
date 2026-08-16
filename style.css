@@ -2628,3 +2628,62 @@ body {
   #account-detail.v56-account-detail,
   #banking.v56-account-underlay { transition: none !important; }
 }
+
+
+/* =========================
+   v57: stable transitions
+   ========================= */
+/* Never move Banking itself during detail pushes. This prevents a half-way frozen page. */
+#banking.v56-account-underlay,
+#banking.v56-account-underlay.v56-returning,
+#banking.saving-underlay,
+#banking.account-underlay {
+  transform: translateX(0) !important;
+}
+
+/* Bottom-menu screen change: quick, subtle horizontal fade. */
+.screen.v57-nav-out {
+  opacity: 0 !important;
+  transform: translateX(-10px) !important;
+  transition: opacity 105ms ease, transform 105ms ease !important;
+}
+.screen.v57-nav-in {
+  opacity: 0 !important;
+  transform: translateX(10px) !important;
+  transition: none !important;
+}
+.screen.active:not(.v57-nav-in):not(.v57-nav-out) {
+  opacity: 1;
+}
+
+/* Maruzen detail: only the new page slides from the right. */
+#account-detail.v57-detail {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(100%) !important;
+  transition: transform 240ms cubic-bezier(.32,.72,0,1) !important;
+  will-change: transform;
+  z-index: 40 !important;
+  background: #fff;
+}
+#account-detail.v57-detail.active {
+  transform: translateX(0) !important;
+}
+#account-detail.v57-detail.v57-preopen,
+#account-detail.v57-detail.v57-leave-right {
+  transform: translateX(100%) !important;
+}
+
+/* Saving keeps the same right-side push, with Banking fixed underneath. */
+#saving-detail.screen {
+  transition: transform 240ms cubic-bezier(.32,.72,0,1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.v57-nav-out,
+  .screen.v57-nav-in,
+  #account-detail.v57-detail,
+  #saving-detail.screen {
+    transition: none !important;
+  }
+}

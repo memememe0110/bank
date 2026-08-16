@@ -708,3 +708,123 @@ document.querySelectorAll(".bottom-nav .nav-item").forEach((item) => {
     updateMaruzenBalances();
   };
 })();
+
+
+/* v57: transition stability fix + unified navigation */
+(function () {
+  const D = 240;
+  const MAIN = ["wallet", "banking", "record", "links", "circle"];
+  let busy = false;
+
+  function clearTransitionResidue() {
+    const banking = document.getElementById("banking");
+    if (banking) {
+      banking.classList.remove(
+        "v56-account-underlay", "v56-returning", "v56-no-transition",
+        "saving-underlay", "account-underlay", "v57-nav-out", "v57-nav-in"
+      );
+      banking.style.transform = "";
+      banking.style.transition = "";
+      banking.style.opacity = "";
+    }
+    document.querySelectorAll(".screen").forEach(s => {
+      s.classList.remove("v57-nav-out", "v57-nav-in");
+    });
+  }
+
+  // Recover automatically even if v56 was left half-way through a push animation.
+  clearTransitionResidue();
+  window.addEventListener("pageshow", clearTransitionResidue);
+
+  function setNavActive(name) {
+    document.querySelectorAll(".bottom-nav .nav-item").forEach(item => {
+      item.classList.toggle("active", item.dataset.screen === name);
+    });
+  }
+
+  function switchMainScreen(name) {
+    if (!MAIN.includes(name) || busy) return;
+    const target = document.getElementById(name);
+    if (!target) return;
+    const current = MAIN.map(id => document.getElementById(id)).find(s => s?.classList.contains("active"));
+
+    clearTransitionResidue();
+    setNavActive(name);
+
+    if (!current || current === target) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      target.classList.add("active");
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    busy = true;
+    current.classList.add("v57-nav-out");
+    setTimeout(() => {
+      current.classList.remove("active", "v57-nav-out");
+      target.classList.add("active", "v57-nav-in");
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => requestAnimationFrame(() => target.classList.remove("v57-nav-in")));
+      setTimeout(() => { busy = false; }, D);
+    }, 105);
+  }
+
+  // Capture phase overrides the older instant bottom-nav handlers.
+  document.addEventListener("click", function (e) {
+    const item = e.target.closest(".bottom-nav .nav-item[data-screen]");
+    if (!item) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    switchMainScreen(item.dataset.screen);
+  }, true);
+
+  // Replace v56 account push with a stable detail-only slide.
+  function openAccount() {
+    if (busy) return;
+    const b = document.getElementById("banking");
+    const d = document.getElementById("account-detail");
+    if (!b || !d) return;
+    busy = true;
+    clearTransitionResidue();
+    d.classList.add("v57-detail", "v57-preopen");
+    d.classList.remove("v56-account-detail", "v56-leave-right", "v57-leave-right");
+    d.style.display = "block";
+    d.style.opacity = "1";
+    b.classList.add("active");
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      d.classList.add("active");
+      d.classList.remove("v57-preopen");
+    }));
+    setTimeout(() => { b.classList.remove("active"); busy = false; }, D);
+  }
+
+  function closeAccount() {
+    if (busy) return;
+    const b = document.getElementById("banking");
+    const d = document.getElementById("account-detail");
+    if (!b || !d) return;
+    busy = true;
+    clearTransitionResidue();
+    b.classList.add("active");
+    d.classList.add("v57-detail", "v57-leave-right");
+    requestAnimationFrame(() => d.classList.remove("active"));
+    setTimeout(() => {
+      d.classList.remove("v57-detail", "v57-leave-right", "v57-preopen");
+      d.style.display = "";
+      d.style.opacity = "";
+      busy = false;
+    }, D);
+  }
+
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".account-card");
+    if (card && document.getElementById("banking")?.classList.contains("active")) {
+      e.preventDefault(); e.stopImmediatePropagation(); openAccount(); return;
+    }
+    const d = document.getElementById("account-detail");
+    if (!d?.classList.contains("v57-detail")) return;
+    if (e.target.closest("#accountDetailBack, [aria-label='戻る']")) {
+      e.preventDefault(); e.stopImmediatePropagation(); closeAccount();
+    }
+  }, true);
+})();
