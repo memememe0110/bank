@@ -19,6 +19,12 @@ Saving 明細データ
 */
 
 window.SAVING_TRANSACTIONS = [
+  {
+    type: "debit",
+    date: "2026.8.18",
+    amount: 24500,
+    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
+  },
 
   {
     type: "credit",
