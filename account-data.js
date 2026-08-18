@@ -26,7 +26,12 @@ window.MARUZEN_ACCOUNT = {
 
   transactions: [
 
-
+    {
+      type: "credit",
+      date: "2026.8.18",
+      amount: 24500,
+      desc: "振込入金｜Saving"
+    },
     {
       type: "debit",
       date: "2026.8.14",
