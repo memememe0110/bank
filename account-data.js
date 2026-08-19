@@ -61,7 +61,26 @@ window.MARUZEN_ACCOUNT = {
       amount: 6000,
       desc: "振込入金｜Saving"
     },
+  {
+    type: "debit",
+    date: "2026.8.14",
+    amount: 27740,
+    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
+  },
 
+  {
+    type: "debit",
+    date: "2026.8.14",
+    amount: 1205,
+    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
+  },
+
+  {
+    type: "debit",
+    date: "2026.8.14",
+    amount: 15055,
+    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
+  },
     {
       type: "credit",
       date: "2026.8.14",
