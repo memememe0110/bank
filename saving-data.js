@@ -22,13 +22,6 @@ window.SAVING_TRANSACTIONS = [
   {
     type: "debit",
     date: "2026.8.19",
-    amount: 6000,
-    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
-  },
-
-  {
-    type: "debit",
-    date: "2026.8.19",
     amount: 10000,
     desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
   },
@@ -39,7 +32,12 @@ window.SAVING_TRANSACTIONS = [
     amount: 28000,
     desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
   },
-
+  {
+    type: "debit",
+    date: "2026.8.17",
+    amount: 6000,
+    desc: "振替出金｜普通預金（丸善ジュンク堂支店）"
+  },
   {
     type: "credit",
     date: "2026.8.14",
