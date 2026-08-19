@@ -51,6 +51,18 @@ window.MARUZEN_ACCOUNT = {
     },
     {
       type: "debit",
+      date: "2026.8.17",
+      amount: 6000,
+      desc: "振込出金｜ｶ)ｾﾌﾞﾝCSｶｰﾄﾞｻｰﾋﾞｽ"
+    },
+    {
+      type: "credit",
+      date: "2026.8.17",
+      amount: 6000,
+      desc: "振込入金｜Saving"
+    },
+    {
+      type: "debit",
       date: "2026.8.14",
       amount: 1205,
       desc: "振替出金｜Saving"
