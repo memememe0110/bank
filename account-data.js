@@ -35,7 +35,7 @@ window.MARUZEN_ACCOUNT = {
       type: "credit",
       date: "2026.9.5",
       amount: 4000,
-      desc: "振込入金｜Saving"
+      desc: "振替入金｜Saving"
     },
     {
       type: "debit",
@@ -47,7 +47,7 @@ window.MARUZEN_ACCOUNT = {
       type: "credit",
       date: "2026.9.3",
       amount: 24585,
-      desc: "振込入金｜Saving"
+      desc: "振替入金｜Saving"
     },
     {
       type: "debit",
@@ -59,7 +59,7 @@ window.MARUZEN_ACCOUNT = {
       type: "credit",
       date: "2026.8.31",
       amount: 2000,
-      desc: "振込入金｜Saving"
+      desc: "振替入金｜Saving"
     },
     {
       type: "debit",
@@ -71,7 +71,7 @@ window.MARUZEN_ACCOUNT = {
       type: "credit",
       date: "2026.8.17",
       amount: 6000,
-      desc: "振込入金｜Saving"
+      desc: "振替入金｜Saving"
     },
   {
     type: "debit",
