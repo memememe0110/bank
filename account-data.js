@@ -27,26 +27,38 @@ window.MARUZEN_ACCOUNT = {
   transactions: [
     {
       type: "debit",
-      date: "2026.8.19",
-      amount: 10000,
-      desc: "振込出金｜ﾎﾟｹｯﾄｶｰﾄﾞｶﾌﾞｼｷｶﾞｲｼｬ"
+      date: "2026.9.5",
+      amount: 4000,
+      desc: "ATM出金"
     },
     {
       type: "credit",
-      date: "2026.8.19",
-      amount: 10000,
+      date: "2026.9.5",
+      amount: 4000,
       desc: "振込入金｜Saving"
     },
     {
       type: "debit",
-      date: "2026.8.19",
-      amount: 28000,
+      date: "2026.9.3",
+      amount: 24585,
       desc: "振込出金｜ｶ)ｵﾘｴﾝﾄｺｰﾎﾟﾚｰｼｮﾝ"
     },
     {
       type: "credit",
-      date: "2026.8.18",
-      amount: 28000,
+      date: "2026.9.3",
+      amount: 24585,
+      desc: "振込入金｜Saving"
+    },
+    {
+      type: "debit",
+      date: "2026.8.31",
+      amount: 2000,
+      desc: "ATM出金"
+    },
+    {
+      type: "credit",
+      date: "2026.8.31",
+      amount: 2000,
       desc: "振込入金｜Saving"
     },
     {
