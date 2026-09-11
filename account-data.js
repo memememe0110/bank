@@ -32,10 +32,10 @@ window.MARUZEN_ACCOUNT = {
       desc: "ATM出金"
     },
     {
-      type: "credit",
-      date: "2026.9.5",
-      amount: 4000,
-      desc: "振替入金｜Saving"
+      type: "debit",
+      date: "2026.9.2",
+      amount: 9594,
+      desc: "振込出金｜ﾎﾟｹｯﾄｶｰﾄﾞｶﾌﾞｼｷｶﾞｲｼｬ"
     },
     {
       type: "debit",
