@@ -33,7 +33,7 @@ window.MARUZEN_ACCOUNT = {
     },
     {
       type: "credit",
-      date: "2026.9.3",
+      date: "2026.9.5",
       amount: 7540,
       desc: "振込入金｜ｶ)ﾒﾙｶﾘ"
     },
