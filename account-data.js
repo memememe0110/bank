@@ -32,6 +32,12 @@ window.MARUZEN_ACCOUNT = {
       desc: "ATM出金"
     },
     {
+      type: "credit",
+      date: "2026.9.3",
+      amount: 7540,
+      desc: "振込入金｜ｶ)ﾒﾙｶﾘ"
+    },
+    {
       type: "debit",
       date: "2026.9.2",
       amount: 9594,
@@ -52,7 +58,7 @@ window.MARUZEN_ACCOUNT = {
     {
       type: "debit",
       date: "2026.8.31",
-      amount: 2000,
+      amount: 3000,
       desc: "ATM出金"
     },
     {
