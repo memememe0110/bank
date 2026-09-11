@@ -46,7 +46,7 @@ window.MARUZEN_ACCOUNT = {
     {
       type: "credit",
       date: "2026.9.3",
-      amount: 24585,
+      amount: 36000,
       desc: "振替入金｜Saving"
     },
     {
