@@ -26,6 +26,121 @@ window.MARUZEN_ACCOUNT = {
 
   transactions: [
     {
+      type: "credit",
+      date: "2026.10.27",
+      amount: 19504,
+      desc: "振込入金｜メルカリ"
+    },
+    {
+      type: "credit",
+      date: "2026.10.24",
+      amount: 22640,
+      desc: "ことら入金｜ヤマザキヒナ"
+    },
+    {
+      type: "credit",
+      date: "2026.10.22",
+      amount: 13000,
+      desc: "ATM入金"
+    },
+    {
+      type: "credit",
+      date: "2026.10.20",
+      amount: 16800,
+      desc: "ことら入金｜イワマミユ"
+    },
+    {
+      type: "debit",
+      date: "2026.10.20",
+      amount: 10028,
+      desc: "振込出金｜ｶ)ｾﾌﾞﾝCSｶｰﾄﾞｻｰﾋﾞｽ"
+    },
+    {
+      type: "debit",
+      date: "2026.10.20",
+      amount: 24500,
+      desc: "振込出金｜ｶ)ｵﾘｴﾝﾄｺｰﾎﾟﾚｰｼｮﾝ"
+    },
+    {
+      type: "credit",
+      date: "2026.10.19",
+      amount: 16000,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
+    {
+      type: "debit",
+      date: "2026.10.19",
+      amount: 20000,
+      desc: "ATM出金"
+    },
+   {
+      type: "debit",
+      date: "2026.10.16",
+      amount: 18000,
+      desc: "振込出金｜ｶ)ﾒﾙｶﾘ"
+    },
+    {
+      type: "debit",
+      date: "2026.10.16",
+      amount: 9559,
+      desc: "振込出金｜ﾎﾟｹｯﾄｶｰﾄﾞｶﾌﾞｼｷｶﾞｲｼｬ"
+    },
+    {
+      type: "credit",
+      date: "2026.10.16",
+      amount: 80000,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.24",
+      amount: 25000,
+      desc: "ATM出金"
+    },
+    {
+      type: "credit",
+      date: "2026.9.24",
+      amount: 19000,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.17",
+      amount: 11175,
+      desc: "振込出金｜ｶ)ｾﾌﾞﾝCSｶｰﾄﾞｻｰﾋﾞｽ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.16",
+      amount: 24000,
+      desc: "振込出金｜ｶ)ｵﾘｴﾝﾄｺｰﾎﾟﾚｰｼｮﾝ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.16",
+      amount: 19000,
+      desc: "振込出金｜ｶ)ﾒﾙｶﾘ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.16",
+      amount: 19193,
+      desc: "振込出金｜ﾎﾟｹｯﾄｶｰﾄﾞｶﾌﾞｼｷｶﾞｲｼｬ"
+    },
+    {
+      type: "debit",
+      date: "2026.9.16",
+      amount: 3829,
+      desc: "振込出金｜ﾍﾟｲﾍﾟｲｶｰﾄﾞ (ｶ"
+    },
+    {
+      type: "credit",
+      date: "2026.9.16",
+      amount: 80000,
+      desc: "ことら入金｜イイジマ　メイナ"
+    },
+
+    {
       type: "debit",
       date: "2026.9.5",
       amount: 4000,
