@@ -58,7 +58,7 @@ window.MARUZEN_ACCOUNT = {
     {
       type: "credit",
       date: "2026.10.24",
-      amount: 28640,
+      amount: 10640,
       desc: "ことら入金｜ヤマザキ　ヒナ"
     },
     {
@@ -102,12 +102,6 @@ window.MARUZEN_ACCOUNT = {
       date: "2026.10.19",
       amount: 20000,
       desc: "ATM出金"
-    },
-   {
-      type: "debit",
-      date: "2026.10.16",
-      amount: 18000,
-      desc: "振込出金｜ｶ)ﾒﾙｶﾘ"
     },
     {
       type: "debit",
