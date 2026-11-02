@@ -33,7 +33,7 @@ window.MARUZEN_ACCOUNT = {
     },
   {
     type: "debit",
-    date: "2026.10.27",
+    date: "2026.10.29",
     amount: 9000,
     desc: "ことら出金｜オガワ　シオリ"
   },
