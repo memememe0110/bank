@@ -58,7 +58,7 @@ window.MARUZEN_ACCOUNT = {
     {
       type: "credit",
       date: "2026.10.24",
-      amount: 10640,
+      amount: 11970,
       desc: "ことら入金｜ヤマザキ　ヒナ"
     },
     {
