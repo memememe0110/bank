@@ -38,10 +38,10 @@ window.MARUZEN_ACCOUNT = {
     desc: "ことら出金｜イイジマ　メイナ"
     },
     {
-      type: "debit",
+      type: "credit",
       date: "2026.11.9",
       amount: 5675,
-      desc: "振込出金｜ｶ)ﾒﾙｶﾘ"
+      desc: "振込入金｜メルカリ"
     },
     {
       type: "credit",
