@@ -26,35 +26,71 @@ window.MARUZEN_ACCOUNT = {
 
   transactions: [
     {
+    type: "debit",
+    date: "2026.11.11",
+    amount: 20010,
+    desc: "ことら出金｜イイジマ　メイナ"
+    },
+    {
+    type: "debit",
+    date: "2026.11.10",
+    amount: 13159,
+    desc: "ことら出金｜イイジマ　メイナ"
+    },
+    {
+      type: "debit",
+      date: "2026.11.9",
+      amount: 5675,
+      desc: "振込出金｜ｶ)ﾒﾙｶﾘ"
+    },
+    {
+      type: "credit",
+      date: "2026.11.8",
+      amount: 13000,
+      desc: "ATM入金"
+    },
+    {
+      type: "credit",
+      date: "2026.11.6",
+      amount: 10000,
+      desc: "ATM入金"
+    },
+    {
+    type: "debit",
+    date: "2026.11.4",
+    amount: 8582,
+    desc: "ことら出金｜イイジマ　メイナ"
+    },
+    {
       type: "debit",
       date: "2026.10.31",
       amount: 2000,
       desc: "ATM出金"
     },
-  {
+    {
     type: "debit",
     date: "2026.10.29",
     amount: 9000,
     desc: "ことら出金｜オガワ　シオリ"
-  },
+    },
     {
       type: "debit",
       date: "2026.10.27",
       amount: 40000,
       desc: "ことら出金｜イイジマ　カズコ"
-    },
-  {
+     },
+    {
     type: "debit",
     date: "2026.10.27",
     amount: 22000,
     desc: "ことら出金｜イイジマ　メイナ"
-  },
-  {
+    },
+    {
     type: "debit",
     date: "2026.10.26",
     amount: 10000,
     desc: "ことら出金｜イイジマ　メイナ"
-  },
+    },
     {
       type: "credit",
       date: "2026.10.24",
